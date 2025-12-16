@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('drug_interactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('drug_id')->constrained()->cascadeOnDelete();
-            $table->string('interacts_with');
+            $table->string('interacting_drug');
+            $table->enum('risk_level', ['low', 'moderate', 'high']);
             $table->text('description');
         });
     }

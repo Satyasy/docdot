@@ -12,8 +12,7 @@ return new class extends Migration {
     {
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->id();
-            $table->uuid('session_id');
-            $table->foreign('chat_sessions')->references('id')->on('chat_sessions')->onDelete('cascade');
+            $table->foreignUuid('chat_session_id')->constrained('chat_sessions')->cascadeOnDelete();
             $table->enum('sender', ['user', 'ai']);
             $table->longText('message');
             $table->json('structured_response')->nullable();
