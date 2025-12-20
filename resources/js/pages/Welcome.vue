@@ -177,5 +177,52 @@ import { BoltIcon, ClockIcon, BriefcaseIcon, MagnifyingGlassIcon, CpuChipIcon, L
                 </div>
             </div>
         </section>
+
+        <section class="px-6 py-16 lg:px-12">
+            <div class="mx-auto max-w-7xl text-center">
+                <h2 class="text-[36px] font-bold text-[#1b1b18]">
+                    Rasakan <span class="text-[#DDB4F6]">Fitur Kesehatan</span> Lengkap dengan<br />
+                    Teknologi Pintar dari <span class="text-[#DDB4F6]">DocDot</span> Setiap Hari 🚀
+                </h2>
+
+                <div class="mt-12 flex items-stretch justify-center gap-6">
+                    <div class="relative w-[320px] overflow-hidden rounded-[30px] bg-[#E8D4F8] p-6">
+                        <div class="absolute top-0 right-0 h-full w-1/2 bg-[#D9B8F0]/50" style="transform: skewX(-15deg); transform-origin: top right;"></div>
+                        <div class="relative z-10 mt-auto rounded-[20px] bg-white p-5">
+                            <div class="flex items-start gap-3">
+                                <img src="/images/time.png" alt="Time" class="h-12 w-12" />
+                                <p class="text-left text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                    Tim kami siap merespon keluhan kesehatan mu dengan cepat, 24/7 tanpa harus menunggu lama.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative w-[320px] overflow-hidden rounded-[30px] bg-[#E8D4F8] p-6">
+                        <div class="absolute top-0 right-0 h-full w-1/2 bg-[#D9B8F0]/50" style="transform: skewX(-15deg); transform-origin: top right;"></div>
+                        <div class="relative z-10 mt-auto rounded-[20px] bg-white p-5">
+                            <div class="flex items-start gap-3">
+                                <img src="/images/chat.png" alt="Chat" class="h-12 w-12" />
+                                <p class="text-left text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                    Konsultasi kesehatan tersedia kapan pun, siap melayani kamu siang dan malam tanpa henti.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative w-[320px] overflow-hidden rounded-[30px] bg-[#E8D4F8] p-6">
+                        <div class="absolute top-0 right-0 h-full w-1/2 bg-[#D9B8F0]/50" style="transform: skewX(-15deg); transform-origin: top right;"></div>
+                        <div class="relative z-10 mt-auto rounded-[20px] bg-white p-5">
+                            <div class="flex items-start gap-3">
+                                <img src="/images/talks.png" alt="Talks" class="h-12 w-12" />
+                                <p class="text-left text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                    Nikmati layanan konsultasi kesehatan tanpa biaya, langsung dari rumah kamu.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
