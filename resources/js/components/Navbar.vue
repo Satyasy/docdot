@@ -1,18 +1,28 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 interface NavItem {
     label: string;
     href: string;
-    active?: boolean;
 }
 
 const navItems: NavItem[] = [
-    { label: 'Home', href: '/', active: true },
+    { label: 'Home', href: '/' },
     { label: 'Features', href: '/features' },
     { label: 'Article', href: '/article' },
     { label: 'Consultation', href: '/consultation' },
 ];
+
+const page = usePage();
+const currentPath = computed(() => page.url);
+
+const isActive = (href: string) => {
+    if (href === '/') {
+        return currentPath.value === '/';
+    }
+    return currentPath.value.startsWith(href);
+};
 </script>
 
 <template>
@@ -26,7 +36,7 @@ const navItems: NavItem[] = [
                         :href="item.href"
                         :class="[
                             'text-[25px] transition-colors',
-                            item.active
+                            isActive(item.href)
                                 ? 'bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] bg-clip-text font-semibold text-transparent'
                                 : 'font-normal text-[#1b1b18] hover:text-[#F4AFE9]',
                         ]"
