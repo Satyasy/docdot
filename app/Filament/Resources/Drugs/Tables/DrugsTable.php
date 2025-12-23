@@ -10,13 +10,18 @@ use Filament\Tables;
 
 class DrugsTable
 {
-    public static function configure (Table $table): Table
+    public static function configure(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('dosage'),
+                Tables\Columns\TextColumn::make('category')->badge()->sortable(),
+                Tables\Columns\IconColumn::make('pregnancy_safe')->boolean()->label('Pregnancy Safe'),
                 Tables\Columns\TextColumn::make('created_at')->since(),
+            ])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('pregnancy_safe')
+                    ->label('Pregnancy Safe'),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -27,5 +32,4 @@ class DrugsTable
                 ]),
             ]);
     }
-
 }

@@ -4,7 +4,6 @@ namespace App\Filament\Resources\MedicalDocuments\Schemas;
 
 use Filament\Schemas\Schema;
 use Filament\Forms;
-use Illuminate\Support\Facades\Auth;
 
 class MedicalDocumentForm
 {
@@ -17,9 +16,9 @@ class MedicalDocumentForm
 
                 Forms\Components\Select::make('type')
                     ->options([
-                        'guideline' => 'Medical Guideline',
-                        'journal' => 'Journal',
-                        'faq' => 'FAQ',
+                        'disease' => 'Disease',
+                        'symptom' => 'Symptom',
+                        'drug' => 'Drug',
                     ])
                     ->required(),
 
@@ -33,9 +32,6 @@ class MedicalDocumentForm
                 Forms\Components\Toggle::make('verified')
                     ->label('Verified by Medical Reviewer')
                     ->default(false),
-
-                Forms\Components\Hidden::make('uploaded_by')
-                    ->default(Auth::id()),
             ]);
     }
 }

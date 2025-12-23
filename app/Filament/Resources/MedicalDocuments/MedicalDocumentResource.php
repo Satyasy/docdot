@@ -5,6 +5,7 @@ namespace App\Filament\Resources\MedicalDocuments;
 use App\Filament\Resources\MedicalDocuments\Pages\CreateMedicalDocument;
 use App\Filament\Resources\MedicalDocuments\Pages\EditMedicalDocument;
 use App\Filament\Resources\MedicalDocuments\Pages\ListMedicalDocuments;
+use App\Filament\Resources\MedicalDocuments\RelationManagers\EmbeddingsRelationManager;
 use App\Filament\Resources\MedicalDocuments\Schemas\MedicalDocumentForm;
 use App\Filament\Resources\MedicalDocuments\Tables\MedicalDocumentsTable;
 use App\Models\MedicalDocument;
@@ -14,11 +15,15 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+use UnitEnum;
+
 class MedicalDocumentResource extends Resource
 {
     protected static ?string $model = MedicalDocument::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Medical';
 
     public static function form(Schema $schema): Schema
     {
@@ -33,7 +38,7 @@ class MedicalDocumentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            EmbeddingsRelationManager::class,
         ];
     }
 

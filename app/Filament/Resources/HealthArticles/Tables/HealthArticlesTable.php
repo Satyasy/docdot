@@ -10,15 +10,19 @@ use Filament\Tables;
 
 class HealthArticlesTable
 {
-    public static function configure (Table $table): Table
+    public static function configure(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('slug')->searchable(),
                 Tables\Columns\TextColumn::make('category')->badge(),
-                Tables\Columns\TextColumn::make('author.name')->label('Author'),
+                Tables\Columns\IconColumn::make('verified')->boolean(),
                 Tables\Columns\TextColumn::make('published_at')->dateTime(),
                 Tables\Columns\TextColumn::make('created_at')->since(),
+            ])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('verified'),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -28,7 +32,5 @@ class HealthArticlesTable
                     DeleteBulkAction::make(),
                 ]),
             ]);
-            
     }
-
 }

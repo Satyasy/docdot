@@ -15,17 +15,26 @@ class DrugForm
                     ->required()
                     ->maxLength(255),
 
+                Forms\Components\TextInput::make('category')
+                    ->maxLength(255),
+
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
 
-                Forms\Components\TextInput::make('dosage')
-                    ->placeholder('e.g. 500mg twice a day'),
+                Forms\Components\Textarea::make('dosage_info')
+                    ->label('Dosage Information')
+                    ->columnSpanFull(),
 
-                Forms\Components\TagsInput::make('side_effects')
-                    ->label('Side Effects'),
+                Forms\Components\Textarea::make('side_effects')
+                    ->label('Side Effects')
+                    ->columnSpanFull(),
 
-                Forms\Components\TagsInput::make('contraindications')
-                    ->label('Contraindications'),
+                Forms\Components\Textarea::make('warnings')
+                    ->columnSpanFull(),
+
+                Forms\Components\Toggle::make('pregnancy_safe')
+                    ->label('Safe for Pregnancy')
+                    ->default(false),
             ]);
     }
 }

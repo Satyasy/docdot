@@ -4,7 +4,6 @@ namespace App\Filament\Resources\HealthArticles\Schemas;
 
 use Filament\Schemas\Schema;
 use Filament\Forms;
-use Illuminate\Support\Facades\Auth;
 
 class HealthArticleForm
 {
@@ -26,8 +25,7 @@ class HealthArticleForm
                         'physical' => 'Physical Health',
                         'nutrition' => 'Nutrition',
                         'general' => 'General',
-                    ])
-                    ->required(),
+                    ]),
 
                 Forms\Components\RichEditor::make('content')
                     ->required()
@@ -36,10 +34,11 @@ class HealthArticleForm
                 Forms\Components\TextInput::make('source')
                     ->label('Reference Source'),
 
-                Forms\Components\DateTimePicker::make('published_at'),
+                Forms\Components\Toggle::make('verified')
+                    ->label('Verified')
+                    ->default(false),
 
-                Forms\Components\Hidden::make('created_by')
-                    ->default(Auth::id()),
+                Forms\Components\DateTimePicker::make('published_at'),
             ]);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Drugs;
 use App\Filament\Resources\Drugs\Pages\CreateDrug;
 use App\Filament\Resources\Drugs\Pages\EditDrug;
 use App\Filament\Resources\Drugs\Pages\ListDrugs;
+use App\Filament\Resources\Drugs\RelationManagers\InteractionsRelationManager;
+use App\Filament\Resources\Drugs\RelationManagers\PricesRelationManager;
 use App\Filament\Resources\Drugs\Schemas\DrugForm;
 use App\Filament\Resources\Drugs\Tables\DrugsTable;
 use App\Models\Drug;
@@ -14,11 +16,15 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+use UnitEnum;
+
 class DrugResource extends Resource
 {
     protected static ?string $model = Drug::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Medical';
 
     public static function form(Schema $schema): Schema
     {
@@ -33,7 +39,8 @@ class DrugResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PricesRelationManager::class,
+            InteractionsRelationManager::class,
         ];
     }
 
