@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import { Icon } from '@iconify/vue';
@@ -8,7 +8,9 @@ import { Icon } from '@iconify/vue';
 <template>
     <Head title="Welcome" />
     <div class="min-h-screen overflow-x-hidden bg-white">
-        <Navbar />
+        <div class="bg-white">
+            <Navbar />
+        </div>
 
         <section class="relative overflow-hidden px-6 pt-8 lg:px-12">
             <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
@@ -19,10 +21,10 @@ import { Icon } from '@iconify/vue';
                     <p class="mt-4 text-[20px] font-light text-[#1b1b18]">
                         Konsultasikan Keluhan Kesehatan Anda<br />Langsung, dengan Dokter Terpercaya.
                     </p>
-                    <button class="mt-8 flex items-center gap-2 rounded-full border-2 border-[#1b1b18] px-10 py-3 text-[20px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
+                    <Link href="/consultation" class="mt-8 inline-flex w-fit items-center justify-between gap-6 rounded-full border-2 border-[#1b1b18] px-10 py-3 text-[20px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
                         ChatBot
                         <Icon icon="mdi:arrow-right" class="h-5 w-5" />
-                    </button>
+                    </Link>
                 </div>
 
                 <div class="relative -translate-x-16">
@@ -298,27 +300,27 @@ import { Icon } from '@iconify/vue';
         <!-- Informasi Tepat Section -->
         <section class="mt-16 bg-white px-6 pt-40 pb-16 lg:px-12">
             <div class="mx-auto max-w-6xl">
-                <div class="relative flex h-[474px] items-center rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-10">
+                <div class="relative flex h-[400px] items-center rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-10">
                     <!-- Stripes di pojok kanan bawah (inside card with clip) -->
                     <div class="absolute inset-0 overflow-hidden rounded-[30px]">
                         <div class="absolute bottom-16 -right-17 h-[50px] w-[500px] rounded-l-full bg-white/20" style="transform: rotate(-35deg); transform-origin: bottom right;"></div>
                     </div>
 
                     <div class="absolute right-48 z-10 max-w-sm py-4">
-                        <h2 class="flex items-center gap-3 text-[26px] font-bold text-[#1b1b18]">
+                        <h2 class="flex items-center gap-3 text-[32px] font-bold text-[#1b1b18]">
                             Informasi Tepat
-                            <Icon icon="mdi:fingerprint" class="h-7 w-7 text-[#1b1b18]" />
+                            <Icon icon="carbon:circle-dash" class="h-8 w-8 text-[#1b1b18]" />
                         </h2>
-                        <h3 class="text-[26px] font-bold text-[#1b1b18]">
+                        <h3 class="text-[32px] font-bold text-[#1b1b18]">
                             Untuk <span class="text-[#7C3AED]">Hidup</span> Sehat
                         </h3>
-                        <p class="mt-2 text-[15px] font-light text-[#1b1b18]/80">
+                        <p class="mt-3 text-[18px] font-light text-[#1b1b18]/80">
                             Konten tepercaya untuk<br />mendukung kesehatan keluarga<br />Anda.
                         </p>
-                        <button class="mt-4 flex items-center gap-2 rounded-full border-2 border-[#1b1b18] bg-white px-6 py-2 text-[15px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
+                        <Link href="/article" class="mt-5 inline-flex w-fit items-center justify-between gap-6 rounded-full border-2 border-[#1b1b18] bg-white px-6 py-2 text-[16px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
                             Article
-                            <Icon icon="mdi:arrow-top-right" class="h-4 w-4" />
-                        </button>
+                            <Icon icon="mdi:arrow-top-right" class="h-5 w-5" />
+                        </Link>
                     </div>
                     <div class="absolute left-10 -top-32 z-20">
                         <img src="/images/informasi.png" alt="Informasi" class="w-[600px] max-w-none" />

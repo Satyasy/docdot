@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import { Icon } from '@iconify/vue';
@@ -311,10 +311,10 @@ import { Icon } from '@iconify/vue';
                         <p class="mt-3 text-[18px] font-light text-[#1b1b18]/80">
                             Yuk Periksa menggunakan<br />Chatbot Sekarang juga!
                         </p>
-                        <button class="mt-5 flex items-center gap-2 rounded-full border-2 border-[#1b1b18] bg-white px-6 py-2 text-[16px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
+                        <Link href="/consultation" class="mt-5 inline-flex w-fit items-center justify-between gap-6 rounded-full border-2 border-[#1b1b18] bg-white px-6 py-2 text-[16px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
                             Chatbot
                             <Icon icon="mdi:arrow-top-right" class="h-5 w-5" />
-                        </button>
+                        </Link>
                     </div>
                     <div class="absolute left-10 -top-32 z-20">
                         <img src="/images/gejala.png" alt="Gejala" class="w-[600px] max-w-none" />
