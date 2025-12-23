@@ -173,12 +173,20 @@ class RagService
      */
     private function getDocumentContent(MedicalDocument $document): array
     {
-        if ($document->file_path && file_exists(storage_path('app/' . $document->file_path))) {
-            return $this->documentParser->parseFromStorageWithPages($document->file_path);
+        // Check both storage paths (private and public)
+        $possiblePaths = [
+            storage_path('app/private/' . $document->file_path),
+            storage_path('app/' . $document->file_path),
+        ];
+
+        foreach ($possiblePaths as $path) {
+            if ($document->file_path && file_exists($path)) {
+                return $this->documentParser->parseWithPages($path);
+            }
         }
 
-        if ($document->content) {
-            return [['page' => 1, 'content' => $document->content]];
+        if ($document->content && !empty(strip_tags($document->content))) {
+            return [['page' => 1, 'content' => strip_tags($document->content)]];
         }
 
         throw new \RuntimeException('Document has no content or file');

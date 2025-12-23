@@ -66,7 +66,8 @@ class GeminiLlmService implements LlmServiceInterface
         ];
 
         try {
-            $response = Http::timeout(60)
+            $response = Http::withOptions(['verify' => false])
+                ->timeout(60)
                 ->retry(3, 1000)
                 ->withQueryParameters(['key' => $this->apiKey])
                 ->post("{$this->baseUrl}/models/{$this->model}:generateContent", $payload);
@@ -143,9 +144,9 @@ PROMPT;
         }
 
         try {
-            $response = Http::timeout(120)
+            $response = Http::withOptions(['verify' => false, 'stream' => true])
+                ->timeout(120)
                 ->withQueryParameters(['key' => $this->apiKey])
-                ->withOptions(['stream' => true])
                 ->post("{$this->baseUrl}/models/{$this->model}:streamGenerateContent", $payload);
 
             $body = $response->getBody();
@@ -174,7 +175,8 @@ PROMPT;
     public function countTokens(string $text): int
     {
         try {
-            $response = Http::timeout(30)
+            $response = Http::withOptions(['verify' => false])
+                ->timeout(30)
                 ->withQueryParameters(['key' => $this->apiKey])
                 ->post("{$this->baseUrl}/models/{$this->model}:countTokens", [
                     'contents' => [
@@ -242,7 +244,8 @@ PROMPT;
         }
 
         try {
-            $response = Http::timeout(60)
+            $response = Http::withOptions(['verify' => false])
+                ->timeout(60)
                 ->retry(3, 1000)
                 ->withQueryParameters(['key' => $this->apiKey])
                 ->post("{$this->baseUrl}/models/{$this->model}:generateContent", $payload);

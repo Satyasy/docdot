@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\MedicalDocuments\Schemas;
 
-use App\Jobs\ProcessDocumentEmbedding;
 use App\Models\MedicalDocument;
 use Filament\Schemas\Schema;
 use Filament\Forms;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 
 class MedicalDocumentForm
 {
@@ -13,7 +15,7 @@ class MedicalDocumentForm
     {
         return $schema
             ->components([
-                Forms\Components\Section::make('Document Information')
+                Section::make('Document Information')
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->required()
@@ -40,11 +42,11 @@ class MedicalDocumentForm
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Content')
+                Section::make('Content')
                     ->schema([
-                        Forms\Components\Tabs::make('content_tabs')
+                        Tabs::make('content_tabs')
                             ->tabs([
-                                Forms\Components\Tabs\Tab::make('Upload File')
+                                Tab::make('Upload File')
                                     ->schema([
                                         Forms\Components\FileUpload::make('file_path')
                                             ->label('Document File')
@@ -57,29 +59,22 @@ class MedicalDocumentForm
                                                 'text/markdown',
                                             ])
                                             ->maxSize(10240) // 10MB
-                                            ->helperText('Supported formats: PDF, DOCX, TXT, MD (max 10MB)')
-                                            ->reactive()
-                                            ->afterStateUpdated(function ($state, callable $set) {
-                                                if ($state) {
-                                                    $extension = pathinfo($state, PATHINFO_EXTENSION);
-                                                    $set('file_type', strtolower($extension));
-                                                }
-                                            }),
+                                            ->helperText('Supported formats: PDF, DOCX, TXT, MD (max 10MB)'),
 
                                         Forms\Components\Hidden::make('file_type'),
                                     ]),
 
-                                Forms\Components\Tabs\Tab::make('Manual Content')
+                                Tab::make('Manual Content')
                                     ->schema([
                                         Forms\Components\RichEditor::make('content')
-                                            ->helperText('Enter content directly if not uploading a file')
+                                            ->label('Content')
                                             ->columnSpanFull(),
                                     ]),
                             ])
                             ->columnSpanFull(),
                     ]),
 
-                Forms\Components\Section::make('Embedding Status')
+                Section::make('Embedding Status')
                     ->schema([
                         Forms\Components\Placeholder::make('embedding_status_display')
                             ->label('Status')

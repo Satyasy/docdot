@@ -4,6 +4,8 @@ namespace App\Filament\Resources\MedicalDocuments\Tables;
 
 use App\Jobs\ProcessDocumentEmbedding;
 use App\Models\MedicalDocument;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -98,7 +100,7 @@ class MedicalDocumentsTable
                 Tables\Filters\TernaryFilter::make('verified'),
             ])
             ->recordActions([
-                Tables\Actions\Action::make('process_embedding')
+                Action::make('process_embedding')
                     ->label('Process')
                     ->icon('heroicon-o-cpu-chip')
                     ->color('info')
@@ -122,7 +124,7 @@ class MedicalDocumentsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    Tables\Actions\BulkAction::make('process_embeddings')
+                    BulkAction::make('process_embeddings')
                         ->label('Process Embeddings')
                         ->icon('heroicon-o-cpu-chip')
                         ->requiresConfirmation()
