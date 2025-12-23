@@ -35,4 +35,34 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Gemini AI Services
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for Google Gemini API used for embeddings and LLM.
+    |
+    */
+
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+        'embedding_model' => env('GEMINI_EMBEDDING_MODEL', 'text-embedding-004'),
+        'llm_model' => env('GEMINI_LLM_MODEL', 'gemini-1.5-flash'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pinecone Vector Database
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for Pinecone vector database used for RAG.
+    |
+    */
+
+    'pinecone' => [
+        'api_key' => env('PINECONE_API_KEY'),
+        'host' => env('PINECONE_HOST'),
+        'index' => env('PINECONE_INDEX', 'docdot-medical'),
+    ],
+
 ];
