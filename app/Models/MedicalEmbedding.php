@@ -4,22 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MedicalEmbedding extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'medical_document_id',
-        'vector',
+        'document_id',
+        'vector_id',
+        'chunk_index',
     ];
 
     protected $casts = [
-        'vector' => 'array',
+        'chunk_index' => 'integer',
     ];
 
-    public function document()
+    public function document(): BelongsTo
     {
-        return $this->belongsTo(MedicalDocument::class);
+        return $this->belongsTo(MedicalDocument::class, 'document_id');
     }
 }

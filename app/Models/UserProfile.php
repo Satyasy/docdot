@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserProfile extends Model
 {
     use HasFactory;
+
+    protected $table = 'users_profiles';
 
     protected $fillable = [
         'user_id',
@@ -15,16 +18,15 @@ class UserProfile extends Model
         'birth_date',
         'height',
         'weight',
-        'mental_condition',
-        'medical_notes',
     ];
 
     protected $casts = [
         'birth_date' => 'date',
-        'medical_notes' => 'encrypted',
+        'height' => 'integer',
+        'weight' => 'integer',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

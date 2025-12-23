@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Drug extends Model
 {
@@ -11,23 +12,24 @@ class Drug extends Model
 
     protected $fillable = [
         'name',
+        'category',
         'description',
-        'dosage',
+        'dosage_info',
         'side_effects',
-        'contraindications',
+        'warnings',
+        'pregnancy_safe',
     ];
 
     protected $casts = [
-        'side_effects' => 'array',
-        'contraindications' => 'array',
+        'pregnancy_safe' => 'boolean',
     ];
 
-    public function prices()
+    public function prices(): HasMany
     {
         return $this->hasMany(DrugPrice::class);
     }
 
-    public function interactions()
+    public function interactions(): HasMany
     {
         return $this->hasMany(DrugInteraction::class);
     }

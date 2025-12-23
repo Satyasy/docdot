@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ChatMessage extends Model
 {
@@ -11,16 +12,16 @@ class ChatMessage extends Model
 
     protected $fillable = [
         'chat_session_id',
-        'role',
+        'sender',
         'message',
-        'ai_response',
+        'structured_response',
     ];
 
     protected $casts = [
-        'ai_response' => 'array',
+        'structured_response' => 'array',
     ];
 
-    public function session()
+    public function chatSession(): BelongsTo
     {
         return $this->belongsTo(ChatSession::class, 'chat_session_id');
     }

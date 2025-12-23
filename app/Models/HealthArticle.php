@@ -15,16 +15,12 @@ class HealthArticle extends Model
         'content',
         'category',
         'source',
+        'verified',
         'published_at',
-        'created_by',
     ];
 
     protected $casts = [
+        'verified' => 'boolean',
         'published_at' => 'datetime',
     ];
-
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
 }

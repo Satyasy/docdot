@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DrugInteraction extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 
     protected $fillable = [
         'drug_id',
@@ -16,7 +19,7 @@ class DrugInteraction extends Model
         'description',
     ];
 
-    public function drug()
+    public function drug(): BelongsTo
     {
         return $this->belongsTo(Drug::class);
     }
