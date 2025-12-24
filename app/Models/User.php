@@ -15,19 +15,146 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
         'role',
+        'otp_code',
+        'otp_expires_at',
+        'otp_resend_count',
+        'otp_last_resend_at',
+        'email_verified_at',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'otp_code',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'otp_expires_at' => 'datetime',
+        'otp_last_resend_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Generate OTP code
+     */
+    public function generateOtp(): string
+    {
+        $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        
+        $this->update([
+            'otp_code' => $otp,
+            'otp_expires_at' => now()->addMinutes(10),
+        ]);
+
+        return $otp;
+    }
+
+    /**
+     * Check if can resend OTP
+     */
+    public function canResendOtp(): array
+    {
+        $maxResendPerDay = 5;
+        $cooldowns = [30, 60, 120, 300, 300]; // seconds: 30s, 1m, 2m, 5m, 5m
+        
+        // Reset count if last resend was yesterday
+        if ($this->otp_last_resend_at && !$this->otp_last_resend_at->isToday()) {
+            $this->update(['otp_resend_count' => 0]);
+        }
+        
+        $resendCount = $this->otp_resend_count ?? 0;
+        
+        // Check daily limit
+        if ($resendCount >= $maxResendPerDay) {
+            return [
+                'can_resend' => false,
+                'reason' => 'Anda telah mencapai batas maksimal resend OTP hari ini (5x).',
+                'wait_seconds' => 0,
+                'remaining_today' => 0,
+            ];
+        }
+        
+        // Check cooldown
+        if ($this->otp_last_resend_at) {
+            $cooldownIndex = min($resendCount, count($cooldowns) - 1);
+            $cooldownSeconds = $cooldowns[$cooldownIndex];
+            $nextResendAt = $this->otp_last_resend_at->addSeconds($cooldownSeconds);
+            
+            if (now()->lt($nextResendAt)) {
+                return [
+                    'can_resend' => false,
+                    'reason' => 'Tunggu sebentar sebelum mengirim ulang.',
+                    'wait_seconds' => now()->diffInSeconds($nextResendAt),
+                    'remaining_today' => $maxResendPerDay - $resendCount,
+                ];
+            }
+        }
+        
+        return [
+            'can_resend' => true,
+            'reason' => null,
+            'wait_seconds' => 0,
+            'remaining_today' => $maxResendPerDay - $resendCount,
+        ];
+    }
+
+    /**
+     * Resend OTP with tracking
+     */
+    public function resendOtp(): string
+    {
+        $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        
+        $this->update([
+            'otp_code' => $otp,
+            'otp_expires_at' => now()->addMinutes(10),
+            'otp_resend_count' => ($this->otp_resend_count ?? 0) + 1,
+            'otp_last_resend_at' => now(),
+        ]);
+
+        return $otp;
+    }
+
+    /**
+     * Get next cooldown seconds
+     */
+    public function getNextCooldown(): int
+    {
+        $cooldowns = [30, 60, 120, 300, 300];
+        $resendCount = ($this->otp_resend_count ?? 0) + 1;
+        $cooldownIndex = min($resendCount, count($cooldowns) - 1);
+        return $cooldowns[$cooldownIndex];
+    }
+
+    /**
+     * Verify OTP code
+     */
+    public function verifyOtp(string $otp): bool
+    {
+        if ($this->otp_code === $otp && $this->otp_expires_at && $this->otp_expires_at->isFuture()) {
+            $this->update([
+                'otp_code' => null,
+                'otp_expires_at' => null,
+                'otp_resend_count' => 0,
+                'otp_last_resend_at' => null,
+                'email_verified_at' => now(),
+            ]);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check if user is verified
+     */
+    public function isVerified(): bool
+    {
+        return $this->email_verified_at !== null;
+    }
 
     public function profile(): HasOne
     {

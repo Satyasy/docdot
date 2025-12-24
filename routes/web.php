@@ -31,7 +31,18 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
-    // Consultation Chat (requires auth)
+    // OTP Verification (doesn't require verified middleware)
+    Route::get('/verify-otp', [AuthController::class, 'showVerifyOtp'])->name('verify.otp');
+    Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+    Route::post('/resend-otp', [AuthController::class, 'resendOtp'])->name('resend.otp');
+});
+
+// Routes that require verified email
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Profile
+    Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
+    
+    // Consultation Chat (requires auth + verified)
     Route::post('/consultation/session', [ChatController::class, 'createSession']);
     Route::get('/consultation/session/{session}/messages', [ChatController::class, 'getMessages']);
     Route::post('/consultation/session/{session}/message', [ChatController::class, 'sendMessage']);

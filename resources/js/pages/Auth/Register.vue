@@ -117,6 +117,7 @@ const submit = () => {
                                 <Icon :icon="showConfirmPassword ? 'mdi:eye' : 'mdi:eye-off'" class="h-4 w-4" />
                             </button>
                         </div>
+                        <p v-if="form.errors.password_confirmation" class="mt-1 text-[11px] text-red-500">{{ form.errors.password_confirmation }}</p>
                     </div>
 
                     <!-- Agree Terms -->

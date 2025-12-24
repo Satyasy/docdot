@@ -12,6 +12,7 @@ interface User {
     id: number;
     name: string;
     email: string;
+    email_verified_at: string | null;
 }
 
 const navItems: NavItem[] = [
@@ -24,6 +25,7 @@ const navItems: NavItem[] = [
 const page = usePage<{ auth: { user: User | null } }>();
 const currentPath = computed(() => page.url);
 const user = computed(() => page.props.auth?.user as User | null);
+const isVerified = computed(() => user.value?.email_verified_at !== null);
 
 const showDropdown = ref(false);
 
@@ -65,8 +67,8 @@ const toggleDropdown = () => {
                 </li>
             </ul>
 
-            <!-- User Dropdown (when logged in) -->
-            <div v-if="user" class="relative z-50">
+            <!-- User Dropdown (when logged in AND verified) -->
+            <div v-if="user && isVerified" class="relative z-50">
                 <button 
                     @click="toggleDropdown"
                     class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] transition-opacity hover:opacity-90"
@@ -75,7 +77,7 @@ const toggleDropdown = () => {
                 </button>
                 
                 <!-- Dropdown Menu -->
-                <div class="absolute right-0 z-50 mt-2 w-48 overflow-hidden">
+                <div class="absolute right-0 z-50 mt-2 min-w-max overflow-hidden">
                     <Transition
                         enter-active-class="transition-all duration-300 ease-out"
                         enter-from-class="max-h-0 opacity-0"
@@ -110,7 +112,7 @@ const toggleDropdown = () => {
                 </div>
             </div>
 
-            <!-- Sign In Button (when not logged in) -->
+            <!-- Sign In Button (when not logged in OR not verified) -->
             <Link
                 v-else
                 href="/login"
