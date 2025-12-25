@@ -174,15 +174,97 @@ class AuthController extends Controller
             return redirect()->route('login');
         }
 
+        $user->load('profile');
+
+        // Get statistics
+        $chatSessionsCount = $user->chatSessions()->count();
+        $totalMessages = \App\Models\ChatMessage::whereHas('session', function ($q) use ($user) {
+            $q->where('user_id', $user->id);
+        })->count();
+
         return Inertia::render('Profile', [
             'user' => [
+                'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
                 'phone' => $user->phone,
                 'email_verified_at' => $user->email_verified_at,
                 'created_at' => $user->created_at,
             ],
+            'profile' => $user->profile ? [
+                'gender' => $user->profile->gender,
+                'photo_profile' => $user->profile->photo_profile,
+                'birth_date' => $user->profile->birth_date?->format('Y-m-d'),
+                'height' => $user->profile->height,
+                'weight' => $user->profile->weight,
+                'bmi' => $user->profile->bmi,
+                'bmi_category' => $user->profile->bmi_category,
+                'age' => $user->profile->age,
+            ] : null,
+            'stats' => [
+                'chat_sessions' => $chatSessionsCount,
+                'total_messages' => $totalMessages,
+            ],
         ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'gender' => ['nullable', 'in:male,female'],
+            'birth_date' => ['nullable', 'date', 'before:today'],
+            'height' => ['nullable', 'integer', 'min:50', 'max:250'],
+            'weight' => ['nullable', 'integer', 'min:20', 'max:300'],
+        ]);
+
+        // Update user basic info
+        $user->update([
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+        ]);
+
+        // Update or create profile
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'gender' => $validated['gender'],
+                'birth_date' => $validated['birth_date'],
+                'height' => $validated['height'],
+                'weight' => $validated['weight'],
+            ]
+        );
+
+        return back()->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function updateProfilePhoto(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $request->validate([
+            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+
+        $path = $request->file('photo')->store('profile-photos', 'public');
+
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            ['photo_profile' => $path]
+        );
+
+        return back()->with('success', 'Foto profil berhasil diperbarui.');
     }
 
     public function showForgotPassword()

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DrugController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,6 +18,10 @@ Route::get('/features', function () {
 // Article Routes
 Route::get('/article', [ArticleController::class, 'index'])->name('article');
 Route::get('/article/{slug}', [ArticleController::class, 'show'])->name('article.show');
+
+// Drug Catalog Routes
+Route::get('/drug-catalog', [DrugController::class, 'index'])->name('drug-catalog');
+Route::get('/drug-catalog/{drug}', [DrugController::class, 'show'])->name('drug-catalog.show');
 
 // Consultation - accessible by everyone, but submit requires auth
 Route::get('/consultation', [ChatController::class, 'index'])->name('consultation');
@@ -48,6 +53,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // Profile
     Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
+    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/photo', [AuthController::class, 'updateProfilePhoto'])->name('profile.photo');
 
     // Chat History
     Route::get('/chat-history', [ChatController::class, 'history'])->name('chat.history');

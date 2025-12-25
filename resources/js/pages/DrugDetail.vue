@@ -1,0 +1,353 @@
+<script setup lang="ts">
+import { Head, Link } from '@inertiajs/vue3';
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
+import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
+
+interface DrugPrice {
+    id: number;
+    pharmacy_name: string;
+    price_min: number;
+    price_max: number;
+}
+
+interface Drug {
+    id: number;
+    name: string;
+    category: string;
+    description: string;
+    dosage_info: string | null;
+    side_effects: string | null;
+    warnings: string | null;
+    pregnancy_safe: boolean;
+    prices: DrugPrice[];
+}
+
+interface Props {
+    drug: Drug;
+    relatedDrugs: Drug[];
+}
+
+const props = defineProps<Props>();
+
+const activeTab = ref<'info' | 'dosage' | 'side-effects' | 'warnings'>('info');
+
+const getCategoryIcon = (category: string): string => {
+    const icons: Record<string, string> = {
+        'Analgesik': 'mdi:pill',
+        'Antibiotik': 'mdi:bacteria',
+        'Antihistamin': 'mdi:allergy',
+        'Antasida': 'mdi:stomach',
+        'Vitamin': 'mdi:fruit-cherries',
+        'Obat Batuk': 'mdi:lungs',
+        'Obat Flu': 'mdi:emoticon-sick-outline',
+        'Antiseptik': 'mdi:hand-wash-outline',
+    };
+    return icons[category] || 'mdi:medical-bag';
+};
+
+const getCategoryColor = (category: string): string => {
+    const colors: Record<string, string> = {
+        'Analgesik': '#F4AFE9',
+        'Antibiotik': '#8DD0FC',
+        'Antihistamin': '#DDB4F6',
+        'Antasida': '#43B3FC',
+        'Vitamin': '#FF7CEA',
+        'Obat Batuk': '#F4AFE9',
+        'Obat Flu': '#8DD0FC',
+        'Antiseptik': '#DDB4F6',
+    };
+    return colors[category] || '#8DD0FC';
+};
+
+const formatPrice = (price: number): string => {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+    }).format(price);
+};
+
+const getPriceRange = (prices: DrugPrice[]): string => {
+    if (prices.length === 0) return 'Harga tidak tersedia';
+    
+    const minPrice = Math.min(...prices.map(p => p.price_min));
+    const maxPrice = Math.max(...prices.map(p => p.price_max));
+    
+    if (minPrice === maxPrice) {
+        return formatPrice(minPrice);
+    }
+    return `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
+};
+
+const tabs = [
+    { id: 'info', label: 'Informasi', icon: 'mdi:information-outline' },
+    { id: 'dosage', label: 'Dosis', icon: 'mdi:clock-outline' },
+    { id: 'side-effects', label: 'Efek Samping', icon: 'mdi:alert-circle-outline' },
+    { id: 'warnings', label: 'Peringatan', icon: 'mdi:alert-outline' },
+];
+</script>
+
+<template>
+    <Head :title="`${drug.name} - Katalog Obat - DocDot`" />
+
+    <div class="min-h-screen font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+        <Navbar />
+
+        <div class="px-6 py-8 lg:px-12">
+            <div class="mx-auto max-w-5xl">
+                <!-- Breadcrumb -->
+                <nav class="mb-6 flex items-center gap-2 text-[14px]">
+                    <Link href="/" class="text-[#1b1b18]/60 hover:text-[#1b1b18]">Beranda</Link>
+                    <Icon icon="mdi:chevron-right" class="h-4 w-4 text-[#1b1b18]/40" />
+                    <Link href="/drug-catalog" class="text-[#1b1b18]/60 hover:text-[#1b1b18]">Katalog Obat</Link>
+                    <Icon icon="mdi:chevron-right" class="h-4 w-4 text-[#1b1b18]/40" />
+                    <span class="text-[#1b1b18]">{{ drug.name }}</span>
+                </nav>
+
+                <!-- Back Button -->
+                <Link 
+                    href="/drug-catalog"
+                    class="mb-6 inline-flex items-center gap-2 text-[14px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18]"
+                >
+                    <Icon icon="mdi:arrow-left" class="h-4 w-4" />
+                    Kembali ke Katalog
+                </Link>
+
+                <div class="grid gap-6 lg:grid-cols-3">
+                    <!-- Main Content -->
+                    <div class="space-y-6 lg:col-span-2">
+                        <!-- Drug Header Card -->
+                        <div class="overflow-hidden rounded-2xl bg-white">
+                            <!-- Header Banner -->
+                            <div 
+                                class="flex h-48 items-center justify-center"
+                                :style="{ background: `linear-gradient(135deg, ${getCategoryColor(drug.category)}60, ${getCategoryColor(drug.category)}30)` }"
+                            >
+                                <Icon 
+                                    :icon="getCategoryIcon(drug.category)" 
+                                    class="h-24 w-24"
+                                    :style="{ color: getCategoryColor(drug.category) }"
+                                />
+                            </div>
+
+                            <div class="p-6">
+                                <!-- Category & Safety Badge -->
+                                <div class="mb-3 flex items-center gap-3">
+                                    <span 
+                                        class="rounded-full px-3 py-1 text-[12px] font-medium"
+                                        :style="{ 
+                                            backgroundColor: `${getCategoryColor(drug.category)}20`,
+                                            color: getCategoryColor(drug.category)
+                                        }"
+                                    >
+                                        {{ drug.category }}
+                                    </span>
+                                    <span
+                                        v-if="drug.pregnancy_safe"
+                                        class="flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-[12px] font-medium text-green-600"
+                                    >
+                                        <Icon icon="mdi:mother-heart" class="h-4 w-4" />
+                                        Aman untuk Ibu Hamil
+                                    </span>
+                                    <span
+                                        v-else
+                                        class="flex items-center gap-1 rounded-full bg-red-100 px-3 py-1 text-[12px] font-medium text-red-600"
+                                    >
+                                        <Icon icon="mdi:alert" class="h-4 w-4" />
+                                        Tidak Aman untuk Ibu Hamil
+                                    </span>
+                                </div>
+
+                                <!-- Drug Name -->
+                                <h1 class="mb-2 text-[28px] font-bold text-[#1b1b18] lg:text-[32px]">
+                                    {{ drug.name }}
+                                </h1>
+
+                                <!-- Price Range -->
+                                <div class="flex items-center gap-2 text-[18px]">
+                                    <Icon icon="mdi:tag-outline" class="h-5 w-5 text-[#8DD0FC]" />
+                                    <span class="font-semibold text-[#1b1b18]">
+                                        {{ getPriceRange(drug.prices) }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="rounded-2xl bg-white p-4 lg:p-6">
+                            <!-- Tab Buttons -->
+                            <div class="mb-6 flex gap-2 overflow-x-auto">
+                                <button
+                                    v-for="tab in tabs"
+                                    :key="tab.id"
+                                    @click="activeTab = tab.id as typeof activeTab"
+                                    :class="[
+                                        'flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-[14px] font-medium transition-all',
+                                        activeTab === tab.id
+                                            ? 'bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] text-white'
+                                            : 'bg-[#F8F8F8] text-[#1b1b18]/70 hover:bg-[#F4AFE9]/10'
+                                    ]"
+                                >
+                                    <Icon :icon="tab.icon" class="h-4 w-4" />
+                                    {{ tab.label }}
+                                </button>
+                            </div>
+
+                            <!-- Tab Content -->
+                            <div class="min-h-[200px]">
+                                <!-- Info Tab -->
+                                <div v-if="activeTab === 'info'">
+                                    <h3 class="mb-3 text-[18px] font-semibold text-[#1b1b18]">Deskripsi Obat</h3>
+                                    <p class="whitespace-pre-line text-[14px] leading-relaxed text-[#1b1b18]/70">
+                                        {{ drug.description }}
+                                    </p>
+                                </div>
+
+                                <!-- Dosage Tab -->
+                                <div v-if="activeTab === 'dosage'">
+                                    <h3 class="mb-3 text-[18px] font-semibold text-[#1b1b18]">Informasi Dosis</h3>
+                                    <div v-if="drug.dosage_info" class="whitespace-pre-line text-[14px] leading-relaxed text-[#1b1b18]/70">
+                                        {{ drug.dosage_info }}
+                                    </div>
+                                    <div v-else class="flex flex-col items-center py-8 text-center">
+                                        <Icon icon="mdi:file-document-outline" class="h-12 w-12 text-[#1b1b18]/20" />
+                                        <p class="mt-2 text-[14px] text-[#1b1b18]/60">
+                                            Informasi dosis belum tersedia
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Side Effects Tab -->
+                                <div v-if="activeTab === 'side-effects'">
+                                    <h3 class="mb-3 text-[18px] font-semibold text-[#1b1b18]">Efek Samping</h3>
+                                    <div v-if="drug.side_effects" class="whitespace-pre-line text-[14px] leading-relaxed text-[#1b1b18]/70">
+                                        {{ drug.side_effects }}
+                                    </div>
+                                    <div v-else class="flex flex-col items-center py-8 text-center">
+                                        <Icon icon="mdi:check-circle-outline" class="h-12 w-12 text-green-400" />
+                                        <p class="mt-2 text-[14px] text-[#1b1b18]/60">
+                                            Tidak ada efek samping yang tercatat
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Warnings Tab -->
+                                <div v-if="activeTab === 'warnings'">
+                                    <h3 class="mb-3 text-[18px] font-semibold text-[#1b1b18]">Peringatan</h3>
+                                    <div v-if="drug.warnings" class="rounded-xl bg-yellow-50 p-4">
+                                        <div class="flex items-start gap-3">
+                                            <Icon icon="mdi:alert" class="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-600" />
+                                            <div class="whitespace-pre-line text-[14px] leading-relaxed text-yellow-800">
+                                                {{ drug.warnings }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else class="flex flex-col items-center py-8 text-center">
+                                        <Icon icon="mdi:shield-check-outline" class="h-12 w-12 text-green-400" />
+                                        <p class="mt-2 text-[14px] text-[#1b1b18]/60">
+                                            Tidak ada peringatan khusus
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="space-y-6">
+                        <!-- Price Comparison Card -->
+                        <div class="rounded-2xl bg-white p-6">
+                            <h3 class="mb-4 flex items-center gap-2 text-[18px] font-semibold text-[#1b1b18]">
+                                <Icon icon="mdi:store" class="h-5 w-5 text-[#8DD0FC]" />
+                                Harga di Apotek
+                            </h3>
+
+                            <div v-if="drug.prices.length > 0" class="space-y-3">
+                                <div
+                                    v-for="price in drug.prices"
+                                    :key="price.id"
+                                    class="rounded-xl bg-[#F8F8F8] p-4"
+                                >
+                                    <p class="mb-1 text-[14px] font-medium text-[#1b1b18]">
+                                        {{ price.pharmacy_name }}
+                                    </p>
+                                    <p class="text-[16px] font-semibold text-[#8DD0FC]">
+                                        {{ formatPrice(price.price_min) }}
+                                        <span v-if="price.price_min !== price.price_max">
+                                            - {{ formatPrice(price.price_max) }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div v-else class="py-6 text-center">
+                                <Icon icon="mdi:store-off" class="mx-auto h-10 w-10 text-[#1b1b18]/20" />
+                                <p class="mt-2 text-[13px] text-[#1b1b18]/60">
+                                    Harga belum tersedia
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Disclaimer -->
+                        <div class="rounded-2xl bg-gradient-to-br from-[#F4AFE9]/20 to-[#8DD0FC]/20 p-4">
+                            <div class="flex items-start gap-3">
+                                <Icon icon="mdi:information" class="mt-0.5 h-5 w-5 flex-shrink-0 text-[#8DD0FC]" />
+                                <div class="text-[12px] text-[#1b1b18]/70">
+                                    <p class="mb-1 font-medium text-[#1b1b18]">Disclaimer</p>
+                                    <p>
+                                        Informasi obat ini hanya untuk referensi. Selalu konsultasikan dengan dokter atau apoteker sebelum menggunakan obat.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consult CTA -->
+                        <Link
+                            href="/consultation"
+                            class="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] p-4 text-[14px] font-medium text-white transition-all hover:shadow-lg"
+                        >
+                            <Icon icon="mdi:robot" class="h-5 w-5" />
+                            Konsultasikan dengan AI
+                        </Link>
+                    </div>
+                </div>
+
+                <!-- Related Drugs -->
+                <div v-if="relatedDrugs.length > 0" class="mt-8">
+                    <h2 class="mb-4 text-[20px] font-semibold text-[#1b1b18]">Obat Terkait</h2>
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <Link
+                            v-for="related in relatedDrugs"
+                            :key="related.id"
+                            :href="`/drug-catalog/${related.id}`"
+                            class="group flex items-center gap-3 rounded-xl bg-white p-4 transition-all hover:shadow-md"
+                        >
+                            <div 
+                                class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl"
+                                :style="{ backgroundColor: `${getCategoryColor(related.category)}20` }"
+                            >
+                                <Icon 
+                                    :icon="getCategoryIcon(related.category)" 
+                                    class="h-6 w-6"
+                                    :style="{ color: getCategoryColor(related.category) }"
+                                />
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <p class="truncate text-[14px] font-medium text-[#1b1b18] group-hover:text-[#8DD0FC]">
+                                    {{ related.name }}
+                                </p>
+                                <p class="text-[12px] text-[#1b1b18]/60">
+                                    {{ related.category }}
+                                </p>
+                            </div>
+                            <Icon icon="mdi:chevron-right" class="h-5 w-5 text-[#1b1b18]/30 group-hover:text-[#8DD0FC]" />
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <Footer />
+    </div>
+</template>
