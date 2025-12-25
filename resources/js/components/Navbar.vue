@@ -13,6 +13,7 @@ interface User {
     name: string;
     email: string;
     email_verified_at: string | null;
+    photo_profile: string | null;
 }
 
 const navItems: NavItem[] = [
@@ -56,7 +57,9 @@ const toggleMobileMenu = () => {
 <template>
     <nav class="relative z-50 w-full bg-transparent px-6 py-4 lg:px-12">
         <div class="mx-auto flex max-w-7xl items-center justify-between">
-            <Link href="/" class="text-[24px] font-bold text-[#1b1b18] lg:text-[32px]">DocDot</Link>
+            <Link href="/" class="flex items-center gap-2">
+                <img src="/images/logo.png" alt="DocDot" class="h-12 w-auto lg:h-14" />
+            </Link>
 
             <!-- Desktop Navigation -->
             <ul class="hidden items-center gap-6 lg:flex xl:gap-8">
@@ -80,9 +83,15 @@ const toggleMobileMenu = () => {
                 <div v-if="user && isVerified" class="relative z-50 hidden md:block">
                     <button 
                         @click="toggleDropdown"
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] transition-opacity hover:opacity-90 lg:h-12 lg:w-12"
+                        class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] transition-opacity hover:opacity-90 lg:h-12 lg:w-12"
                     >
-                        <Icon icon="mdi:account" class="h-5 w-5 text-[#1b1b18] lg:h-7 lg:w-7" />
+                        <img 
+                            v-if="user.photo_profile" 
+                            :src="'/storage/' + user.photo_profile" 
+                            :alt="user.name" 
+                            class="h-full w-full object-cover" 
+                        />
+                        <Icon v-else icon="mdi:account" class="h-5 w-5 text-[#1b1b18] lg:h-7 lg:w-7" />
                     </button>
                     
                     <!-- Dropdown Menu -->
@@ -174,8 +183,14 @@ const toggleMobileMenu = () => {
                 <!-- User info if logged in -->
                 <div v-if="user && isVerified" class="mb-4 rounded-xl bg-gradient-to-r from-[#F4AFE9]/10 to-[#8DD0FC]/10 p-4">
                     <div class="flex items-center gap-3">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC]">
-                            <Icon icon="mdi:account" class="h-5 w-5 text-white" />
+                        <div class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC]">
+                            <img 
+                                v-if="user.photo_profile" 
+                                :src="'/storage/' + user.photo_profile" 
+                                :alt="user.name" 
+                                class="h-full w-full object-cover" 
+                            />
+                            <Icon v-else icon="mdi:account" class="h-5 w-5 text-white" />
                         </div>
                         <div>
                             <p class="text-[14px] font-medium text-[#1b1b18]">{{ user.name }}</p>

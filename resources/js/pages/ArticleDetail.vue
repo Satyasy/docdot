@@ -110,7 +110,7 @@ const getCategoryColor = (category: string) => {
 
         <!-- Related Articles -->
         <section v-if="relatedArticles.length > 0" class="bg-white px-6 py-16 lg:px-12">
-            <h2 class="mb-10 text-center text-[32px] font-semibold text-[#1b1b18]" style="font-style: italic;">Artikel Terkait</h2>
+            <h2 class="mb-10 text-center text-[32px] font-semibold text-[#1b1b18]">Artikel Terkait</h2>
             
             <div class="mx-auto flex max-w-6xl gap-6">
                 <Link 

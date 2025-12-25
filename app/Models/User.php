@@ -18,6 +18,7 @@ class User extends Authenticatable
         'phone',
         'password',
         'role',
+        'google_id',
         'otp_code',
         'otp_expires_at',
         'otp_resend_count',
@@ -44,7 +45,7 @@ class User extends Authenticatable
     public function generateOtp(): string
     {
         $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-        
+
         $this->update([
             'otp_code' => $otp,
             'otp_expires_at' => now()->addMinutes(10),
@@ -60,14 +61,14 @@ class User extends Authenticatable
     {
         $maxResendPerDay = 5;
         $cooldowns = [30, 60, 120, 300, 300]; // seconds: 30s, 1m, 2m, 5m, 5m
-        
+
         // Reset count if last resend was yesterday
         if ($this->otp_last_resend_at && !$this->otp_last_resend_at->isToday()) {
             $this->update(['otp_resend_count' => 0]);
         }
-        
+
         $resendCount = $this->otp_resend_count ?? 0;
-        
+
         // Check daily limit
         if ($resendCount >= $maxResendPerDay) {
             return [
@@ -77,13 +78,13 @@ class User extends Authenticatable
                 'remaining_today' => 0,
             ];
         }
-        
+
         // Check cooldown
         if ($this->otp_last_resend_at) {
             $cooldownIndex = min($resendCount, count($cooldowns) - 1);
             $cooldownSeconds = $cooldowns[$cooldownIndex];
             $nextResendAt = $this->otp_last_resend_at->addSeconds($cooldownSeconds);
-            
+
             if (now()->lt($nextResendAt)) {
                 return [
                     'can_resend' => false,
@@ -93,7 +94,7 @@ class User extends Authenticatable
                 ];
             }
         }
-        
+
         return [
             'can_resend' => true,
             'reason' => null,
@@ -108,7 +109,7 @@ class User extends Authenticatable
     public function resendOtp(): string
     {
         $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-        
+
         $this->update([
             'otp_code' => $otp,
             'otp_expires_at' => now()->addMinutes(10),

@@ -152,7 +152,7 @@ const hasFilters = computed(() => searchQuery.value || dateFilter.value);
 
                 <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                        <h1 class="text-[32px] font-bold text-[#1b1b18] lg:text-[42px]" style="font-style: italic;">
+                        <h1 class="text-[32px] font-bold text-[#1b1b18] lg:text-[42px]">
                             Riwayat <span class="bg-gradient-to-r from-[#BF55FF] to-[#43B3FC] bg-clip-text text-transparent">Konsultasi</span>
                         </h1>
                         <p class="mt-2 text-[16px] text-[#1b1b18]/70">

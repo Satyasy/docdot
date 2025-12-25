@@ -43,7 +43,13 @@ class HandleInertiaRequests extends Middleware
         // Only share user if verified, otherwise treat as guest
         $authUser = null;
         if ($user && $user->isVerified()) {
-            $authUser = $user;
+            $authUser = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+                'photo_profile' => $user->profile?->photo_profile,
+            ];
         }
 
         return [

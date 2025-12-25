@@ -3,6 +3,9 @@ import { Head, Link } from '@inertiajs/vue3';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import { Icon } from '@iconify/vue';
+import { useScrollAnimation } from '@/composables/useScrollAnimation';
+
+useScrollAnimation();
 </script>
 
 <template>
@@ -14,7 +17,7 @@ import { Icon } from '@iconify/vue';
 
         <section class="relative overflow-hidden px-6 pt-8 lg:px-12">
             <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
-                <div class="max-w-xl pt-16">
+                <div class="scroll-animate max-w-xl pt-16">
                     <h1 class="text-[40px] font-semibold leading-tight text-[#1b1b18] lg:text-[48px]">
                         Lindungi Diri Anda<br />Lindungi Keluarga
                     </h1>
@@ -27,7 +30,7 @@ import { Icon } from '@iconify/vue';
                     </Link>
                 </div>
 
-                <div class="relative -translate-x-16">
+                <div class="scroll-animate scroll-animate-delay-2 relative -translate-x-16">
                     <div class="absolute -top-4 -right-32 z-10 rounded-full bg-white px-6 py-3 text-[16px] font-normal shadow-lg">
                         Ayo mulai sekarang!
                     </div>
@@ -58,16 +61,16 @@ import { Icon } from '@iconify/vue';
                                 </div>
                                 <h3 class="text-[20px] font-bold text-[#1b1b18]">AI Consultation</h3>
                                 <p class="mt-2 text-[14px] leading-relaxed text-[#1b1b18]/80">
-                                    Konsultasikan keluhan penyakit Anda sekarang dan dapatkan solusi cepat dari MediBot, aman terpercaya.
+                                    Konsultasikan keluhan penyakit Anda sekarang dan dapatkan solusi cepat dari DocDot, aman terpercaya.
                                 </p>
                             </div>
                             <div class="max-w-[320px]">
                                 <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/40">
                                     <Icon icon="fluent-mdl2:insights" class="h-8 w-8 text-[#2D7BB8]" />
                                 </div>
-                                <h3 class="text-[20px] font-bold text-[#1b1b18]">MediBot Insight</h3>
+                                <h3 class="text-[20px] font-bold text-[#1b1b18]">DocDot Insight</h3>
                                 <p class="mt-2 text-[14px] leading-relaxed text-[#1b1b18]/80">
-                                    Temukan berbagai artikel kesehatan terpercaya dan terbaru hanya di MediBot, untuk hidup lebih sehat.
+                                    Temukan berbagai artikel kesehatan terpercaya dan terbaru hanya di DocDot, untuk hidup lebih sehat.
                                 </p>
                             </div>
                         </div>
@@ -99,7 +102,7 @@ import { Icon } from '@iconify/vue';
 
         <!-- Features Bar Section -->
         <section class="px-6 py-16 lg:px-12">
-            <div class="rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-16 py-6">
+            <div class="scroll-animate rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-16 py-6">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
@@ -127,7 +130,7 @@ import { Icon } from '@iconify/vue';
         <section class="px-6 py-16 lg:px-12">
             <div class="mx-auto max-w-7xl">
                 <div class="relative flex items-center justify-between">
-                    <div class="relative flex items-center">
+                    <div class="scroll-animate relative flex items-center">
                         <div class="relative h-[380px] w-[220px] rounded-[30px] bg-[#43B3FC]/10">
                             <div class="absolute top-1/2 left-1/2 h-[200px] w-[2px] -translate-x-1/2 -translate-y-1/2 bg-[#43B3FC]/40"></div>
                             <div class="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#43B3FC]/60"></div>
@@ -154,7 +157,7 @@ import { Icon } from '@iconify/vue';
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-8">
+                    <div class="scroll-animate scroll-animate-delay-2 flex flex-col gap-8">
                         <div class="flex items-center gap-6">
                             <div>
                                 <p class="text-[56px] font-bold leading-none text-[#43B3FC]">33%</p>
@@ -181,12 +184,12 @@ import { Icon } from '@iconify/vue';
         <!-- Rasakan Fitur Kesehatan Section -->
         <section class="bg-[#DDB4F6]/20 px-6 py-16 lg:px-12">
             <div class="mx-auto max-w-7xl text-center">
-                <h2 class="text-[36px] font-bold text-[#1b1b18]">
+                <h2 class="scroll-animate text-[36px] font-bold text-[#1b1b18]">
                     Rasakan <span class="text-[#CC79FF]">Fitur Kesehatan</span> Lengkap dengan<br />
                     Teknologi Pintar dari <span class="bg-gradient-to-r from-[#CC79FF] to-[#4FB9FF] bg-clip-text text-transparent">DocDot</span> Setiap Hari 🚀
                 </h2>
 
-                <div class="mt-12 flex items-stretch justify-center gap-6">
+                <div class="scroll-animate scroll-animate-delay-1 mt-12 flex items-stretch justify-center gap-6">
                     <div class="relative h-[180px] w-[400px] overflow-hidden rounded-[30px] bg-[#E2B2FF] p-6">
                         <div class="absolute -top-8 -bottom-8 left-[51%] w-[18%] rounded-[20px] bg-white/60" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[69%] w-[18%] rounded-[20px] bg-white/30" style="transform: skewX(-15deg);"></div>
@@ -236,7 +239,7 @@ import { Icon } from '@iconify/vue';
         <section class="bg-white px-6 py-16 lg:px-12">
             <div class="mx-auto max-w-7xl">
                 <div class="flex items-start justify-between gap-12">
-                    <div class="relative flex gap-8">
+                    <div class="scroll-animate relative flex gap-8">
                         <div class="relative">
                             <div class="absolute -top-8 left-1/2 z-20 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-lg">
                                 <Icon icon="mdi:stethoscope" class="h-8 w-8 text-[#CC79FF]" />
@@ -244,7 +247,7 @@ import { Icon } from '@iconify/vue';
 
                             <div class="relative h-[280px] w-[280px] rounded-[30px] bg-[#E2B2FF]">
                                 <div class="absolute top-0 right-0 h-full w-1/2 rounded-r-[30px] bg-[#D9A0F0]"></div>
-                                <img src="/images/bot.png" alt="MediBot" class="absolute bottom-4 left-1/2 z-10 h-[220px] w-auto -translate-x-1/2" />
+                                <img src="/images/bot.png" alt="DocDot Bot" class="absolute bottom-4 left-1/2 z-10 h-[220px] w-auto -translate-x-1/2" />
                             </div>
 
                             <div class="absolute top-16 -right-20 z-20 rounded-full bg-white px-8 py-3 shadow-lg">
@@ -278,18 +281,18 @@ import { Icon } from '@iconify/vue';
                         </div>
                     </div>
 
-                    <div class="max-w-xl pt-8">
-                        <h2 class="text-[32px] font-bold text-[#1b1b18]">Pengigat Medibot 🔔</h2>
+                    <div class="scroll-animate scroll-animate-delay-2 max-w-xl pt-8">
+                        <h2 class="text-[32px] font-bold text-[#1b1b18]">Pengingat DocDot 🔔</h2>
                         <div class="mt-4 border-l-2 border-[#039BFF] pl-4">
                             <p class="text-[16px] leading-relaxed text-[#1b1b18]/80">
-                                Fitur notification di MediBot berfungsi untuk memberikan pengingat dan informasi penting secara otomatis. Tujuannya agar pengguna lebih teratur dalam menjaga kesehatannya.
+                                Fitur notification di DocDot berfungsi untuk memberikan pengingat dan informasi penting secara otomatis. Tujuannya agar pengguna lebih teratur dalam menjaga kesehatannya.
                             </p>
                         </div>
 
-                        <h3 class="mt-8 text-[24px] font-bold text-[#1b1b18]">Siaga bersama Medibot</h3>
+                        <h3 class="mt-8 text-[24px] font-bold text-[#1b1b18]">Siaga bersama DocDot</h3>
                         <div class="mt-4 border-l-2 border-[#BF55FF] pl-4">
                             <p class="text-[16px] leading-relaxed text-[#1b1b18]/80">
-                                Dengan fitur notifikasi otomatis, MediBot selalu siap mengingatkanmu tentang jadwal kesehatan penting konsultasi, dan tips harian agar kamu tetap sehat dan terjaga setiap saat.
+                                Dengan fitur notifikasi otomatis, DocDot selalu siap mengingatkanmu tentang jadwal kesehatan penting konsultasi, dan tips harian agar kamu tetap sehat dan terjaga setiap saat.
                             </p>
                         </div>
                     </div>
@@ -300,7 +303,7 @@ import { Icon } from '@iconify/vue';
         <!-- Informasi Tepat Section -->
         <section class="mt-16 bg-white px-6 pt-40 pb-16 lg:px-12">
             <div class="mx-auto max-w-6xl">
-                <div class="relative flex h-[400px] items-center rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-10">
+                <div class="scroll-animate relative flex h-[400px] items-center rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-10">
                     <!-- Stripes di pojok kanan bawah (inside card with clip) -->
                     <div class="absolute inset-0 overflow-hidden rounded-[30px]">
                         <div class="absolute bottom-16 -right-17 h-[50px] w-[500px] rounded-l-full bg-white/20" style="transform: rotate(-35deg); transform-origin: bottom right;"></div>
@@ -332,11 +335,11 @@ import { Icon } from '@iconify/vue';
         <!-- Ulasan Section -->
         <section class="bg-white px-6 py-16 lg:px-12">
             <div class="mx-auto max-w-6xl">
-                <h2 class="mb-12 text-left text-[32px] font-bold text-[#1b1b18]">
-                    Ulasan Nyata dari Pengguna MediBot
+                <h2 class="scroll-animate mb-12 text-left text-[32px] font-bold text-[#1b1b18]">
+                    Ulasan Nyata dari Pengguna DocDot
                 </h2>
 
-                <div class="flex justify-between gap-4">
+                <div class="scroll-animate scroll-animate-delay-1 flex justify-between gap-4">
                     <!-- Card 1 -->
                     <div class="w-[350px] rounded-[20px] bg-[#FAF1FF] p-6">
                         <div class="mb-4 flex items-center justify-between">

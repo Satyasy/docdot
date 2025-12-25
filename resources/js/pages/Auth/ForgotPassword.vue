@@ -19,9 +19,12 @@ const submit = () => {
 <template>
     <Head title="Lupa Password" />
     <div class="flex min-h-screen overflow-x-hidden" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%);">
-        <!-- Left Side - Robot Image -->
+        <!-- Left Side - Logo -->
         <div class="relative hidden flex-1 items-center justify-center lg:flex">
-            <img src="/images/login.png" alt="Robot" class="relative z-10 h-[500px] w-auto" />
+            <!-- Decorative circles -->
+            <div class="absolute h-[400px] w-[400px] rounded-full bg-[#DDB4F6]/30"></div>
+            <div class="absolute h-[300px] w-[300px] rounded-full bg-[#8DD0FC]/20"></div>
+            <img src="/images/logo.png" alt="DocDot" class="relative z-10 h-[280px] w-auto drop-shadow-2xl" />
         </div>
 
         <!-- Right Side - Form -->
@@ -33,7 +36,7 @@ const submit = () => {
                     Kembali ke Login
                 </Link>
 
-                <h1 class="text-[28px] font-bold text-[#1b1b18] lg:text-[36px]" style="font-style: italic;">Lupa Password?</h1>
+                <h1 class="text-[28px] font-bold text-[#1b1b18] lg:text-[36px]">Lupa Password?</h1>
                 <p class="mt-2 text-[14px] text-[#1b1b18]/70">
                     Jangan khawatir! Masukkan email yang terdaftar dan kami akan kirimkan link untuk reset password Anda.
                 </p>

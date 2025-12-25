@@ -23,9 +23,9 @@ import { Icon } from '@iconify/vue';
         <div class="bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-6 pt-16 pb-6 lg:px-12">
             <div class="mx-auto max-w-6xl">
                 <div class="flex justify-between">
-                    <!-- Medibot -->
-                    <div class="max-w-[180px]">
-                        <h3 class="mb-4 text-[20px] font-bold text-[#1b1b18]">Medibot</h3>
+                    <!-- DocDot -->
+                    <div class="max-w-[200px]">
+                        <img src="/images/logo.png" alt="DocDot" class="mb-4 h-16 w-auto" />
                         <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
                             Teman cerdas Anda untuk informasi kesehatan terpercaya.
                         </p>
@@ -63,7 +63,7 @@ import { Icon } from '@iconify/vue';
                             </p>
                             <p class="flex items-center gap-2">
                                 <Icon icon="mdi:email" class="h-4 w-4" />
-                                medibot@gmail.com
+                                docdot@gmail.com
                             </p>
                         </div>
                         <!-- Social Icons -->

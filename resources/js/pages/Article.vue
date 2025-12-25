@@ -114,7 +114,7 @@ const handleSearchKeydown = (e: KeyboardEvent) => {
             </div>
 
             <div class="mx-auto max-w-4xl text-center">
-                <h1 class="text-[36px] font-medium leading-tight text-[#1b1b18] lg:text-[56px]" style="font-style: italic;">
+                <h1 class="text-[36px] font-semibold leading-tight text-[#1b1b18] lg:text-[56px]">
                     Cara lebih baik untuk belajar<br />soal <span style="background: linear-gradient(to right, #BF55FF 0%, #43B3FC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">kesehatan</span>, setiap hari
                 </h1>
 
@@ -142,7 +142,7 @@ const handleSearchKeydown = (e: KeyboardEvent) => {
 
         <!-- Kategori Artikel Section -->
         <section class="bg-white px-6 py-12 lg:px-12">
-            <h2 class="mb-8 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]" style="font-style: italic;">Kategori Artikel</h2>
+            <h2 class="mb-8 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]">Kategori Artikel</h2>
             
             <!-- Category Tabs -->
             <div class="mb-10 flex flex-wrap justify-center gap-3 lg:gap-4">
@@ -252,7 +252,7 @@ const handleSearchKeydown = (e: KeyboardEvent) => {
 
         <!-- Artikel Terpopuler Section -->
         <section v-if="popularArticles.length > 0" class="px-6 py-16 lg:px-12">
-            <h2 class="mb-10 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]" style="font-style: italic;">Artikel Terpopuler</h2>
+            <h2 class="mb-10 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]">Artikel Terpopuler</h2>
             
             <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <Link 
@@ -291,7 +291,7 @@ const handleSearchKeydown = (e: KeyboardEvent) => {
 
         <!-- All Articles Grid -->
         <section v-if="articles.data.length > 3" class="bg-white px-6 py-16 lg:px-12">
-            <h2 class="mb-10 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]" style="font-style: italic;">Semua Artikel</h2>
+            <h2 class="mb-10 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]">Semua Artikel</h2>
             
             <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <Link 
@@ -347,7 +347,7 @@ const handleSearchKeydown = (e: KeyboardEvent) => {
             </div>
         </section>
         <section class="px-6 py-16 lg:px-12">
-            <h2 class="mb-10 text-center text-[36px] font-semibold text-[#1b1b18]" style="font-style: italic;">5 Tips Kesehatan Harian</h2>
+            <h2 class="mb-10 text-center text-[36px] font-semibold text-[#1b1b18]">5 Tips Kesehatan Harian</h2>
             
             <div class="mx-auto flex max-w-6xl items-center justify-between px-8">
                 <!-- Robot Image -->

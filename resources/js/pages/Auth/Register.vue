@@ -26,12 +26,20 @@ const submit = () => {
 
 <template>
     <Head title="Sign Up" />
-    <div class="flex h-screen items-center overflow-hidden" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%);">
-        <!-- Left Side - Sign Up Form -->
-        <div class="flex flex-1 items-center pl-16">
-            <div class="w-[550px] rounded-[30px] bg-white/50 p-10">
-                <h1 class="text-[32px] font-bold text-[#1b1b18]" style="font-style: italic;">Sign up</h1>
-                <p class="mt-1 text-[13px] text-[#1b1b18]/70">Let's get you all st up so you can access your personal account.</p>
+    <div class="flex min-h-screen items-center justify-center overflow-hidden px-4 py-8" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%);">
+        <!-- Centered Sign Up Form -->
+        <div class="flex w-full max-w-5xl items-center justify-center gap-12">
+            <!-- Left - Logo (hidden on mobile) -->
+            <div class="relative hidden flex-shrink-0 items-center justify-center lg:flex">
+                <div class="absolute h-[350px] w-[350px] rounded-full bg-[#DDB4F6]/30"></div>
+                <div class="absolute h-[260px] w-[260px] rounded-full bg-[#8DD0FC]/20"></div>
+                <img src="/images/logo.png" alt="DocDot" class="relative z-10 h-[220px] w-auto drop-shadow-2xl" />
+            </div>
+
+            <!-- Form Card -->
+            <div class="w-full max-w-[500px] rounded-[30px] bg-white/50 p-8 backdrop-blur-sm lg:p-10">
+                <h1 class="text-[28px] font-bold text-[#1b1b18] lg:text-[32px]">Sign up</h1>
+                <p class="mt-1 text-[13px] text-[#1b1b18]/70">Let's get you all set up so you can access your personal account.</p>
 
                 <form @submit.prevent="submit" class="mt-5 space-y-4">
                     <!-- First Name & Last Name -->
@@ -164,25 +172,16 @@ const submit = () => {
 
                     <!-- Social Login -->
                     <div class="flex gap-3">
-                        <button type="button" class="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#1b1b18]/10 bg-white py-2 transition-colors hover:bg-[#f5f5f5]">
-                            <Icon icon="logos:facebook" class="h-4 w-4" />
-                        </button>
-                        <button type="button" class="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#1b1b18]/10 bg-white py-2 transition-colors hover:bg-[#f5f5f5]">
+                        <a 
+                            href="/auth/google" 
+                            class="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#1b1b18]/10 bg-white py-2 transition-all hover:bg-[#f5f5f5] hover:shadow-md"
+                        >
                             <Icon icon="logos:google-icon" class="h-4 w-4" />
-                        </button>
-                        <button type="button" class="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#1b1b18]/10 bg-white py-2 transition-colors hover:bg-[#f5f5f5]">
-                            <Icon icon="logos:apple" class="h-4 w-4" />
-                        </button>
+                            <span class="text-[12px] font-medium text-[#1b1b18]">Google</span>
+                        </a>
                     </div>
                 </form>
             </div>
-        </div>
-
-        <!-- Right Side - Robot Image -->
-        <div class="relative flex flex-1 items-center justify-start pl-8">
-            <!-- Purple circle background -->
-            <div class="absolute left-0 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-[#DDB4F6]/50"></div>
-            <img src="/images/login.png" alt="Robot" class="relative z-10 h-[500px] w-auto" />
         </div>
     </div>
 </template>

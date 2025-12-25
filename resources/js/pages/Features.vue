@@ -26,7 +26,7 @@ import { Icon } from '@iconify/vue';
                 </h1>
 
                 <p class="mt-6 text-[20px] font-light text-[#1b1b18]/80">
-                    Describe what you're feeling, MediBot will help decode it for you.
+                    Describe what you're feeling, DocDot will help decode it for you.
                 </p>
 
                 <!-- Floating card left -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OtpMail;
+use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -299,16 +300,10 @@ class AuthController extends Controller
             'created_at' => now(),
         ]);
 
-        // Send email (using a simple approach - you can create a dedicated Mailable later)
+        // Send email with proper Mailable
         $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($request->email));
 
-        Mail::raw(
-            "Halo {$user->name},\n\nAnda menerima email ini karena kami menerima permintaan reset password untuk akun Anda.\n\nKlik link berikut untuk reset password:\n{$resetUrl}\n\nLink ini akan kadaluarsa dalam 60 menit.\n\nJika Anda tidak meminta reset password, abaikan email ini.\n\nSalam,\nDocDot Team",
-            function ($message) use ($user) {
-                $message->to($user->email)
-                    ->subject('Reset Password - DocDot');
-            }
-        );
+        Mail::to($user->email)->send(new ResetPasswordMail($resetUrl, $user->name));
 
         return back()->with('success', 'Link reset password telah dikirim ke email Anda.');
     }

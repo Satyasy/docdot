@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DrugController;
@@ -32,6 +33,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
+
+    // Google OAuth Routes
+    Route::get('/auth/google', [SocialiteController::class, 'redirectToGoogle'])->name('auth.google');
+    Route::get('/auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 
     // Forgot Password Routes
     Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
