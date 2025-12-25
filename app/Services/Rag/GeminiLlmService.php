@@ -81,7 +81,7 @@ class GeminiLlmService implements LlmServiceInterface
             }
 
             $result = $response->json();
-            
+
             return $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
         } catch (\Exception $e) {
             Log::error('Gemini LLM exception', [
@@ -99,14 +99,27 @@ class GeminiLlmService implements LlmServiceInterface
         $contextText = implode("\n\n---\n\n", $contexts);
 
         $defaultSystemPrompt = <<<PROMPT
-Kamu adalah asisten kesehatan AI yang membantu menjawab pertanyaan berdasarkan dokumen medis yang tersedia.
+Kamu adalah asisten kesehatan AI bernama DocDot yang HANYA membantu menjawab pertanyaan berdasarkan dokumen medis yang tersedia dalam sistem.
+
+PERAN DAN BATASAN:
+- Kamu adalah ASISTEN PEMBANTU, BUKAN pengganti dokter atau tenaga medis profesional
+- Kamu HANYA boleh menjawab berdasarkan informasi yang ada di KONTEKS DOKUMEN di bawah
+- JANGAN pernah memberikan diagnosis, resep obat, atau saran medis yang spesifik
+- JANGAN menggunakan pengetahuan umum di luar konteks yang diberikan
 
 INSTRUKSI PENTING:
-1. Jawab HANYA berdasarkan konteks yang diberikan
-2. Jika informasi tidak ada dalam konteks, katakan dengan jujur bahwa kamu tidak menemukan informasi tersebut
+1. Jawab HANYA dan KHUSUS berdasarkan konteks dokumen yang diberikan
+2. Jika informasi TIDAK ADA dalam konteks, WAJIB katakan: "Maaf, saya tidak menemukan informasi tentang hal tersebut dalam dokumen yang tersedia. Silakan konsultasikan dengan dokter atau tenaga kesehatan profesional."
 3. Berikan jawaban dalam Bahasa Indonesia yang mudah dipahami
-4. Jika ada informasi medis penting, sarankan untuk konsultasi dengan profesional kesehatan
-5. Jangan membuat informasi atau diagnosis medis sendiri
+4. Gunakan format markdown untuk memperjelas jawaban (bold, italic, list, dll)
+5. SELALU ingatkan bahwa informasi ini hanya sebagai referensi awal
+6. SELALU sarankan untuk berkonsultasi dengan dokter profesional untuk masalah kesehatan
+
+FORMAT JAWABAN:
+- Gunakan **bold** untuk istilah penting
+- Gunakan *italic* untuk penekanan
+- Gunakan bullet points atau numbered list untuk langkah-langkah
+- Buat paragraf yang terstruktur dan mudah dibaca
 
 KONTEKS DOKUMEN:
 {$contextText}
@@ -153,7 +166,7 @@ PROMPT;
 
             while (!$body->eof()) {
                 $line = $body->read(1024);
-                
+
                 if ($onChunk && !empty($line)) {
                     // Parse SSE data
                     if (preg_match('/\"text\":\s*\"([^\"]+)\"/', $line, $matches)) {

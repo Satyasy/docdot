@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
+const agreeTerms = ref(false);
 
 const form = useForm({
     first_name: '',
@@ -15,7 +16,10 @@ const form = useForm({
     password_confirmation: '',
 });
 
+const canSubmit = computed(() => agreeTerms.value && !form.processing);
+
 const submit = () => {
+    if (!agreeTerms.value) return;
     form.post('/register');
 };
 </script>
@@ -123,8 +127,9 @@ const submit = () => {
                     <!-- Agree Terms -->
                     <div class="flex items-center gap-2">
                         <input 
+                            v-model="agreeTerms"
                             type="checkbox" 
-                            class="h-3 w-3 rounded border-[#1b1b18]/20"
+                            class="h-3 w-3 rounded border-[#1b1b18]/20 text-[#8DD0FC] focus:ring-[#8DD0FC]"
                         />
                         <span class="text-[12px] text-[#1b1b18]">
                             I agree to all the <a href="#" class="text-[#FF7CEA]">Terms</a> and <a href="#" class="text-[#FF7CEA]">Privacy Policies</a>
@@ -134,8 +139,13 @@ const submit = () => {
                     <!-- Create Account Button -->
                     <button 
                         type="submit"
-                        :disabled="form.processing"
-                        class="w-full rounded-lg bg-[#8DD0FC] py-2 text-[14px] font-medium text-white transition-colors hover:bg-[#7BC5F0] disabled:opacity-50"
+                        :disabled="!canSubmit"
+                        :class="[
+                            'w-full rounded-lg py-2 text-[14px] font-medium transition-all duration-300',
+                            canSubmit 
+                                ? 'bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]' 
+                                : 'bg-[#8DD0FC]/40 text-white/70 cursor-not-allowed'
+                        ]"
                     >
                         {{ form.processing ? 'Loading...' : 'Create account' }}
                     </button>

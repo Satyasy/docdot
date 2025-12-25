@@ -4,6 +4,18 @@ import { Head, usePage, router } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import Navbar from '@/components/Navbar.vue';
 import axios from 'axios';
+import { marked } from 'marked';
+
+// Configure marked for safe rendering
+marked.setOptions({
+    breaks: true,
+    gfm: true,
+});
+
+// Render markdown to HTML
+const renderMarkdown = (text: string): string => {
+    return marked.parse(text) as string;
+};
 
 interface Message {
     id: number;
@@ -206,7 +218,17 @@ onMounted(async () => {
                         <div v-else class="flex justify-start">
                             <div class="relative max-w-[70%]">
                                 <div class="rounded-2xl rounded-tl-md bg-[#DDB4F6]/50 px-5 py-4">
-                                    <p class="whitespace-pre-wrap text-[15px] text-[#1b1b18]">{{ msg.message }}</p>
+                                    <div 
+                                        class="prose prose-sm max-w-none text-[15px] text-[#1b1b18] prose-p:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-headings:text-[#1b1b18] prose-strong:text-[#1b1b18] prose-em:text-[#1b1b18]"
+                                        v-html="renderMarkdown(msg.message)"
+                                    ></div>
+                                    <!-- Disclaimer -->
+                                    <div class="mt-3 border-t border-[#1b1b18]/10 pt-2">
+                                        <p class="flex items-center gap-1.5 text-[11px] italic text-[#1b1b18]/60">
+                                            <Icon icon="mdi:information-outline" class="h-3.5 w-3.5 flex-shrink-0" />
+                                            <span>Informasi ini hanya sebagai referensi dan tidak menggantikan konsultasi dengan dokter profesional.</span>
+                                        </p>
+                                    </div>
                                 </div>
                                 <!-- Tail pointing left top -->
                                 <div 

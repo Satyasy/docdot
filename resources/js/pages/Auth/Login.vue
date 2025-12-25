@@ -38,7 +38,7 @@ const submit = () => {
                         <input 
                             v-model="form.email"
                             type="email" 
-                            placeholder="john.doe@gmail.com"
+                            placeholder="example@gmail.com"
                             class="w-full rounded-lg border border-[#1b1b18]/20 bg-transparent px-4 py-3 text-[14px] text-[#1b1b18] outline-none focus:border-[#43B3FC] focus:ring-0"
                         />
                         <p v-if="form.errors.email" class="mt-1 text-[12px] text-red-500">{{ form.errors.email }}</p>
@@ -82,7 +82,7 @@ const submit = () => {
                     <button 
                         type="submit"
                         :disabled="form.processing"
-                        class="w-full rounded-lg bg-[#8DD0FC] py-3 text-[16px] font-medium text-white transition-colors hover:bg-[#7BC5F0] disabled:opacity-50"
+                        class="w-full rounded-lg bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] py-3 text-[16px] font-medium text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
                     >
                         {{ form.processing ? 'Loading...' : 'Login' }}
                     </button>

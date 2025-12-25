@@ -119,10 +119,13 @@ class RagService
         if (!empty($contexts)) {
             $response = $this->llmService->generateWithContext($question, $contexts);
         } else {
-            $response = $this->llmService->generate(
-                $question,
-                'Kamu adalah asisten kesehatan AI. Jawab pertanyaan pengguna dengan informatif, tetapi ingatkan bahwa kamu tidak memiliki dokumen referensi untuk pertanyaan ini.'
-            );
+            // No documents found - return a strict message without using general AI knowledge
+            $response = "Maaf, saya **tidak menemukan informasi** yang relevan tentang pertanyaan Anda dalam dokumen medis yang tersedia di sistem DocDot.\n\n" .
+                "Untuk mendapatkan informasi yang akurat dan aman, silakan:\n" .
+                "1. **Konsultasikan langsung** dengan dokter atau tenaga kesehatan profesional\n" .
+                "2. Kunjungi fasilitas kesehatan terdekat\n" .
+                "3. Hubungi hotline kesehatan jika diperlukan\n\n" .
+                "*DocDot hanya dapat menjawab berdasarkan dokumen medis yang telah diverifikasi dalam sistem.*";
         }
 
         return [

@@ -27,7 +27,7 @@ class MedicalDocumentsTable
 
                 Tables\Columns\TextColumn::make('type')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'disease' => 'danger',
                         'symptom' => 'warning',
                         'drug' => 'success',
@@ -44,14 +44,14 @@ class MedicalDocumentsTable
 
                 Tables\Columns\TextColumn::make('embedding_status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pending' => 'gray',
                         'processing' => 'warning',
                         'completed' => 'success',
                         'failed' => 'danger',
                         default => 'secondary',
                     })
-                    ->icon(fn (string $state): string => match ($state) {
+                    ->icon(fn(string $state): string => match ($state) {
                         'pending' => 'heroicon-o-clock',
                         'processing' => 'heroicon-o-arrow-path',
                         'completed' => 'heroicon-o-check-circle',
@@ -106,17 +106,33 @@ class MedicalDocumentsTable
                     ->color('info')
                     ->requiresConfirmation()
                     ->modalHeading('Process Document Embedding')
-                    ->modalDescription('This will extract text from the document and create embeddings for RAG. This may take a few minutes.')
+                    ->modalDescription('This will extract text from the document and create embeddings for RAG. This may take 1-3 minutes depending on document size. Please wait...')
                     ->action(function (MedicalDocument $record) {
-                        ProcessDocumentEmbedding::dispatch($record);
+                        // Set max execution time for large documents
+                        set_time_limit(300);
 
-                        Notification::make()
-                            ->title('Processing Started')
-                            ->body('Document embedding job has been queued.')
-                            ->success()
-                            ->send();
+                        // Use dispatchSync to process immediately without queue
+                        try {
+                            ProcessDocumentEmbedding::dispatchSync($record);
+
+                            $record->refresh();
+                            $chunksCount = $record->embeddings()->count();
+
+                            Notification::make()
+                                ->title('Processing Completed')
+                                ->body("Document embedded successfully with {$chunksCount} chunks.")
+                                ->success()
+                                ->send();
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->title('Processing Failed')
+                                ->body('Error: ' . $e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
                     })
-                    ->visible(fn (MedicalDocument $record): bool => 
+                    ->visible(
+                        fn(MedicalDocument $record): bool =>
                         in_array($record->embedding_status, ['pending', 'failed'])
                     ),
 
@@ -130,18 +146,31 @@ class MedicalDocumentsTable
                         ->requiresConfirmation()
                         ->action(function (Collection $records) {
                             $count = 0;
+                            $failed = 0;
                             foreach ($records as $record) {
                                 if (in_array($record->embedding_status, ['pending', 'failed'])) {
-                                    ProcessDocumentEmbedding::dispatch($record);
-                                    $count++;
+                                    try {
+                                        ProcessDocumentEmbedding::dispatchSync($record);
+                                        $count++;
+                                    } catch (\Exception $e) {
+                                        $failed++;
+                                    }
                                 }
                             }
 
-                            Notification::make()
-                                ->title('Processing Started')
-                                ->body("{$count} document(s) queued for embedding.")
-                                ->success()
-                                ->send();
+                            if ($failed > 0) {
+                                Notification::make()
+                                    ->title('Processing Completed with Errors')
+                                    ->body("{$count} document(s) processed. {$failed} failed.")
+                                    ->warning()
+                                    ->send();
+                            } else {
+                                Notification::make()
+                                    ->title('Processing Completed')
+                                    ->body("{$count} document(s) processed successfully.")
+                                    ->success()
+                                    ->send();
+                            }
                         }),
 
                     DeleteBulkAction::make(),
