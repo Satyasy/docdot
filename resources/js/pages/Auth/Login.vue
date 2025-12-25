@@ -32,20 +32,25 @@ const submit = () => {
         </div>
 
         <!-- Right Side - Login Form -->
-        <div class="flex flex-1 items-center justify-center px-6 lg:justify-start lg:pl-12">
-            <div class="w-full max-w-[600px] rounded-[30px] bg-white/50 p-8 lg:-ml-16 lg:p-10">
-                <h1 class="text-[28px] font-bold text-[#1b1b18] lg:text-[36px]">Login</h1>
-                <p class="mt-2 text-[14px] text-[#1b1b18]/70">Login to access your DocDot account</p>
+        <div class="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 lg:justify-start lg:pl-12">
+            <div class="w-full max-w-[600px] rounded-2xl bg-white/50 p-6 sm:rounded-[30px] sm:p-8 lg:-ml-16 lg:p-10">
+                <!-- Mobile Logo -->
+                <div class="mb-6 flex justify-center lg:hidden">
+                    <img src="/images/logo.png" alt="DocDot" class="h-20 w-auto sm:h-24" />
+                </div>
+                
+                <h1 class="text-[24px] font-bold text-[#1b1b18] sm:text-[28px] lg:text-[36px]">Login</h1>
+                <p class="mt-1 text-[13px] text-[#1b1b18]/70 sm:mt-2 sm:text-[14px]">Login to access your DocDot account</p>
 
                 <!-- Success Message -->
-                <div v-if="success" class="mt-6 rounded-lg bg-green-50 border border-green-200 p-4">
-                    <div class="flex items-start gap-3">
-                        <Icon icon="mdi:check-circle" class="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <p class="text-[14px] text-green-800">{{ success }}</p>
+                <div v-if="success" class="mt-4 rounded-lg bg-green-50 border border-green-200 p-3 sm:mt-6 sm:p-4">
+                    <div class="flex items-start gap-2 sm:gap-3">
+                        <Icon icon="mdi:check-circle" class="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5 sm:h-5 sm:w-5" />
+                        <p class="text-[13px] text-green-800 sm:text-[14px]">{{ success }}</p>
                     </div>
                 </div>
 
-                <form @submit.prevent="submit" class="mt-8 space-y-5">
+                <form @submit.prevent="submit" class="mt-6 space-y-4 sm:mt-8 sm:space-y-5">
                     <!-- Email -->
                     <div>
                         <label class="mb-1 block text-[12px] text-[#1b1b18]/60">Email</label>

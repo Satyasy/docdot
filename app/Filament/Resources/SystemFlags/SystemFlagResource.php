@@ -22,9 +22,13 @@ class SystemFlagResource extends Resource
 
    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFlag;
 
-   protected static string|UnitEnum|null $navigationGroup = 'System';
+   protected static string|UnitEnum|null $navigationGroup = 'Sistem';
 
    protected static ?string $navigationLabel = 'System Flags';
+
+   protected static ?string $modelLabel = 'System Flag';
+
+   protected static ?string $pluralModelLabel = 'System Flags';
 
    public static function form(Schema $schema): Schema
    {

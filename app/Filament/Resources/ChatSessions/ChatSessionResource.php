@@ -20,7 +20,13 @@ class ChatSessionResource extends Resource
 
    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
-   protected static string|UnitEnum|null $navigationGroup = 'Chat';
+   protected static string|UnitEnum|null $navigationGroup = 'Konsultasi';
+
+   protected static ?string $navigationLabel = 'Sesi Chat';
+
+   protected static ?string $modelLabel = 'Sesi Chat';
+
+   protected static ?string $pluralModelLabel = 'Sesi Chat';
 
    public static function table(Table $table): Table
    {

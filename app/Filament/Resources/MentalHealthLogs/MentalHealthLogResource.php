@@ -22,9 +22,13 @@ class MentalHealthLogResource extends Resource
 
    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHeart;
 
-   protected static string|UnitEnum|null $navigationGroup = 'Health Logs';
+   protected static string|UnitEnum|null $navigationGroup = 'Kesehatan User';
 
-   protected static ?string $navigationLabel = 'Mental Health Logs';
+   protected static ?string $navigationLabel = 'Log Mental';
+
+   protected static ?string $modelLabel = 'Log Kesehatan Mental';
+
+   protected static ?string $pluralModelLabel = 'Log Kesehatan Mental';
 
    public static function form(Schema $schema): Schema
    {

@@ -199,71 +199,71 @@ onMounted(async () => {
 <template>
     <Head title="Konsultasi - DocDot" />
 
-    <div class="min-h-screen" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+    <div class="min-h-screen bg-[#FAFAFA] pt-16 sm:pt-20 lg:pt-22">
         <Navbar />
 
         <!-- Landing Mode: Show when no messages and not in chat mode -->
         <div v-if="!showChatMode" class="overflow-x-hidden">
             <!-- Hero Section -->
-            <section class="relative overflow-hidden px-6 pt-8 lg:px-12">
+            <section class="relative overflow-hidden px-4 pt-6 sm:px-6 sm:pt-8 lg:px-12">
                 <!-- Background gradient blob -->
-                <div class="absolute top-20 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-gradient-to-r from-[#8DD0FC]/30 via-[#DDB4F6]/20 to-[#F4AFE9]/30 blur-3xl"></div>
+                <div class="absolute top-20 left-1/2 h-[300px] w-[500px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8DD0FC]/30 via-[#DDB4F6]/20 to-[#F4AFE9]/30 blur-3xl sm:h-[400px] sm:w-[600px] lg:h-[500px] lg:w-[800px]"></div>
 
-                <div class="relative z-10 mx-auto max-w-4xl pt-16 text-center">
+                <div class="relative z-10 mx-auto max-w-4xl pt-8 text-center sm:pt-12 lg:pt-16">
                     <!-- Floating card top right -->
-                    <div class="scroll-animate absolute top-4 -right-40 hidden rounded-full bg-white px-6 py-3 text-[16px] font-normal shadow-lg lg:block">
+                    <div class="scroll-animate absolute top-4 -right-40 hidden rounded-full bg-white px-6 py-3 text-[16px] font-normal shadow-lg xl:block">
                         Ayo mulai sekarang!
                     </div>
 
-                    <h1 class="scroll-animate text-[36px] font-semibold leading-tight text-[#1b1b18] lg:text-[56px]">
-                        Get trusted insights about your<br />symptoms with <span style="background: linear-gradient(to right, #C360FF 0%, #54BBFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">DocDot</span>
+                    <h1 class="scroll-animate text-[24px] font-semibold leading-tight text-[#1b1b18] sm:text-[32px] lg:text-[56px]">
+                        Get trusted insights about your<br class="hidden sm:block" />symptoms with <span style="background: linear-gradient(to right, #C360FF 0%, #54BBFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">DocDot</span>
                     </h1>
 
-                    <p class="scroll-animate scroll-animate-delay-1 mt-6 text-[18px] font-light text-[#1b1b18]/80 lg:text-[20px]">
+                    <p class="scroll-animate scroll-animate-delay-1 mt-4 text-[14px] font-light text-[#1b1b18]/80 sm:mt-6 sm:text-[16px] lg:text-[20px]">
                         Describe what you're feeling, DocDot will help decode it for you.
                     </p>
 
                     <!-- Floating card left -->
-                    <div class="scroll-animate absolute bottom-50 -left-50 hidden rounded-xl bg-white px-5 py-3 shadow-lg lg:block">
+                    <div class="scroll-animate absolute bottom-50 -left-50 hidden rounded-xl bg-white px-5 py-3 shadow-lg xl:block">
                         <p class="text-[14px] font-semibold text-[#1b1b18]">Konsultasi Sekarang! 🌟 9.10</p>
                     </div>
 
                     <!-- Get Started Button -->
                     <button 
                         @click="startNewChat"
-                        class="scroll-animate scroll-animate-delay-2 mt-8 inline-flex items-center gap-2 rounded-full border-2 border-[#1b1b18] px-8 py-3 text-[18px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white"
+                        class="scroll-animate scroll-animate-delay-2 mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[#1b1b18] px-6 py-2.5 text-[14px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white sm:mt-8 sm:px-8 sm:py-3 sm:text-[18px]"
                     >
                         Get Started
-                        <Icon icon="mdi:arrow-right" class="h-5 w-5" />
+                        <Icon icon="mdi:arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
 
                     <!-- Chat Input Box with gradient border -->
-                    <div class="scroll-animate scroll-animate-delay-3 mx-auto mt-12 w-full max-w-[600px] overflow-hidden rounded-xl p-[2px]" style="background: linear-gradient(to left, #8DD0FC 0%, #DDB4F6 100%);">
-                        <div class="overflow-hidden rounded-xl bg-white px-6 py-4">
+                    <div class="scroll-animate scroll-animate-delay-3 mx-auto mt-8 w-full max-w-[600px] overflow-hidden rounded-xl p-[2px] sm:mt-12" style="background: linear-gradient(to left, #8DD0FC 0%, #DDB4F6 100%);">
+                        <div class="overflow-hidden rounded-xl bg-white px-4 py-3 sm:px-6 sm:py-4">
                             <input 
                                 v-model="newMessage"
                                 @keydown="handleKeydown"
                                 type="text" 
                                 placeholder="Type your symptoms here..."
-                                class="w-full border-none bg-transparent text-[16px] text-[#1b1b18] placeholder-[#1b1b18]/40 outline-none focus:outline-none focus:ring-0"
+                                class="w-full border-none bg-transparent text-[14px] text-[#1b1b18] placeholder-[#1b1b18]/40 outline-none focus:outline-none focus:ring-0 sm:text-[16px]"
                             />
-                            <div class="mt-4 flex items-center justify-between">
-                                <div class="flex flex-wrap items-center gap-4">
-                                    <button class="flex items-center gap-2 text-[13px] text-[#54BBFF]">
-                                        <Icon icon="mdi:auto-fix" class="h-4 w-4" />
-                                        Identify your symptoms
+                            <div class="mt-3 flex items-center justify-between sm:mt-4">
+                                <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                                    <button class="flex items-center gap-1.5 text-[12px] text-[#54BBFF] sm:gap-2 sm:text-[13px]">
+                                        <Icon icon="mdi:auto-fix" class="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                                        Identify symptoms
                                     </button>
                                     <button class="hidden items-center gap-2 text-[13px] text-[#1b1b18]/60 sm:flex">
                                         <Icon icon="mdi:image-outline" class="h-4 w-4" />
-                                        Consult by uploading a photo
+                                        Upload photo
                                     </button>
                                 </div>
                                 <button 
                                     @click="sendMessage"
                                     :disabled="!newMessage.trim()"
-                                    class="flex h-8 w-8 items-center justify-center text-[#54BBFF] transition-colors hover:text-[#43A8E8] disabled:opacity-50"
+                                    class="flex h-7 w-7 items-center justify-center text-[#54BBFF] transition-colors hover:text-[#43A8E8] disabled:opacity-50 sm:h-8 sm:w-8"
                                 >
-                                    <Icon icon="mdi:send" class="h-5 w-5" />
+                                    <Icon icon="mdi:send" class="h-4 w-4 sm:h-5 sm:w-5" />
                                 </button>
                             </div>
                         </div>
@@ -272,34 +272,34 @@ onMounted(async () => {
             </section>
 
             <!-- How does it work Section -->
-            <section class="relative px-6 py-8 lg:px-12 mt-30">
-                <div class="scroll-animate mx-auto max-w-6xl overflow-visible rounded-[30px] px-8 pb-16 pt-8 lg:px-16" style="background: rgba(255, 255, 255, 0.4);">
-                    <h2 class="mb-8 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]">How does it work?</h2>
+            <section class="relative px-4 py-6 sm:px-6 sm:py-8 lg:mt-30 lg:px-12">
+                <div class="scroll-animate mx-auto max-w-6xl overflow-visible rounded-[20px] px-4 pb-12 pt-6 sm:rounded-[30px] sm:px-8 sm:pb-16 sm:pt-8 lg:px-16" style="background: rgba(255, 255, 255, 0.4);">
+                    <h2 class="mb-6 text-center text-[22px] font-semibold text-[#1b1b18] sm:mb-8 sm:text-[28px] lg:text-[36px]">How does it work?</h2>
                     
-                    <div class="flex flex-col items-center justify-center gap-8 lg:flex-row lg:items-start">
+                    <div class="flex flex-col items-center justify-center gap-4 sm:gap-8 lg:flex-row lg:items-start">
                         <!-- Card 1 -->
-                        <div class="scroll-animate scroll-animate-delay-1 h-auto min-h-[280px] w-full max-w-[260px] overflow-hidden rounded-[20px] bg-white p-6 text-center shadow-sm lg:mt-8 lg:h-[300px]">
-                            <Icon icon="mingcute:search-line" class="mx-auto mb-4 h-10 w-10 text-[#9EC9FB]" />
-                            <h3 class="mb-3 text-[16px] font-semibold text-[#1b1b18]">Input Gejala atau Pertanyaan</h3>
-                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70">
+                        <div class="scroll-animate scroll-animate-delay-1 h-auto w-full max-w-[260px] overflow-hidden rounded-[16px] bg-white p-4 text-center shadow-sm sm:min-h-[280px] sm:rounded-[20px] sm:p-6 lg:mt-8 lg:h-[300px]">
+                            <Icon icon="mingcute:search-line" class="mx-auto mb-3 h-8 w-8 text-[#9EC9FB] sm:mb-4 sm:h-10 sm:w-10" />
+                            <h3 class="mb-2 text-[14px] font-semibold text-[#1b1b18] sm:mb-3 sm:text-[16px]">Input Gejala atau Pertanyaan</h3>
+                            <p class="text-[12px] leading-relaxed text-[#1b1b18]/70 sm:text-[13px]">
                                 Pengguna cukup mengetik keluhan atau pertanyaan kesehatan, misalnya "sakit kepala", "demam sejak kemarin", atau "tips pola makan sehat untuk remaja."
                             </p>
                         </div>
 
                         <!-- Card 2 (higher) -->
-                        <div class="scroll-animate scroll-animate-delay-2 h-auto min-h-[280px] w-full max-w-[260px] overflow-hidden rounded-[20px] bg-white p-6 text-center shadow-sm lg:-mt-4 lg:h-[300px]">
-                            <Icon icon="mage:robot-wink" class="mx-auto mb-4 h-10 w-10 text-[#9EC9FB]" />
-                            <h3 class="mb-3 text-[16px] font-semibold text-[#1b1b18]">Analisis dengan AI Medis</h3>
-                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70">
+                        <div class="scroll-animate scroll-animate-delay-2 h-auto w-full max-w-[260px] overflow-hidden rounded-[16px] bg-white p-4 text-center shadow-sm sm:min-h-[280px] sm:rounded-[20px] sm:p-6 lg:-mt-4 lg:h-[300px]">
+                            <Icon icon="mage:robot-wink" class="mx-auto mb-3 h-8 w-8 text-[#9EC9FB] sm:mb-4 sm:h-10 sm:w-10" />
+                            <h3 class="mb-2 text-[14px] font-semibold text-[#1b1b18] sm:mb-3 sm:text-[16px]">Analisis dengan AI Medis</h3>
+                            <p class="text-[12px] leading-relaxed text-[#1b1b18]/70 sm:text-[13px]">
                                 DocDot memproses input dengan teknologi AI, membandingkan dengan data medis terpercaya, lalu memberikan informasi seputar kemungkinan penyebab, tips perawatan awal, dan rekomendasi gaya hidup.
                             </p>
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="scroll-animate scroll-animate-delay-3 h-auto min-h-[280px] w-full max-w-[260px] overflow-hidden rounded-[20px] bg-white p-6 text-center shadow-sm lg:mt-8 lg:h-[300px]">
-                            <Icon icon="mdi:clipboard-text-outline" class="mx-auto mb-4 h-10 w-10 text-[#CCBAF8]" />
-                            <h3 class="mb-3 text-[16px] font-semibold text-[#1b1b18]">Saran & Rekomendasi Lanjutan</h3>
-                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70">
+                        <div class="scroll-animate scroll-animate-delay-3 h-auto w-full max-w-[260px] overflow-hidden rounded-[16px] bg-white p-4 text-center shadow-sm sm:min-h-[280px] sm:rounded-[20px] sm:p-6 lg:mt-8 lg:h-[300px]">
+                            <Icon icon="mdi:clipboard-text-outline" class="mx-auto mb-3 h-8 w-8 text-[#CCBAF8] sm:mb-4 sm:h-10 sm:w-10" />
+                            <h3 class="mb-2 text-[14px] font-semibold text-[#1b1b18] sm:mb-3 sm:text-[16px]">Saran & Rekomendasi Lanjutan</h3>
+                            <p class="text-[12px] leading-relaxed text-[#1b1b18]/70 sm:text-[13px]">
                                 DocDot menampilkan hasil analisis dalam bahasa yang mudah dipahami. Jika gejala serius, chatbot akan menyarankan pengguna untuk segera berkonsultasi dengan tenaga medis profesional.
                             </p>
                         </div>
@@ -308,78 +308,78 @@ onMounted(async () => {
             </section>
 
             <!-- Testimonial Section -->
-            <section class="mt-16 w-full py-12 mb-16" style="background: rgba(255, 255, 255, 0.3);">
-                <div class="px-6 lg:px-12">
-                    <h2 class="scroll-animate mb-10 text-left text-[28px] font-semibold text-[#1b1b18] lg:text-[32px]">
+            <section class="mt-8 mb-8 w-full py-8 sm:mt-16 sm:mb-16 sm:py-12" style="background: rgba(255, 255, 255, 0.3);">
+                <div class="px-4 sm:px-6 lg:px-12">
+                    <h2 class="scroll-animate mb-6 text-left text-[22px] font-semibold text-[#1b1b18] sm:mb-10 sm:text-[28px] lg:text-[32px]">
                         Testimonial dari Pengguna <span class="text-[#54BBFF]">DocDot</span>
                     </h2>
                     
-                    <div class="scroll-animate scroll-animate-delay-1 flex flex-col justify-between gap-6 lg:flex-row">
+                    <div class="scroll-animate scroll-animate-delay-1 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                         <!-- Card 1 -->
-                        <div class="flex-1 rounded-[20px] bg-[#FAF1FF] p-6">
-                            <div class="mb-4 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://i.pravatar.cc/48?img=11" class="h-12 w-12 rounded-full object-cover" />
+                        <div class="rounded-[16px] bg-[#FAF1FF] p-4 sm:rounded-[20px] sm:p-6">
+                            <div class="mb-3 flex items-center justify-between sm:mb-4">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <img src="https://i.pravatar.cc/48?img=11" class="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12" />
                                     <div>
-                                        <p class="text-[16px] font-semibold text-[#1b1b18]">Andi Pratama</p>
-                                        <p class="text-[12px] text-[#1b1b18]/60">@andipratama</p>
+                                        <p class="text-[14px] font-semibold text-[#1b1b18] sm:text-[16px]">Andi Pratama</p>
+                                        <p class="text-[11px] text-[#1b1b18]/60 sm:text-[12px]">@andipratama</p>
                                     </div>
                                 </div>
-                                <div class="flex gap-1">
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                <div class="flex gap-0.5 sm:gap-1">
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
                                 </div>
                             </div>
-                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
                                 DocDot sangat membantu saya memahami gejala yang saya rasakan. Penjelasannya detail dan mudah dipahami, plus selalu mengingatkan untuk konsultasi ke dokter jika perlu.
                             </p>
                         </div>
 
                         <!-- Card 2 -->
-                        <div class="flex-1 rounded-[20px] bg-[#FAF1FF] p-6">
-                            <div class="mb-4 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://i.pravatar.cc/48?img=12" class="h-12 w-12 rounded-full object-cover" />
+                        <div class="rounded-[16px] bg-[#FAF1FF] p-4 sm:rounded-[20px] sm:p-6">
+                            <div class="mb-3 flex items-center justify-between sm:mb-4">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <img src="https://i.pravatar.cc/48?img=12" class="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12" />
                                     <div>
-                                        <p class="text-[16px] font-semibold text-[#1b1b18]">Siti Rahayu</p>
-                                        <p class="text-[12px] text-[#1b1b18]/60">@sitirahayu</p>
+                                        <p class="text-[14px] font-semibold text-[#1b1b18] sm:text-[16px]">Siti Rahayu</p>
+                                        <p class="text-[11px] text-[#1b1b18]/60 sm:text-[12px]">@sitirahayu</p>
                                     </div>
                                 </div>
-                                <div class="flex gap-1">
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                <div class="flex gap-0.5 sm:gap-1">
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
                                 </div>
                             </div>
-                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
                                 Sebagai ibu rumah tangga, DocDot sangat berguna untuk mendapat informasi awal tentang kesehatan keluarga. Responnya cepat dan informatif!
                             </p>
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="flex-1 rounded-[20px] bg-[#FAF1FF] p-6">
-                            <div class="mb-4 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://i.pravatar.cc/48?img=13" class="h-12 w-12 rounded-full object-cover" />
+                        <div class="rounded-[16px] bg-[#FAF1FF] p-4 sm:col-span-2 sm:rounded-[20px] sm:p-6 lg:col-span-1">
+                            <div class="mb-3 flex items-center justify-between sm:mb-4">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <img src="https://i.pravatar.cc/48?img=13" class="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12" />
                                     <div>
-                                        <p class="text-[16px] font-semibold text-[#1b1b18]">Budi Santoso</p>
-                                        <p class="text-[12px] text-[#1b1b18]/60">@budisantoso</p>
+                                        <p class="text-[14px] font-semibold text-[#1b1b18] sm:text-[16px]">Budi Santoso</p>
+                                        <p class="text-[11px] text-[#1b1b18]/60 sm:text-[12px]">@budisantoso</p>
                                     </div>
                                 </div>
-                                <div class="flex gap-1">
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                    <Icon icon="mdi:star-half-full" class="h-4 w-4 text-[#FFD700]" />
+                                <div class="flex gap-0.5 sm:gap-1">
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
+                                    <Icon icon="mdi:star-half-full" class="h-3.5 w-3.5 text-[#FFD700] sm:h-4 sm:w-4" />
                                 </div>
                             </div>
-                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
                                 Fitur konsultasi 24 jam sangat membantu ketika butuh informasi kesehatan di malam hari. Terima kasih DocDot!
                             </p>
                         </div>
@@ -391,20 +391,20 @@ onMounted(async () => {
         </div>
 
         <!-- Chat Mode: Show when in chat mode -->
-        <div v-else class="flex h-[calc(100vh-80px)] flex-col px-6 pb-6 lg:px-12">
+        <div v-else class="flex h-[calc(100vh-72px)] flex-col px-4 pb-4 sm:h-[calc(100vh-80px)] sm:px-6 sm:pb-6 lg:px-12">
             <!-- Chat Messages Area -->
             <div 
                 ref="chatContainer"
-                class="flex-1 overflow-y-auto py-8"
+                class="flex-1 overflow-y-auto py-4 sm:py-8"
             >
-                <div class="mx-auto max-w-4xl space-y-6">
+                <div class="mx-auto max-w-4xl space-y-4 sm:space-y-6">
                     <!-- Welcome message if no messages -->
-                    <div v-if="messages.length === 0" class="flex flex-col items-center justify-center py-20">
-                        <h2 class="mb-2 text-2xl font-semibold text-[#1b1b18]">
+                    <div v-if="messages.length === 0" class="flex flex-col items-center justify-center py-12 sm:py-20">
+                        <h2 class="mb-2 text-xl font-semibold text-[#1b1b18] sm:text-2xl">
                             Hallo{{ user?.name ? `, ${user.name}` : '' }}!
                         </h2>
-                        <p class="text-[#1b1b18]/70">Ceritakan gejala atau keluhan kesehatan Anda</p>
-                        <p v-if="!isLoggedIn" class="mt-2 text-sm text-[#1b1b18]/50">
+                        <p class="text-center text-[14px] text-[#1b1b18]/70 sm:text-base">Ceritakan gejala atau keluhan kesehatan Anda</p>
+                        <p v-if="!isLoggedIn" class="mt-2 text-center text-xs text-[#1b1b18]/50 sm:text-sm">
                             Silakan login untuk memulai konsultasi
                         </p>
                     </div>
@@ -413,9 +413,9 @@ onMounted(async () => {
                     <template v-for="msg in messages" :key="msg.id">
                         <!-- User Message (right side with tail at top) -->
                         <div v-if="msg.sender === 'user'" class="flex justify-end">
-                            <div class="relative max-w-[70%]">
-                                <div class="rounded-2xl rounded-tr-md bg-[#8DD0FC]/50 px-5 py-4">
-                                    <p class="text-[15px] text-[#1b1b18]">{{ msg.message }}</p>
+                            <div class="relative max-w-[85%] sm:max-w-[70%]">
+                                <div class="rounded-2xl rounded-tr-md bg-[#8DD0FC]/50 px-4 py-3 sm:px-5 sm:py-4">
+                                    <p class="text-[14px] text-[#1b1b18] sm:text-[15px]">{{ msg.message }}</p>
                                 </div>
                                 <!-- Tail pointing right top -->
                                 <div 
@@ -427,16 +427,16 @@ onMounted(async () => {
 
                         <!-- AI Message (left side with tail at top) -->
                         <div v-else class="flex justify-start">
-                            <div class="relative max-w-[70%]">
-                                <div class="rounded-2xl rounded-tl-md bg-[#DDB4F6]/50 px-5 py-4">
+                            <div class="relative max-w-[85%] sm:max-w-[70%]">
+                                <div class="rounded-2xl rounded-tl-md bg-[#DDB4F6]/50 px-4 py-3 sm:px-5 sm:py-4">
                                     <div 
-                                        class="prose prose-sm max-w-none text-[15px] text-[#1b1b18] prose-p:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-headings:text-[#1b1b18] prose-strong:text-[#1b1b18] prose-em:text-[#1b1b18]"
+                                        class="prose prose-sm max-w-none text-[14px] text-[#1b1b18] prose-p:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-headings:text-[#1b1b18] prose-strong:text-[#1b1b18] prose-em:text-[#1b1b18] sm:text-[15px]"
                                         v-html="renderMarkdown(msg.message)"
                                     ></div>
                                     <!-- Disclaimer -->
-                                    <div class="mt-3 border-t border-[#1b1b18]/10 pt-2">
-                                        <p class="flex items-center gap-1.5 text-[11px] italic text-[#1b1b18]/60">
-                                            <Icon icon="mdi:information-outline" class="h-3.5 w-3.5 flex-shrink-0" />
+                                    <div class="mt-2 border-t border-[#1b1b18]/10 pt-2 sm:mt-3">
+                                        <p class="flex items-start gap-1.5 text-[10px] italic text-[#1b1b18]/60 sm:items-center sm:text-[11px]">
+                                            <Icon icon="mdi:information-outline" class="h-3 w-3 flex-shrink-0 sm:h-3.5 sm:w-3.5" />
                                             <span>Informasi ini hanya sebagai referensi dan tidak menggantikan konsultasi dengan dokter profesional.</span>
                                         </p>
                                     </div>
@@ -472,22 +472,23 @@ onMounted(async () => {
 
             <!-- Input Area -->
             <div class="mx-auto w-full max-w-4xl">
-                <div class="rounded-2xl bg-white p-4 shadow-lg">
-                    <div class="mb-3">
+                <div class="rounded-xl bg-white p-3 shadow-lg sm:rounded-2xl sm:p-4">
+                    <div class="mb-2 sm:mb-3">
                         <textarea
                             v-model="newMessage"
                             @keydown="handleKeydown"
                             placeholder="Type your symptoms here..."
                             rows="2"
-                            class="w-full resize-none border-none bg-transparent text-[15px] text-[#1b1b18] placeholder-[#1b1b18]/50 focus:outline-none"
+                            class="w-full resize-none border-none bg-transparent text-[14px] text-[#1b1b18] placeholder-[#1b1b18]/50 focus:outline-none sm:text-[15px]"
                         ></textarea>
                     </div>
                     
                     <div class="flex items-center justify-between">
-                        <div class="flex flex-wrap items-center gap-4">
-                            <button class="flex items-center gap-2 text-[13px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18]">
-                                <Icon icon="mdi:magnify" class="h-5 w-5" />
-                                Identify your symptoms
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                            <button class="flex items-center gap-1.5 text-[12px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18] sm:gap-2 sm:text-[13px]">
+                                <Icon icon="mdi:magnify" class="h-4 w-4 sm:h-5 sm:w-5" />
+                                <span class="hidden sm:inline">Identify your symptoms</span>
+                                <span class="sm:hidden">Identify</span>
                             </button>
                             <button class="hidden items-center gap-2 text-[13px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18] sm:flex">
                                 <Icon icon="mdi:image-plus" class="h-5 w-5" />
@@ -498,9 +499,9 @@ onMounted(async () => {
                         <button 
                             @click="sendMessage"
                             :disabled="!newMessage.trim() || isLoading"
-                            class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] transition-opacity hover:opacity-90 disabled:opacity-50"
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] transition-opacity hover:opacity-90 disabled:opacity-50 sm:h-10 sm:w-10"
                         >
-                            <Icon icon="mdi:send" class="h-5 w-5 text-white" />
+                            <Icon icon="mdi:send" class="h-4 w-4 text-white sm:h-5 sm:w-5" />
                         </button>
                     </div>
                 </div>

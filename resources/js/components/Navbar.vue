@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage, router } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { Icon } from '@iconify/vue';
 
 interface NavItem {
@@ -30,6 +30,20 @@ const isVerified = computed(() => user.value?.email_verified_at !== null);
 
 const showDropdown = ref(false);
 const showMobileMenu = ref(false);
+const isScrolled = ref(false);
+
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 50;
+};
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+});
 
 const isActive = (href: string) => {
     if (href === '/') {
@@ -54,22 +68,44 @@ const toggleMobileMenu = () => {
 </script>
 
 <template>
-    <nav class="relative z-50 w-full bg-transparent px-6 py-4 lg:px-12">
-        <div class="mx-auto flex max-w-7xl items-center justify-between">
+    <nav 
+        :class="[
+            'fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300 ease-in-out',
+            isScrolled 
+                ? 'bg-gradient-to-r from-[#F4AFE9]/85 to-[#8DD0FC]/85 py-2.5 shadow-lg sm:py-3 lg:px-8 xl:px-12' 
+                : 'bg-gradient-to-r from-[#F4AFE9]/40 to-[#8DD0FC]/40 py-3 sm:py-4 lg:px-8 xl:px-12'
+        ]"
+        class="px-4 sm:px-6"
+    >
+        <div class="flex w-full items-center justify-between">
             <Link href="/" class="flex items-center gap-2">
-                <img src="/images/logo.png" alt="DocDot" class="h-12 w-auto lg:h-14" />
+                <img 
+                    src="/images/logo.png" 
+                    alt="DocDot" 
+                    :class="[
+                        'w-auto transition-all duration-300',
+                        isScrolled ? 'h-9 sm:h-10 lg:h-11' : 'h-10 sm:h-12 lg:h-14'
+                    ]" 
+                />
+                <span :class="[
+                    'font-bold transition-all duration-300',
+                    isScrolled ? 'text-[17px] sm:text-[19px] lg:text-[22px]' : 'text-[18px] sm:text-[20px] lg:text-[24px]'
+                ]">
+                    <span class="text-[#1b1b18]">Doc</span><span class="text-[#1b1b18]">Dot</span>
+                </span>
             </Link>
 
             <!-- Desktop Navigation -->
-            <ul class="hidden items-center gap-6 lg:flex xl:gap-8">
+            <ul class="hidden items-center gap-4 lg:flex xl:gap-8">
                 <li v-for="item in navItems" :key="item.label">
                     <Link
                         :href="item.href"
                         :class="[
-                            'text-[18px] transition-colors xl:text-[20px]',
+                            'transition-all duration-300',
+                            isScrolled ? 'text-[15px] lg:text-[17px] xl:text-[18px]' : 'text-[16px] lg:text-[18px] xl:text-[20px]',
                             isActive(item.href)
-                                ? 'bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] bg-clip-text font-semibold text-transparent'
-                                : 'font-normal text-[#1b1b18] hover:text-[#F4AFE9]',
+                                ? 'font-semibold text-white drop-shadow-sm'
+                                : 'font-normal text-[#1b1b18] hover:text-white',
                         ]"
                     >
                         {{ item.label }}
@@ -78,11 +114,44 @@ const toggleMobileMenu = () => {
             </ul>
 
             <div class="flex items-center gap-3">
+                <!-- Quick Links (when logged in AND verified) - Desktop -->
+                <div v-if="user && isVerified" class="hidden items-center gap-2 md:flex">
+                    <Link 
+                        href="/health-dashboard" 
+                        :class="[
+                            'flex items-center gap-1.5 rounded-full transition-all duration-300',
+                            isScrolled ? 'px-3 py-1.5 text-[13px] lg:px-3.5 lg:py-1.5 lg:text-[14px]' : 'px-3 py-1.5 text-[14px] lg:px-4 lg:py-2 lg:text-[15px]',
+                            isActive('/health-dashboard')
+                                ? 'bg-white/30 font-medium text-[#1b1b18]'
+                                : 'text-[#1b1b18]/80 hover:bg-white/20 hover:text-[#1b1b18]'
+                        ]"
+                    >
+                        <Icon :class="['transition-all duration-300', isScrolled ? 'h-4 w-4 lg:h-4.5 lg:w-4.5' : 'h-4 w-4 lg:h-5 lg:w-5']" icon="mdi:heart-pulse" />
+                        <span class="hidden xl:inline">Health</span>
+                    </Link>
+                    <Link 
+                        href="/chat-history" 
+                        :class="[
+                            'flex items-center gap-1.5 rounded-full transition-all duration-300',
+                            isScrolled ? 'px-3 py-1.5 text-[13px] lg:px-3.5 lg:py-1.5 lg:text-[14px]' : 'px-3 py-1.5 text-[14px] lg:px-4 lg:py-2 lg:text-[15px]',
+                            isActive('/chat-history')
+                                ? 'bg-white/30 font-medium text-[#1b1b18]'
+                                : 'text-[#1b1b18]/80 hover:bg-white/20 hover:text-[#1b1b18]'
+                        ]"
+                    >
+                        <Icon :class="['transition-all duration-300', isScrolled ? 'h-4 w-4 lg:h-4.5 lg:w-4.5' : 'h-4 w-4 lg:h-5 lg:w-5']" icon="mdi:chat-outline" />
+                        <span class="hidden xl:inline">Riwayat</span>
+                    </Link>
+                </div>
+
                 <!-- User Dropdown (when logged in AND verified) -->
                 <div v-if="user && isVerified" class="relative z-50 hidden md:block">
                     <button 
                         @click="toggleDropdown"
-                        class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] transition-opacity hover:opacity-90 lg:h-12 lg:w-12"
+                        :class="[
+                            'flex items-center justify-center overflow-hidden rounded-full bg-white/90 shadow-sm transition-all duration-300 hover:bg-white',
+                            isScrolled ? 'h-9 w-9 lg:h-10 lg:w-10' : 'h-10 w-10 lg:h-12 lg:w-12'
+                        ]"
                     >
                         <img 
                             v-if="user.photo_profile" 
@@ -90,7 +159,7 @@ const toggleMobileMenu = () => {
                             :alt="user.name" 
                             class="h-full w-full object-cover" 
                         />
-                        <Icon v-else icon="mdi:account" class="h-5 w-5 text-[#1b1b18] lg:h-7 lg:w-7" />
+                        <Icon v-else icon="mdi:account" :class="['text-[#1b1b18] transition-all duration-300', isScrolled ? 'h-5 w-5 lg:h-6 lg:w-6' : 'h-5 w-5 lg:h-7 lg:w-7']" />
                     </button>
                     
                     <!-- Dropdown Menu -->
@@ -159,7 +228,10 @@ const toggleMobileMenu = () => {
                 <Link
                     v-else
                     href="/login"
-                    class="hidden rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] px-8 py-2 text-[16px] font-medium text-[#1b1b18] transition-opacity hover:opacity-90 md:block lg:px-10 lg:py-3 lg:text-[18px]"
+                    :class="[
+                        'hidden rounded-full bg-white/90 font-medium text-[#1b1b18] shadow-sm transition-all duration-300 hover:bg-white md:block',
+                        isScrolled ? 'px-7 py-2 text-[15px] lg:px-9 lg:py-2.5 lg:text-[16px]' : 'px-8 py-2 text-[16px] lg:px-10 lg:py-3 lg:text-[18px]'
+                    ]"
                 >
                     Sign In
                 </Link>
@@ -167,9 +239,12 @@ const toggleMobileMenu = () => {
                 <!-- Mobile Menu Button -->
                 <button 
                     @click="toggleMobileMenu"
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-[#F4AFE9]/20 to-[#8DD0FC]/20 lg:hidden"
+                    :class="[
+                        'flex items-center justify-center rounded-xl bg-white/30 transition-all duration-300 lg:hidden',
+                        isScrolled ? 'h-9 w-9' : 'h-10 w-10'
+                    ]"
                 >
-                    <Icon :icon="showMobileMenu ? 'mdi:close' : 'mdi:menu'" class="h-6 w-6 text-[#1b1b18]" />
+                    <Icon :icon="showMobileMenu ? 'mdi:close' : 'mdi:menu'" :class="['text-[#1b1b18] transition-all duration-300', isScrolled ? 'h-5 w-5' : 'h-6 w-6']" />
                 </button>
             </div>
         </div>
@@ -271,7 +346,5 @@ const toggleMobileMenu = () => {
                 </div>
             </div>
         </Transition>
-
-        <div class="absolute bottom-0 left-0 h-[1px] w-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC]"></div>
     </nav>
 </template>

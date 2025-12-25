@@ -145,49 +145,49 @@ const cancelPhotoUpload = () => {
 <template>
     <Head title="Profile - DocDot" />
 
-    <div class="min-h-screen font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+    <div class="min-h-screen pt-16 sm:pt-20 lg:pt-22 font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
         <Navbar />
 
-        <div class="px-6 py-8 lg:px-12">
+        <div class="px-4 py-6 sm:px-6 sm:py-8 lg:px-12">
             <div class="mx-auto max-w-5xl">
                 <!-- Breadcrumb -->
-                <nav class="mb-6 flex items-center gap-2 text-[14px]">
+                <nav class="mb-4 flex items-center gap-2 text-[12px] sm:mb-6 sm:text-[14px]">
                     <Link href="/" class="text-[#1b1b18]/60 hover:text-[#1b1b18]">Beranda</Link>
                     <Icon icon="mdi:chevron-right" class="h-4 w-4 text-[#1b1b18]/40" />
                     <span class="text-[#1b1b18]">Profile</span>
                 </nav>
 
                 <!-- Profile Header Card -->
-                <div class="mb-6 overflow-hidden rounded-3xl bg-white/70 backdrop-blur-sm">
-                    <div class="relative h-32 bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC]">
+                <div class="mb-4 overflow-hidden rounded-2xl bg-white/70 backdrop-blur-sm sm:mb-6 sm:rounded-3xl">
+                    <div class="relative h-24 bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] sm:h-32">
                         <!-- Decorative elements -->
                         <div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10"></div>
                         <div class="absolute -left-5 bottom-0 h-24 w-24 rounded-full bg-white/10"></div>
                     </div>
                     
-                    <div class="relative px-6 pb-6 lg:px-8">
+                    <div class="relative px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8">
                         <!-- Avatar -->
-                        <div class="-mt-16 mb-4 flex items-end gap-4">
+                        <div class="-mt-12 mb-3 flex items-end gap-3 sm:-mt-16 sm:mb-4 sm:gap-4">
                             <div class="relative">
                                 <div 
                                     v-if="avatarUrl"
-                                    class="h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-lg"
+                                    class="h-20 w-20 overflow-hidden rounded-full border-4 border-white shadow-lg sm:h-28 sm:w-28"
                                 >
                                     <img :src="avatarUrl" alt="Profile" class="h-full w-full object-cover" />
                                 </div>
                                 <div 
                                     v-else
-                                    class="flex h-28 w-28 items-center justify-center rounded-full border-4 border-white bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] shadow-lg"
+                                    class="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] shadow-lg sm:h-28 sm:w-28"
                                 >
-                                    <Icon icon="mdi:account" class="h-16 w-16 text-white" />
+                                    <Icon icon="mdi:account" class="h-12 w-12 text-white sm:h-16 sm:w-16" />
                                 </div>
                                 
                                 <!-- Edit Photo Button -->
                                 <button 
                                     @click="selectPhoto"
-                                    class="absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110"
+                                    class="absolute bottom-0 right-0 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 sm:h-9 sm:w-9"
                                 >
-                                    <Icon icon="mdi:camera" class="h-5 w-5 text-[#1b1b18]" />
+                                    <Icon icon="mdi:camera" class="h-4 w-4 text-[#1b1b18] sm:h-5 sm:w-5" />
                                 </button>
                                 <input 
                                     ref="photoInput"
@@ -198,11 +198,11 @@ const cancelPhotoUpload = () => {
                                 />
                             </div>
                             
-                            <div class="mb-2 flex-1">
-                                <h1 class="text-[24px] font-bold text-[#1b1b18] lg:text-[28px]">{{ user.name }}</h1>
-                                <p class="flex items-center gap-2 text-[14px] text-[#1b1b18]/60">
+                            <div class="mb-2 flex-1 min-w-0">
+                                <h1 class="truncate text-[18px] font-bold text-[#1b1b18] sm:text-[24px] lg:text-[28px]">{{ user.name }}</h1>
+                                <p class="flex items-center gap-2 text-[12px] text-[#1b1b18]/60 sm:text-[14px]">
                                     <Icon icon="mdi:calendar-account" class="h-4 w-4" />
-                                    Member sejak {{ formatDateShort(user.created_at) }}
+                                    <span class="hidden sm:inline">Member sejak</span> {{ formatDateShort(user.created_at) }}
                                 </p>
                             </div>
 
@@ -262,17 +262,17 @@ const cancelPhotoUpload = () => {
                 </div>
 
                 <!-- Overview Tab -->
-                <div v-if="activeTab === 'overview'" class="grid gap-6 lg:grid-cols-3">
+                <div v-if="activeTab === 'overview'" class="grid gap-4 sm:gap-6 lg:grid-cols-3">
                     <!-- Left Column - Basic Info & Stats -->
-                    <div class="space-y-6 lg:col-span-2">
+                    <div class="space-y-4 sm:space-y-6 lg:col-span-2">
                         <!-- Basic Info Card -->
-                        <div class="rounded-2xl bg-white p-6">
-                            <h2 class="mb-4 flex items-center gap-2 text-[18px] font-semibold text-[#1b1b18]">
+                        <div class="rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6">
+                            <h2 class="mb-3 flex items-center gap-2 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[18px]">
                                 <Icon icon="mdi:account-details" class="h-5 w-5 text-[#8DD0FC]" />
                                 Informasi Dasar
                             </h2>
                             
-                            <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
                                 <!-- Name -->
                                 <div class="flex items-center gap-3 rounded-xl bg-[#F8F8F8] p-4">
                                     <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[#F4AFE9]/20">
@@ -338,13 +338,13 @@ const cancelPhotoUpload = () => {
                         </div>
 
                         <!-- Activity Stats -->
-                        <div class="rounded-2xl bg-white p-6">
-                            <h2 class="mb-4 flex items-center gap-2 text-[18px] font-semibold text-[#1b1b18]">
+                        <div class="rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6">
+                            <h2 class="mb-3 flex items-center gap-2 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[18px]">
                                 <Icon icon="mdi:chart-line" class="h-5 w-5 text-[#8DD0FC]" />
                                 Aktivitas
                             </h2>
                             
-                            <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
                                 <Link 
                                     href="/chat-history"
                                     class="group flex items-center gap-4 rounded-xl bg-gradient-to-r from-[#F4AFE9]/10 to-[#8DD0FC]/10 p-4 transition-all hover:from-[#F4AFE9]/20 hover:to-[#8DD0FC]/20"
@@ -373,16 +373,16 @@ const cancelPhotoUpload = () => {
                     </div>
 
                     <!-- Right Column - Health Info -->
-                    <div class="space-y-6">
+                    <div class="space-y-4 sm:space-y-6">
                         <!-- BMI Card -->
-                        <div class="rounded-2xl bg-white p-6">
-                            <h2 class="mb-4 flex items-center gap-2 text-[18px] font-semibold text-[#1b1b18]">
+                        <div class="rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6">
+                            <h2 class="mb-3 flex items-center gap-2 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[18px]">
                                 <Icon icon="mdi:scale-bathroom" class="h-5 w-5 text-[#8DD0FC]" />
                                 BMI
                             </h2>
                             
                             <div v-if="profile?.bmi" class="text-center">
-                                <div class="mb-2 text-[48px] font-bold" :class="getBmiColor(profile.bmi_category)">
+                                <div class="mb-2 text-[36px] font-bold sm:text-[48px]" :class="getBmiColor(profile.bmi_category)">
                                     {{ profile.bmi }}
                                 </div>
                                 <p class="mb-4 text-[14px] font-medium" :class="getBmiColor(profile.bmi_category)">
@@ -421,13 +421,13 @@ const cancelPhotoUpload = () => {
                         </div>
 
                         <!-- Body Stats -->
-                        <div class="rounded-2xl bg-white p-6">
-                            <h2 class="mb-4 flex items-center gap-2 text-[18px] font-semibold text-[#1b1b18]">
+                        <div class="rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6">
+                            <h2 class="mb-3 flex items-center gap-2 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[18px]">
                                 <Icon icon="mdi:human" class="h-5 w-5 text-[#8DD0FC]" />
                                 Data Tubuh
                             </h2>
                             
-                            <div class="space-y-3">
+                            <div class="space-y-2 sm:space-y-3">
                                 <div class="flex items-center justify-between rounded-xl bg-[#F8F8F8] p-4">
                                     <div class="flex items-center gap-3">
                                         <Icon icon="mdi:human-male-height" class="h-5 w-5 text-[#8DD0FC]" />
@@ -451,10 +451,10 @@ const cancelPhotoUpload = () => {
                         </div>
 
                         <!-- Quick Actions -->
-                        <div class="rounded-2xl bg-white p-6">
-                            <h2 class="mb-4 text-[18px] font-semibold text-[#1b1b18]">Aksi Cepat</h2>
+                        <div class="rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6">
+                            <h2 class="mb-3 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[18px]">Aksi Cepat</h2>
                             
-                            <div class="space-y-2">
+                            <div class="space-y-1 sm:space-y-2">
                                 <Link 
                                     href="/consultation"
                                     class="flex items-center gap-3 rounded-xl p-3 transition-colors hover:bg-[#8DD0FC]/10"
@@ -483,10 +483,10 @@ const cancelPhotoUpload = () => {
 
                 <!-- Edit Tab -->
                 <div v-if="activeTab === 'edit'" class="mx-auto max-w-2xl">
-                    <div class="rounded-2xl bg-white p-6 lg:p-8">
-                        <h2 class="mb-6 text-[20px] font-semibold text-[#1b1b18]">Edit Profil</h2>
+                    <div class="rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6 lg:p-8">
+                        <h2 class="mb-4 text-[18px] font-semibold text-[#1b1b18] sm:mb-6 sm:text-[20px]">Edit Profil</h2>
                         
-                        <form @submit.prevent="submitProfile" class="space-y-5">
+                        <form @submit.prevent="submitProfile" class="space-y-4 sm:space-y-5">
                             <!-- Name -->
                             <div>
                                 <label class="mb-1 block text-[13px] font-medium text-[#1b1b18]/70">

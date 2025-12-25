@@ -11,30 +11,30 @@ useScrollAnimation();
 <template>
     <Head title="Syarat & Ketentuan - DocDot" />
 
-    <div class="min-h-screen font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+    <div class="min-h-screen pt-16 sm:pt-20 lg:pt-22 font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
         <Navbar />
 
         <!-- Hero Section -->
-        <section class="px-6 py-12 lg:px-12">
+        <section class="px-4 py-8 sm:px-6 sm:py-12 lg:px-12">
             <div class="mx-auto max-w-4xl">
-                <nav class="mb-6 flex items-center gap-2 text-[14px]">
+                <nav class="mb-4 flex items-center gap-2 text-[12px] sm:mb-6 sm:text-[14px]">
                     <Link href="/" class="text-[#1b1b18]/60 hover:text-[#1b1b18]">Beranda</Link>
-                    <Icon icon="mdi:chevron-right" class="h-4 w-4 text-[#1b1b18]/40" />
+                    <Icon icon="mdi:chevron-right" class="h-3 w-3 text-[#1b1b18]/40 sm:h-4 sm:w-4" />
                     <span class="text-[#1b1b18]">Syarat & Ketentuan</span>
                 </nav>
-                <h1 class="scroll-animate text-[32px] font-bold text-[#1b1b18] lg:text-[42px]">
+                <h1 class="scroll-animate text-[24px] font-bold text-[#1b1b18] sm:text-[32px] lg:text-[42px]">
                     Syarat & <span class="bg-gradient-to-r from-[#BF55FF] to-[#43B3FC] bg-clip-text text-transparent">Ketentuan</span>
                 </h1>
-                <p class="scroll-animate mt-2 text-[14px] text-[#1b1b18]/60">
+                <p class="scroll-animate mt-1 text-[12px] text-[#1b1b18]/60 sm:mt-2 sm:text-[14px]">
                     Terakhir diperbarui: 26 Desember 2025
                 </p>
             </div>
         </section>
 
         <!-- Content -->
-        <section class="px-6 pb-16 lg:px-12">
+        <section class="px-4 pb-12 sm:px-6 sm:pb-16 lg:px-12">
             <div class="mx-auto max-w-4xl">
-                <div class="scroll-animate rounded-2xl bg-white p-6 lg:p-10">
+                <div class="scroll-animate rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6 lg:p-10">
                     <div class="prose prose-lg max-w-none">
                         <!-- Important Notice -->
                         <div class="mb-8 rounded-xl border-l-4 border-[#F4AFE9] bg-[#F4AFE9]/10 p-4">

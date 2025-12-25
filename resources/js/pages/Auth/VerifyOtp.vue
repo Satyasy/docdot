@@ -138,12 +138,12 @@ onUnmounted(() => {
         class="flex min-h-screen flex-col"
         style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)"
     >
-        <div class="flex flex-1 items-center justify-center px-6 py-12">
-            <div class="w-full max-w-lg rounded-3xl bg-white/50 p-10 backdrop-blur-sm">
-                <h1 class="mb-2 text-center text-[28px] font-bold text-[#1b1b18]">
+        <div class="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 sm:py-12">
+            <div class="w-full max-w-lg rounded-2xl bg-white/50 p-6 backdrop-blur-sm sm:rounded-3xl sm:p-10">
+                <h1 class="mb-1 text-center text-[22px] font-bold text-[#1b1b18] sm:mb-2 sm:text-[28px]">
                     OTP Verification
                 </h1>
-                <p class="mb-8 text-center text-[14px] text-[#1b1b18]/70">
+                <p class="mb-6 text-center text-[13px] text-[#1b1b18]/70 sm:mb-8 sm:text-[14px]">
                     Please enter the Code that we has sent to your email address
                 </p>
 

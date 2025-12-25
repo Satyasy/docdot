@@ -7,73 +7,71 @@ import { Icon } from '@iconify/vue';
     <Head title="404 - Halaman Tidak Ditemukan" />
 
     <div 
-        class="flex min-h-screen flex-col items-center justify-center px-6 font-[Poppins]"
+        class="flex min-h-screen flex-col items-center justify-center px-4 pt-16 sm:pt-20 lg:pt-22 font-[Poppins] sm:px-6"
         style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)"
     >
         <div class="text-center">
             <!-- 404 Illustration -->
-            <div class="relative mx-auto mb-8 w-64">
-                <div class="text-[150px] font-bold leading-none text-white/50">404</div>
+            <div class="relative mx-auto mb-6 w-48 sm:mb-8 sm:w-64">
+                <div class="text-[100px] font-bold leading-none text-white/50 sm:text-[150px]">404</div>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="rounded-full bg-white p-6 shadow-2xl">
-                        <Icon icon="mdi:emoticon-sad-outline" class="h-20 w-20 text-[#BF55FF]" />
-                    </div>
+
                 </div>
             </div>
 
             <!-- Message -->
-            <h1 class="mb-4 text-[28px] font-bold text-[#1b1b18] lg:text-[36px]">
+            <h1 class="mb-3 text-[22px] font-bold text-[#1b1b18] sm:mb-4 sm:text-[28px] lg:text-[36px]">
                 Halaman Tidak Ditemukan
             </h1>
-            <p class="mx-auto mb-8 max-w-md text-[14px] text-[#1b1b18]/70 lg:text-[16px]">
+            <p class="mx-auto mb-6 max-w-md text-[13px] text-[#1b1b18]/70 sm:mb-8 sm:text-[14px] lg:text-[16px]">
                 Maaf, halaman yang Anda cari tidak dapat ditemukan. Mungkin halaman telah dipindahkan atau dihapus.
             </p>
 
             <!-- Actions -->
-            <div class="flex flex-wrap justify-center gap-4">
+            <div class="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
                 <Link 
                     href="/"
-                    class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] px-6 py-3 text-[14px] font-medium text-white transition-all hover:shadow-lg"
+                    class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] px-5 py-2.5 text-[13px] font-medium text-white transition-all hover:shadow-lg sm:px-6 sm:py-3 sm:text-[14px]"
                 >
-                    <Icon icon="mdi:home" class="h-5 w-5" />
+                    <Icon icon="mdi:home" class="h-4 w-4 sm:h-5 sm:w-5" />
                     Kembali ke Beranda
                 </Link>
                 <Link 
                     href="/consultation"
-                    class="inline-flex items-center gap-2 rounded-full border-2 border-[#1b1b18] px-6 py-3 text-[14px] font-medium text-[#1b1b18] transition-all hover:bg-[#1b1b18] hover:text-white"
+                    class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#1b1b18] px-5 py-2.5 text-[13px] font-medium text-[#1b1b18] transition-all hover:bg-[#1b1b18] hover:text-white sm:px-6 sm:py-3 sm:text-[14px]"
                 >
-                    <Icon icon="mdi:chat-outline" class="h-5 w-5" />
+                    <Icon icon="mdi:chat-outline" class="h-4 w-4 sm:h-5 sm:w-5" />
                     Konsultasi
                 </Link>
             </div>
 
             <!-- Quick Links -->
-            <div class="mt-12">
-                <p class="mb-4 text-[13px] text-[#1b1b18]/60">Atau kunjungi halaman populer:</p>
-                <div class="flex flex-wrap justify-center gap-3">
+            <div class="mt-10 sm:mt-12">
+                <p class="mb-3 text-[12px] text-[#1b1b18]/60 sm:mb-4 sm:text-[13px]">Atau kunjungi halaman populer:</p>
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
                     <Link 
                         href="/article" 
-                        class="rounded-full bg-white px-4 py-2 text-[13px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8]"
+                        class="rounded-full bg-white px-3 py-1.5 text-[12px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8] sm:px-4 sm:py-2 sm:text-[13px]"
                     >
-                        📰 Artikel
+                        Artikel
                     </Link>
                     <Link 
                         href="/drug-catalog" 
-                        class="rounded-full bg-white px-4 py-2 text-[13px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8]"
+                        class="rounded-full bg-white px-3 py-1.5 text-[12px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8] sm:px-4 sm:py-2 sm:text-[13px]"
                     >
-                        💊 Katalog Obat
+                        Katalog Obat
                     </Link>
                     <Link 
                         href="/about" 
-                        class="rounded-full bg-white px-4 py-2 text-[13px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8]"
+                        class="rounded-full bg-white px-3 py-1.5 text-[12px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8] sm:px-4 sm:py-2 sm:text-[13px]"
                     >
-                        ℹ️ Tentang Kami
+                        Tentang Kami
                     </Link>
                     <Link 
                         href="/contact" 
-                        class="rounded-full bg-white px-4 py-2 text-[13px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8]"
+                        class="rounded-full bg-white px-3 py-1.5 text-[12px] text-[#1b1b18] transition-all hover:bg-[#F8F8F8] sm:px-4 sm:py-2 sm:text-[13px]"
                     >
-                        📧 Hubungi Kami
+                        Hubungi Kami
                     </Link>
                 </div>
             </div>

@@ -19,9 +19,13 @@ class AiAuditLogResource extends Resource
 
    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
-   protected static string|UnitEnum|null $navigationGroup = 'Audit';
+   protected static string|UnitEnum|null $navigationGroup = 'Sistem';
 
-   protected static ?string $navigationLabel = 'AI Audit Logs';
+   protected static ?string $navigationLabel = 'AI Audit Log';
+
+   protected static ?string $modelLabel = 'AI Audit Log';
+
+   protected static ?string $pluralModelLabel = 'AI Audit Logs';
 
    public static function table(Table $table): Table
    {

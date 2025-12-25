@@ -22,7 +22,13 @@ class HealthArticleResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = 'Konten';
+
+    protected static ?string $navigationLabel = 'Artikel Kesehatan';
+
+    protected static ?string $modelLabel = 'Artikel';
+
+    protected static ?string $pluralModelLabel = 'Artikel Kesehatan';
 
     public static function form(Schema $schema): Schema
     {

@@ -11,44 +11,44 @@ useScrollAnimation();
 <template>
     <Head title="Kebijakan Privasi - DocDot" />
 
-    <div class="min-h-screen font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+    <div class="min-h-screen pt-16 sm:pt-20 lg:pt-22 font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
         <Navbar />
 
         <!-- Hero Section -->
-        <section class="px-6 py-12 lg:px-12">
+        <section class="px-4 py-8 sm:px-6 sm:py-12 lg:px-12">
             <div class="mx-auto max-w-4xl">
-                <nav class="mb-6 flex items-center gap-2 text-[14px]">
+                <nav class="mb-4 flex items-center gap-2 text-[12px] sm:mb-6 sm:text-[14px]">
                     <Link href="/" class="text-[#1b1b18]/60 hover:text-[#1b1b18]">Beranda</Link>
-                    <Icon icon="mdi:chevron-right" class="h-4 w-4 text-[#1b1b18]/40" />
+                    <Icon icon="mdi:chevron-right" class="h-3 w-3 text-[#1b1b18]/40 sm:h-4 sm:w-4" />
                     <span class="text-[#1b1b18]">Kebijakan Privasi</span>
                 </nav>
-                <h1 class="scroll-animate text-[32px] font-bold text-[#1b1b18] lg:text-[42px]">
+                <h1 class="scroll-animate text-[24px] font-bold text-[#1b1b18] sm:text-[32px] lg:text-[42px]">
                     Kebijakan <span class="bg-gradient-to-r from-[#BF55FF] to-[#43B3FC] bg-clip-text text-transparent">Privasi</span>
                 </h1>
-                <p class="scroll-animate mt-2 text-[14px] text-[#1b1b18]/60">
+                <p class="scroll-animate mt-1 text-[12px] text-[#1b1b18]/60 sm:mt-2 sm:text-[14px]">
                     Terakhir diperbarui: 26 Desember 2025
                 </p>
             </div>
         </section>
 
         <!-- Content -->
-        <section class="px-6 pb-16 lg:px-12">
+        <section class="px-4 pb-12 sm:px-6 sm:pb-16 lg:px-12">
             <div class="mx-auto max-w-4xl">
-                <div class="scroll-animate rounded-2xl bg-white p-6 lg:p-10">
+                <div class="scroll-animate rounded-xl bg-white p-4 sm:rounded-2xl sm:p-6 lg:p-10">
                     <div class="prose prose-lg max-w-none">
-                        <section class="mb-8">
-                            <h2 class="mb-4 text-[20px] font-semibold text-[#1b1b18]">1. Pendahuluan</h2>
-                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/70">
+                        <section class="mb-6 sm:mb-8">
+                            <h2 class="mb-3 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[20px]">1. Pendahuluan</h2>
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70 sm:text-[14px]">
                                 DocDot ("kami", "kita", atau "milik kami") berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda ketika Anda menggunakan platform DocDot.
                             </p>
                         </section>
 
-                        <section class="mb-8">
-                            <h2 class="mb-4 text-[20px] font-semibold text-[#1b1b18]">2. Informasi yang Kami Kumpulkan</h2>
-                            <p class="mb-3 text-[14px] leading-relaxed text-[#1b1b18]/70">
+                        <section class="mb-6 sm:mb-8">
+                            <h2 class="mb-3 text-[16px] font-semibold text-[#1b1b18] sm:mb-4 sm:text-[20px]">2. Informasi yang Kami Kumpulkan</h2>
+                            <p class="mb-2 text-[13px] leading-relaxed text-[#1b1b18]/70 sm:mb-3 sm:text-[14px]">
                                 Kami mengumpulkan beberapa jenis informasi:
                             </p>
-                            <ul class="ml-4 space-y-2 text-[14px] text-[#1b1b18]/70">
+                            <ul class="ml-4 space-y-1.5 text-[13px] text-[#1b1b18]/70 sm:space-y-2 sm:text-[14px]">
                                 <li class="flex items-start gap-2">
                                     <Icon icon="mdi:circle-small" class="mt-1 h-4 w-4 flex-shrink-0 text-[#43B3FC]" />
                                     <span><strong>Informasi Pribadi:</strong> Nama, alamat email, nomor telepon, tanggal lahir, jenis kelamin.</span>

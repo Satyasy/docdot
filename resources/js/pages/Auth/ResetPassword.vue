@@ -37,19 +37,19 @@ const submit = () => {
         </div>
 
         <!-- Right Side - Form -->
-        <div class="flex flex-1 items-center justify-center px-6 lg:justify-start lg:pl-12">
-            <div class="w-full max-w-[600px] rounded-[30px] bg-white/50 p-8 lg:-ml-16 lg:p-10">
+        <div class="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 lg:justify-start lg:pl-12">
+            <div class="w-full max-w-[600px] rounded-2xl bg-white/50 p-6 sm:rounded-[30px] sm:p-8 lg:-ml-16 lg:p-10">
                 <!-- Icon -->
-                <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC]">
-                    <Icon icon="mdi:lock-reset" class="h-8 w-8 text-white" />
+                <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] sm:mb-6 sm:h-16 sm:w-16">
+                    <Icon icon="mdi:lock-reset" class="h-6 w-6 text-white sm:h-8 sm:w-8" />
                 </div>
 
-                <h1 class="text-[28px] font-bold text-[#1b1b18] lg:text-[36px]">Reset Password</h1>
-                <p class="mt-2 text-[14px] text-[#1b1b18]/70">
+                <h1 class="text-[24px] font-bold text-[#1b1b18] sm:text-[28px] lg:text-[36px]">Reset Password</h1>
+                <p class="mt-1 text-[13px] text-[#1b1b18]/70 sm:mt-2 sm:text-[14px]">
                     Buat password baru untuk akun <span class="font-medium text-[#1b1b18]">{{ email }}</span>
                 </p>
 
-                <form @submit.prevent="submit" class="mt-8 space-y-5">
+                <form @submit.prevent="submit" class="mt-6 space-y-4 sm:mt-8 sm:space-y-5">
                     <!-- Hidden Fields -->
                     <input type="hidden" v-model="form.token" />
                     <input type="hidden" v-model="form.email" />

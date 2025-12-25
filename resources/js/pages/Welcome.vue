@@ -10,38 +10,38 @@ useScrollAnimation();
 
 <template>
     <Head title="Welcome" />
-    <div class="min-h-screen overflow-x-hidden bg-white">
-        <div class="bg-white">
-            <Navbar />
-        </div>
+    <div class="min-h-screen overflow-x-hidden bg-[#FAFAFA] pt-16 sm:pt-20 lg:pt-22">
+        <Navbar />
 
-        <section class="relative overflow-hidden px-6 pt-8 lg:px-12">
-            <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
-                <div class="scroll-animate max-w-xl pt-16">
-                    <h1 class="text-[40px] font-semibold leading-tight text-[#1b1b18] lg:text-[48px]">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden px-4 pt-6 sm:px-6 sm:pt-8 lg:px-12">
+            <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-6 text-center lg:flex-row lg:items-start lg:justify-between lg:text-left">
+                <div class="scroll-animate max-w-xl pt-4 lg:pt-16">
+                    <h1 class="text-[28px] font-semibold leading-tight text-[#1b1b18] sm:text-[36px] lg:text-[48px]">
                         Lindungi Diri Anda<br />Lindungi Keluarga
                     </h1>
-                    <p class="mt-4 text-[20px] font-light text-[#1b1b18]">
-                        Konsultasikan Keluhan Kesehatan Anda<br />Langsung, dengan Dokter Terpercaya.
+                    <p class="mt-3 text-[16px] font-light text-[#1b1b18] sm:mt-4 sm:text-[18px] lg:text-[20px]">
+                        Konsultasikan Keluhan Kesehatan Anda<br class="hidden sm:block" />Langsung, dengan Dokter Terpercaya.
                     </p>
-                    <Link href="/consultation" class="mt-8 inline-flex w-fit items-center justify-between gap-6 rounded-full border-2 border-[#1b1b18] px-10 py-3 text-[20px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
+                    <Link href="/consultation" class="mt-6 inline-flex w-fit items-center justify-between gap-4 rounded-full border-2 border-[#1b1b18] px-6 py-2 text-[16px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white sm:mt-8 sm:gap-6 sm:px-10 sm:py-3 sm:text-[20px]">
                         ChatBot
-                        <Icon icon="mdi:arrow-right" class="h-5 w-5" />
+                        <Icon icon="mdi:arrow-right" class="h-4 w-4 sm:h-5 sm:w-5" />
                     </Link>
                 </div>
 
-                <div class="scroll-animate scroll-animate-delay-2 relative -translate-x-16">
-                    <div class="absolute -top-4 -right-32 z-10 rounded-full bg-white px-6 py-3 text-[16px] font-normal shadow-lg">
+                <div class="scroll-animate scroll-animate-delay-2 relative lg:-translate-x-16">
+                    <div class="absolute -top-2 right-0 z-10 hidden rounded-full bg-white px-4 py-2 text-[14px] font-normal shadow-lg sm:block sm:px-6 sm:py-3 sm:text-[16px] lg:-right-32 lg:-top-4">
                         Ayo mulai sekarang!
                     </div>
-                    <img src="/images/hero.png" alt="App Preview" class="w-[550px]" style="filter: drop-shadow(0 25px 50px rgba(141, 208, 252, 0.5))" />
-                    <div class="absolute bottom-48 -left-8 z-10 rounded-xl bg-white px-5 py-3 shadow-lg">
-                        <p class="text-[14px] font-semibold text-[#1b1b18]">Konsultasi Sekarang! 🌟 9.10</p>
+                    <img src="/images/hero.png" alt="App Preview" class="w-[300px] sm:w-[400px] lg:w-[550px]" style="filter: drop-shadow(0 25px 50px rgba(141, 208, 252, 0.5))" />
+                    <div class="absolute bottom-16 -left-4 z-10 hidden rounded-xl bg-white px-4 py-2 shadow-lg sm:block sm:bottom-32 sm:px-5 sm:py-3 lg:bottom-48 lg:-left-8">
+                        <p class="text-[12px] font-semibold text-[#1b1b18] sm:text-[14px]">Konsultasi Sekarang! 🌟 9.10</p>
                     </div>
                 </div>
             </div>
 
-            <div class="relative -mt-36 h-[320px]">
+            <!-- Gradient Section with Features - Hidden on Mobile -->
+            <div class="relative -mt-8 hidden h-[320px] lg:-mt-36 lg:block">
                 <svg class="absolute left-32 right-0 h-full" style="width: calc(100% + 50px)" viewBox="0 0 1400 280" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -98,58 +98,77 @@ useScrollAnimation();
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile Features Section -->
+            <div class="mt-8 grid grid-cols-2 gap-4 px-2 sm:hidden">
+                <div class="rounded-2xl bg-gradient-to-br from-[#8DD0FC]/20 to-[#DDB4F6]/20 p-4">
+                    <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA4D9]/20">
+                        <Icon icon="eos-icons:ai" class="h-5 w-5 text-[#2D7BB8]" />
+                    </div>
+                    <h3 class="text-[14px] font-bold text-[#1b1b18]">AI Consultation</h3>
+                    <p class="mt-1 text-[11px] leading-relaxed text-[#1b1b18]/70">Konsultasi cepat dengan AI</p>
+                </div>
+                <div class="rounded-2xl bg-gradient-to-br from-[#DDB4F6]/20 to-[#8DD0FC]/20 p-4">
+                    <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white/60">
+                        <Icon icon="fluent-mdl2:insights" class="h-5 w-5 text-[#2D7BB8]" />
+                    </div>
+                    <h3 class="text-[14px] font-bold text-[#1b1b18]">DocDot Insight</h3>
+                    <p class="mt-1 text-[11px] leading-relaxed text-[#1b1b18]/70">Artikel kesehatan terpercaya</p>
+                </div>
+            </div>
         </section>
 
         <!-- Features Bar Section -->
-        <section class="px-6 py-16 lg:px-12">
-            <div class="scroll-animate rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-16 py-6">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
-                            <Icon icon="mdi:clock-fast" class="h-8 w-8 text-[#43B3FC]" />
+        <section class="px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
+            <div class="scroll-animate rounded-2xl bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-4 py-4 sm:rounded-[30px] sm:px-8 sm:py-6 lg:px-16">
+                <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between sm:gap-6">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent sm:h-12 sm:w-12 sm:rounded-xl">
+                            <Icon icon="mdi:clock-fast" class="h-5 w-5 text-[#43B3FC] sm:h-8 sm:w-8" />
                         </div>
-                        <span class="text-[18px] font-medium text-[#1b1b18]">Layanan yang cepat</span>
+                        <span class="text-[14px] font-medium text-[#1b1b18] sm:text-[16px] lg:text-[18px]">Layanan yang cepat</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
-                            <Icon icon="mingcute:hours-fill" class="h-8 w-8 text-[#43B3FC]" />
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent sm:h-12 sm:w-12 sm:rounded-xl">
+                            <Icon icon="mingcute:hours-fill" class="h-5 w-5 text-[#43B3FC] sm:h-8 sm:w-8" />
                         </div>
-                        <span class="text-[18px] font-medium text-[#1b1b18]">24 Jam</span>
+                        <span class="text-[14px] font-medium text-[#1b1b18] sm:text-[16px] lg:text-[18px]">24 Jam</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
-                            <Icon icon="wpf:doctors-bag" class="h-8 w-8 text-[#43B3FC]" />
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent sm:h-12 sm:w-12 sm:rounded-xl">
+                            <Icon icon="wpf:doctors-bag" class="h-5 w-5 text-[#43B3FC] sm:h-8 sm:w-8" />
                         </div>
-                        <span class="text-[18px] font-medium text-[#1b1b18]">Konsultasi Gratis</span>
+                        <span class="text-[14px] font-medium text-[#1b1b18] sm:text-[16px] lg:text-[18px]">Konsultasi Gratis</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Mengapa harus DocDot Section -->
-        <section class="px-6 py-16 lg:px-12">
+        <section class="px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
             <div class="mx-auto max-w-7xl">
-                <div class="relative flex items-center justify-between">
-                    <div class="scroll-animate relative flex items-center">
-                        <div class="relative h-[380px] w-[220px] rounded-[30px] bg-[#43B3FC]/10">
-                            <div class="absolute top-1/2 left-1/2 h-[200px] w-[2px] -translate-x-1/2 -translate-y-1/2 bg-[#43B3FC]/40"></div>
+                <div class="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
+                    <!-- Left side visual - Hidden on mobile, visible on tablet+ -->
+                    <div class="scroll-animate relative hidden items-center sm:flex">
+                        <div class="relative h-[280px] w-[160px] rounded-[20px] bg-[#43B3FC]/10 sm:h-[380px] sm:w-[220px] sm:rounded-[30px]">
+                            <div class="absolute top-1/2 left-1/2 h-[150px] w-[2px] -translate-x-1/2 -translate-y-1/2 bg-[#43B3FC]/40 sm:h-[200px]"></div>
                             <div class="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#43B3FC]/60"></div>
-                            <div class="absolute top-1/2 -left-8 flex h-16 w-16 -translate-y-1/2 rotate-[-15deg] items-center justify-center rounded-[14px] bg-[#7DD3FC]">
-                                <Icon icon="mdi:magnify" class="h-8 w-8 text-white" />
+                            <div class="absolute top-1/2 -left-6 flex h-12 w-12 -translate-y-1/2 rotate-[-15deg] items-center justify-center rounded-[10px] bg-[#7DD3FC] sm:-left-8 sm:h-16 sm:w-16 sm:rounded-[14px]">
+                                <Icon icon="mdi:magnify" class="h-6 w-6 text-white sm:h-8 sm:w-8" />
                             </div>
-                            <Icon icon="mdi:magnify" class="absolute bottom-4 left-4 h-6 w-6 text-[#1b1b18]/30" />
+                            <Icon icon="mdi:magnify" class="absolute bottom-4 left-4 h-5 w-5 text-[#1b1b18]/30 sm:h-6 sm:w-6" />
                         </div>
 
-                        <div class="relative -ml-16 max-w-md rounded-[30px] bg-white p-10" style="box-shadow: 0 10px 40px rgba(141, 208, 252, 0.4)">
-                            <h2 class="mb-6 text-[24px] font-bold text-[#1b1b18]">Mengapa harus DocDot?</h2>
-                            <div class="space-y-4">
-                                <div class="border-l-2 border-[#43B3FC] pl-4">
-                                    <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                        <div class="relative -ml-10 max-w-[280px] rounded-[20px] bg-white p-6 sm:-ml-16 sm:max-w-md sm:rounded-[30px] sm:p-10" style="box-shadow: 0 10px 40px rgba(141, 208, 252, 0.4)">
+                            <h2 class="mb-4 text-[18px] font-bold text-[#1b1b18] sm:mb-6 sm:text-[24px]">Mengapa harus DocDot?</h2>
+                            <div class="space-y-3 sm:space-y-4">
+                                <div class="border-l-2 border-[#43B3FC] pl-3 sm:pl-4">
+                                    <p class="text-[12px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
                                         Hampir separuh hingga dua pertiga populasi Indonesia belum memahami informasi kesehatan dengan baik.
                                     </p>
                                 </div>
-                                <div class="border-l-2 border-[#43B3FC] pl-4">
-                                    <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                <div class="border-l-2 border-[#43B3FC] pl-3 sm:pl-4">
+                                    <p class="text-[12px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
                                         Di banyak wilayah global, lebih dari sepertiga hingga setengah populasi juga mengalami kondisi serupa.
                                     </p>
                                 </div>
@@ -157,23 +176,41 @@ useScrollAnimation();
                         </div>
                     </div>
 
-                    <div class="scroll-animate scroll-animate-delay-2 flex flex-col gap-8">
-                        <div class="flex items-center gap-6">
-                            <div>
-                                <p class="text-[56px] font-bold leading-none text-[#43B3FC]">33%</p>
-                                <p class="text-[20px] font-medium text-[#43B3FC]">kesehatan<br />problematic</p>
+                    <!-- Mobile version of why DocDot -->
+                    <div class="scroll-animate w-full rounded-2xl bg-white p-5 shadow-lg sm:hidden">
+                        <h2 class="mb-4 text-[20px] font-bold text-[#1b1b18]">Mengapa harus DocDot?</h2>
+                        <div class="space-y-3">
+                            <div class="border-l-2 border-[#43B3FC] pl-3">
+                                <p class="text-[13px] leading-relaxed text-[#1b1b18]/80">
+                                    Hampir separuh hingga dua pertiga populasi Indonesia belum memahami informasi kesehatan dengan baik.
+                                </p>
                             </div>
-                            <p class="max-w-[450px] text-[20px] font-light leading-relaxed text-[#1b1b18]">
-                                Di antara pasien dengan penyakit kronis, sekitar 33% menunjukkan tingkat literasi kesehatan problematic dan 16,2% berada pada kategori inadequate, sehingga total ~49% memiliki literasi kesehatan yang kurang memadai.
+                            <div class="border-l-2 border-[#43B3FC] pl-3">
+                                <p class="text-[13px] leading-relaxed text-[#1b1b18]/80">
+                                    Di banyak wilayah global, lebih dari sepertiga hingga setengah populasi juga mengalami kondisi serupa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats section -->
+                    <div class="scroll-animate scroll-animate-delay-2 flex flex-col gap-6 sm:gap-8">
+                        <div class="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:gap-6 sm:text-left">
+                            <div class="flex-shrink-0">
+                                <p class="text-[40px] font-bold leading-none text-[#43B3FC] sm:text-[56px]">33%</p>
+                                <p class="text-[14px] font-medium text-[#43B3FC] sm:text-[20px]">kesehatan<br />problematic</p>
+                            </div>
+                            <p class="max-w-[450px] text-[14px] font-light leading-relaxed text-[#1b1b18] sm:text-[18px] lg:text-[20px]">
+                                Di antara pasien dengan penyakit kronis, sekitar 33% menunjukkan tingkat literasi kesehatan problematic dan 16,2% berada pada kategori inadequate.
                             </p>
                         </div>
-                        <div class="flex items-center gap-6">
-                            <div>
-                                <p class="text-[56px] font-bold leading-none text-[#43B3FC]">26%</p>
-                                <p class="text-[20px] font-medium text-[#43B3FC]">low health<br />literacy</p>
+                        <div class="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:gap-6 sm:text-left">
+                            <div class="flex-shrink-0">
+                                <p class="text-[40px] font-bold leading-none text-[#43B3FC] sm:text-[56px]">26%</p>
+                                <p class="text-[14px] font-medium text-[#43B3FC] sm:text-[20px]">low health<br />literacy</p>
                             </div>
-                            <p class="max-w-[450px] text-[20px] font-light leading-relaxed text-[#1b1b18]">
-                                Analisis dari berbagai kategori menunjukkan bahwa rata-rata 26% populasi memiliki low health literacy, dengan marginal literacy juga signifikan.
+                            <p class="max-w-[450px] text-[14px] font-light leading-relaxed text-[#1b1b18] sm:text-[18px] lg:text-[20px]">
+                                Analisis dari berbagai kategori menunjukkan bahwa rata-rata 26% populasi memiliki low health literacy.
                             </p>
                         </div>
                     </div>
@@ -182,51 +219,51 @@ useScrollAnimation();
         </section>
 
         <!-- Rasakan Fitur Kesehatan Section -->
-        <section class="bg-[#DDB4F6]/20 px-6 py-16 lg:px-12">
+        <section class="bg-[#DDB4F6]/20 px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
             <div class="mx-auto max-w-7xl text-center">
-                <h2 class="scroll-animate text-[36px] font-bold text-[#1b1b18]">
-                    Rasakan <span class="text-[#CC79FF]">Fitur Kesehatan</span> Lengkap dengan<br />
+                <h2 class="scroll-animate text-[22px] font-bold text-[#1b1b18] sm:text-[28px] lg:text-[36px]">
+                    Rasakan <span class="text-[#CC79FF]">Fitur Kesehatan</span> Lengkap dengan<br class="hidden sm:block" />
                     Teknologi Pintar dari <span class="bg-gradient-to-r from-[#CC79FF] to-[#4FB9FF] bg-clip-text text-transparent">DocDot</span> Setiap Hari 🚀
                 </h2>
 
-                <div class="scroll-animate scroll-animate-delay-1 mt-12 flex items-stretch justify-center gap-6">
-                    <div class="relative h-[180px] w-[400px] overflow-hidden rounded-[30px] bg-[#E2B2FF] p-6">
+                <div class="scroll-animate scroll-animate-delay-1 mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+                    <div class="relative h-[160px] overflow-hidden rounded-2xl bg-[#E2B2FF] p-4 sm:h-[180px] sm:rounded-[30px] sm:p-6">
                         <div class="absolute -top-8 -bottom-8 left-[51%] w-[18%] rounded-[20px] bg-white/60" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[69%] w-[18%] rounded-[20px] bg-white/30" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[87%] w-[18%] rounded-[20px] bg-white/20" style="transform: skewX(-15deg);"></div>
-                        <div class="relative z-10 mt-auto h-[110px] rounded-[20px] bg-white p-5">
+                        <div class="relative z-10 mt-auto h-[100px] rounded-[16px] bg-white p-4 sm:h-[110px] sm:rounded-[20px] sm:p-5">
                             <div class="flex items-start gap-3">
-                                <img src="/images/time.png" alt="Time" class="h-12 w-12" />
-                                <p class="text-left text-[14px] leading-relaxed text-[#1b1b18]/80">
-                                    Tim kami siap merespon keluhan kesehatan mu dengan cepat, 24/7 tanpa harus menunggu lama.
+                                <img src="/images/time.png" alt="Time" class="h-10 w-10 sm:h-12 sm:w-12" />
+                                <p class="text-left text-[12px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
+                                    Tim kami siap merespon keluhan kesehatan mu dengan cepat, 24/7.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="relative h-[180px] w-[400px] overflow-hidden rounded-[30px] bg-[#E2B2FF] p-6">
+                    <div class="relative h-[160px] overflow-hidden rounded-2xl bg-[#E2B2FF] p-4 sm:h-[180px] sm:rounded-[30px] sm:p-6">
                         <div class="absolute -top-8 -bottom-8 left-[51%] w-[18%] rounded-[20px] bg-white/60" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[69%] w-[18%] rounded-[20px] bg-white/30" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[87%] w-[18%] rounded-[20px] bg-white/20" style="transform: skewX(-15deg);"></div>
-                        <div class="relative z-10 mt-auto h-[110px] rounded-[20px] bg-white p-5">
+                        <div class="relative z-10 mt-auto h-[100px] rounded-[16px] bg-white p-4 sm:h-[110px] sm:rounded-[20px] sm:p-5">
                             <div class="flex items-start gap-3">
-                                <img src="/images/chat.png" alt="Chat" class="h-12 w-12" />
-                                <p class="text-left text-[14px] leading-relaxed text-[#1b1b18]/80">
-                                    Konsultasi kesehatan tersedia kapan pun, siap melayani kamu siang dan malam tanpa henti.
+                                <img src="/images/chat.png" alt="Chat" class="h-10 w-10 sm:h-12 sm:w-12" />
+                                <p class="text-left text-[12px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
+                                    Konsultasi tersedia kapan pun, siap melayani siang dan malam.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="relative h-[180px] w-[400px] overflow-hidden rounded-[30px] bg-[#E2B2FF] p-6">
+                    <div class="relative h-[160px] overflow-hidden rounded-2xl bg-[#E2B2FF] p-4 sm:col-span-2 sm:h-[180px] sm:rounded-[30px] sm:p-6 lg:col-span-1">
                         <div class="absolute -top-8 -bottom-8 left-[51%] w-[18%] rounded-[20px] bg-white/60" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[69%] w-[18%] rounded-[20px] bg-white/30" style="transform: skewX(-15deg);"></div>
                         <div class="absolute -top-8 -bottom-8 left-[87%] w-[18%] rounded-[20px] bg-white/20" style="transform: skewX(-15deg);"></div>
-                        <div class="relative z-10 mt-auto h-[110px] rounded-[20px] bg-white p-5">
+                        <div class="relative z-10 mt-auto h-[100px] rounded-[16px] bg-white p-4 sm:h-[110px] sm:rounded-[20px] sm:p-5">
                             <div class="flex items-start gap-3">
-                                <img src="/images/talks.png" alt="Talks" class="h-12 w-12" />
-                                <p class="text-left text-[14px] leading-relaxed text-[#1b1b18]/80">
-                                    Nikmati layanan konsultasi kesehatan tanpa biaya, langsung dari rumah kamu.
+                                <img src="/images/talks.png" alt="Talks" class="h-10 w-10 sm:h-12 sm:w-12" />
+                                <p class="text-left text-[12px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
+                                    Nikmati layanan konsultasi tanpa biaya, langsung dari rumah.
                                 </p>
                             </div>
                         </div>
@@ -236,64 +273,82 @@ useScrollAnimation();
         </section>
 
         <!-- Pengingat Medibot Section -->
-        <section class="bg-white px-6 py-16 lg:px-12">
+        <section class="bg-white px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
             <div class="mx-auto max-w-7xl">
-                <div class="flex items-start justify-between gap-12">
-                    <div class="scroll-animate relative flex gap-8">
+                <div class="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+                    <!-- Visual section - hidden on mobile -->
+                    <div class="scroll-animate relative hidden gap-8 sm:flex">
                         <div class="relative">
-                            <div class="absolute -top-8 left-1/2 z-20 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-lg">
-                                <Icon icon="mdi:stethoscope" class="h-8 w-8 text-[#CC79FF]" />
+                            <div class="absolute -top-6 left-1/2 z-20 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-lg sm:-top-8 sm:h-16 sm:w-16">
+                                <Icon icon="mdi:stethoscope" class="h-6 w-6 text-[#CC79FF] sm:h-8 sm:w-8" />
                             </div>
 
-                            <div class="relative h-[280px] w-[280px] rounded-[30px] bg-[#E2B2FF]">
-                                <div class="absolute top-0 right-0 h-full w-1/2 rounded-r-[30px] bg-[#D9A0F0]"></div>
-                                <img src="/images/bot.png" alt="DocDot Bot" class="absolute bottom-4 left-1/2 z-10 h-[220px] w-auto -translate-x-1/2" />
+                            <div class="relative h-[200px] w-[200px] rounded-[20px] bg-[#E2B2FF] sm:h-[280px] sm:w-[280px] sm:rounded-[30px]">
+                                <div class="absolute top-0 right-0 h-full w-1/2 rounded-r-[20px] bg-[#D9A0F0] sm:rounded-r-[30px]"></div>
+                                <img src="/images/bot.png" alt="DocDot Bot" class="absolute bottom-3 left-1/2 z-10 h-[160px] w-auto -translate-x-1/2 sm:bottom-4 sm:h-[220px]" />
                             </div>
 
-                            <div class="absolute top-16 -right-20 z-20 rounded-full bg-white px-8 py-3 shadow-lg">
-                                <span class="text-[18px] font-semibold text-[#CC79FF]">Notification</span>
+                            <div class="absolute top-12 -right-12 z-20 rounded-full bg-white px-5 py-2 shadow-lg sm:top-16 sm:-right-20 sm:px-8 sm:py-3">
+                                <span class="text-[14px] font-semibold text-[#CC79FF] sm:text-[18px]">Notification</span>
                             </div>
                         </div>
 
-                        <div class="relative mt-40">
-                            <div class="absolute -top-8 left-1/2 z-20 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-lg">
-                                <Icon icon="hugeicons:tick-03" class="h-7 w-7 text-[#43B3FC]" />
+                        <div class="relative mt-24 hidden sm:mt-40 lg:block">
+                            <div class="absolute -top-6 left-1/2 z-20 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-lg sm:-top-8 sm:h-14 sm:w-14">
+                                <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-[#43B3FC] sm:h-7 sm:w-7" />
                             </div>
 
-                            <div class="relative h-[220px] w-[260px] overflow-hidden rounded-[20px] bg-[#83CEFF] p-6">
+                            <div class="relative h-[180px] w-[200px] overflow-hidden rounded-[16px] bg-[#83CEFF] p-4 sm:h-[220px] sm:w-[260px] sm:rounded-[20px] sm:p-6">
                                 <div class="absolute top-0 bottom-0 left-[35%] w-[25%] bg-[#99D7FF]"></div>
                                 <div class="absolute top-0 bottom-0 left-[60%] right-0 bg-[#ACDEFF]"></div>
-                                <div class="relative z-10 flex h-full flex-col justify-center space-y-5">
-                                    <div class="flex items-center gap-3">
-                                        <Icon icon="hugeicons:tick-03" class="h-6 w-6 text-white" />
-                                        <span class="text-[16px] font-light text-[#1b1b18]">Tips Kesehatan Harian</span>
+                                <div class="relative z-10 flex h-full flex-col justify-center space-y-3 sm:space-y-5">
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                                        <span class="text-[13px] font-light text-[#1b1b18] sm:text-[16px]">Tips Kesehatan Harian</span>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <Icon icon="hugeicons:tick-03" class="h-6 w-6 text-white" />
-                                        <span class="text-[16px] font-light text-[#1b1b18]">Pengingat Konsultasi</span>
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                                        <span class="text-[13px] font-light text-[#1b1b18] sm:text-[16px]">Pengingat Konsultasi</span>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <Icon icon="hugeicons:tick-03" class="h-6 w-6 text-white" />
-                                        <span class="text-[16px] font-light text-[#1b1b18]">Ucapan Penyemangat</span>
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                                        <span class="text-[13px] font-light text-[#1b1b18] sm:text-[16px]">Ucapan Penyemangat</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="scroll-animate scroll-animate-delay-2 max-w-xl pt-8">
-                        <h2 class="text-[32px] font-bold text-[#1b1b18]">Pengingat DocDot 🔔</h2>
-                        <div class="mt-4 border-l-2 border-[#039BFF] pl-4">
-                            <p class="text-[16px] leading-relaxed text-[#1b1b18]/80">
+                    <!-- Content section -->
+                    <div class="scroll-animate scroll-animate-delay-2 max-w-xl">
+                        <h2 class="text-[24px] font-bold text-[#1b1b18] sm:text-[28px] lg:text-[32px]">Pengingat DocDot 🔔</h2>
+                        <div class="mt-3 border-l-2 border-[#039BFF] pl-3 sm:mt-4 sm:pl-4">
+                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80 sm:text-[16px]">
                                 Fitur notification di DocDot berfungsi untuk memberikan pengingat dan informasi penting secara otomatis. Tujuannya agar pengguna lebih teratur dalam menjaga kesehatannya.
                             </p>
                         </div>
 
-                        <h3 class="mt-8 text-[24px] font-bold text-[#1b1b18]">Siaga bersama DocDot</h3>
-                        <div class="mt-4 border-l-2 border-[#BF55FF] pl-4">
-                            <p class="text-[16px] leading-relaxed text-[#1b1b18]/80">
+                        <h3 class="mt-6 text-[20px] font-bold text-[#1b1b18] sm:mt-8 sm:text-[24px]">Siaga bersama DocDot</h3>
+                        <div class="mt-3 border-l-2 border-[#BF55FF] pl-3 sm:mt-4 sm:pl-4">
+                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80 sm:text-[16px]">
                                 Dengan fitur notifikasi otomatis, DocDot selalu siap mengingatkanmu tentang jadwal kesehatan penting konsultasi, dan tips harian agar kamu tetap sehat dan terjaga setiap saat.
                             </p>
+                        </div>
+
+                        <!-- Mobile features list -->
+                        <div class="mt-6 grid grid-cols-1 gap-3 sm:hidden">
+                            <div class="flex items-center gap-3 rounded-xl bg-[#83CEFF]/20 p-3">
+                                <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-[#43B3FC]" />
+                                <span class="text-[14px] text-[#1b1b18]">Tips Kesehatan Harian</span>
+                            </div>
+                            <div class="flex items-center gap-3 rounded-xl bg-[#83CEFF]/20 p-3">
+                                <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-[#43B3FC]" />
+                                <span class="text-[14px] text-[#1b1b18]">Pengingat Konsultasi</span>
+                            </div>
+                            <div class="flex items-center gap-3 rounded-xl bg-[#83CEFF]/20 p-3">
+                                <Icon icon="hugeicons:tick-03" class="h-5 w-5 text-[#43B3FC]" />
+                                <span class="text-[14px] text-[#1b1b18]">Ucapan Penyemangat</span>
+                            </div>
                         </div>
                     </div>
                 </div>

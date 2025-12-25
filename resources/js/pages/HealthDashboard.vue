@@ -142,7 +142,7 @@ const getRiskColor = (risk: string | null) => {
 <template>
     <Head title="Health Dashboard - DocDot" />
 
-    <div class="min-h-screen font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+    <div class="min-h-screen pt-16 sm:pt-20 lg:pt-22 font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
         <Navbar />
 
         <div class="px-4 py-6 sm:px-6 sm:py-8 lg:px-12">
@@ -265,7 +265,7 @@ const getRiskColor = (risk: string | null) => {
                         </div>
 
                         <!-- Physical Logs -->
-                        <div v-if="activeTab === 'physical'" class="scroll-animate rounded-2xl bg-white p-4 sm:p-6">
+                        <div v-if="activeTab === 'physical'" class="rounded-2xl bg-white p-4 sm:p-6">
                             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                 <h2 class="text-[16px] font-semibold text-[#1b1b18] sm:text-[18px]">Log Kesehatan Fisik</h2>
                                 <button
@@ -321,7 +321,7 @@ const getRiskColor = (risk: string | null) => {
                         </div>
 
                         <!-- Mental Logs -->
-                        <div v-if="activeTab === 'mental'" class="scroll-animate rounded-2xl bg-white p-4 sm:p-6">
+                        <div v-if="activeTab === 'mental'" class="rounded-2xl bg-white p-4 sm:p-6">
                             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                 <h2 class="text-[16px] font-semibold text-[#1b1b18] sm:text-[18px]">Log Kesehatan Mental</h2>
                                 <button

@@ -4,10 +4,10 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <footer class="relative mt-16">
+    <footer class="relative mt-8 sm:mt-12 lg:mt-16">
         <!-- Wave SVG di atas -->
-        <div class="absolute -top-20 left-0 right-0">
-            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="h-24 w-full">
+        <div class="absolute -top-12 left-0 right-0 sm:-top-16 lg:-top-20">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="h-16 w-full sm:h-20 lg:h-24">
                 <defs>
                     <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#8DD0FC" />
@@ -21,21 +21,21 @@ import { Link } from '@inertiajs/vue3';
         </div>
 
         <!-- Footer Content -->
-        <div class="bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-6 pt-16 pb-6 lg:px-12">
+        <div class="bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-4 pt-10 pb-4 sm:px-6 sm:pt-12 sm:pb-6 lg:px-12 lg:pt-16">
             <div class="mx-auto max-w-6xl">
-                <div class="flex flex-wrap justify-between gap-8">
+                <div class="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
                     <!-- DocDot -->
-                    <div class="max-w-[200px]">
-                        <img src="/images/logo.png" alt="DocDot" class="mb-4 h-16 w-auto" />
-                        <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                    <div class="col-span-2 sm:col-span-1">
+                        <img src="/images/logo.png" alt="DocDot" class="mb-3 h-12 w-auto sm:mb-4 sm:h-14 lg:h-16" />
+                        <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
                             Teman cerdas Anda untuk informasi kesehatan terpercaya.
                         </p>
                     </div>
 
                     <!-- Menu -->
                     <div>
-                        <h3 class="mb-4 text-[20px] font-bold text-[#1b1b18]">Menu</h3>
-                        <ul class="space-y-2 text-[14px] text-[#1b1b18]/80">
+                        <h3 class="mb-3 text-[16px] font-bold text-[#1b1b18] sm:mb-4 sm:text-[18px] lg:text-[20px]">Menu</h3>
+                        <ul class="space-y-1.5 text-[13px] text-[#1b1b18]/80 sm:space-y-2 sm:text-[14px]">
                             <li><Link href="/" class="hover:text-[#1b1b18]">Home</Link></li>
                             <li><Link href="/article" class="hover:text-[#1b1b18]">Article</Link></li>
                             <li><Link href="/drug-catalog" class="hover:text-[#1b1b18]">Drug Catalog</Link></li>
@@ -45,8 +45,8 @@ import { Link } from '@inertiajs/vue3';
 
                     <!-- Bantuan & Panduan -->
                     <div>
-                        <h3 class="mb-4 text-[20px] font-bold text-[#1b1b18]">Bantuan & Panduan</h3>
-                        <ul class="space-y-2 text-[14px] text-[#1b1b18]/80">
+                        <h3 class="mb-3 text-[16px] font-bold text-[#1b1b18] sm:mb-4 sm:text-[18px] lg:text-[20px]">Bantuan</h3>
+                        <ul class="space-y-1.5 text-[13px] text-[#1b1b18]/80 sm:space-y-2 sm:text-[14px]">
                             <li><Link href="/about" class="hover:text-[#1b1b18]">Tentang Kami</Link></li>
                             <li><Link href="/contact" class="hover:text-[#1b1b18]">Hubungi Kami</Link></li>
                             <li><Link href="/terms-of-service" class="hover:text-[#1b1b18]">Syarat & Ketentuan</Link></li>
@@ -55,9 +55,9 @@ import { Link } from '@inertiajs/vue3';
                     </div>
 
                     <!-- Kontak -->
-                    <div>
-                        <h3 class="mb-4 text-[20px] font-bold text-[#1b1b18]">Kontak</h3>
-                        <div class="space-y-2 text-[14px] text-[#1b1b18]/80">
+                    <div class="col-span-2 sm:col-span-1">
+                        <h3 class="mb-3 text-[16px] font-bold text-[#1b1b18] sm:mb-4 sm:text-[18px] lg:text-[20px]">Kontak</h3>
+                        <div class="space-y-1.5 text-[13px] text-[#1b1b18]/80 sm:space-y-2 sm:text-[14px]">
                             <p class="flex items-center gap-2">
                                 <Icon icon="mdi:phone" class="h-4 w-4" />
                                 +62 812-3456-7890
@@ -68,27 +68,27 @@ import { Link } from '@inertiajs/vue3';
                             </p>
                         </div>
                         <!-- Social Icons -->
-                        <div class="mt-4 flex gap-3">
-                            <a href="#" class="flex h-8 w-8 items-center justify-center rounded-full bg-black">
-                                <Icon icon="ic:baseline-tiktok" class="h-5 w-5 text-white" />
+                        <div class="mt-3 flex gap-2 sm:mt-4 sm:gap-3">
+                            <a href="#" class="flex h-7 w-7 items-center justify-center rounded-full bg-black sm:h-8 sm:w-8">
+                                <Icon icon="ic:baseline-tiktok" class="h-4 w-4 text-white sm:h-5 sm:w-5" />
                             </a>
-                            <a href="#" class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]">
-                                <Icon icon="mdi:instagram" class="h-5 w-5 text-white" />
+                            <a href="#" class="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] sm:h-8 sm:w-8">
+                                <Icon icon="mdi:instagram" class="h-4 w-4 text-white sm:h-5 sm:w-5" />
                             </a>
-                            <a href="#" class="flex h-8 w-8 items-center justify-center rounded-full bg-[#1877F2]">
-                                <Icon icon="mdi:facebook" class="h-5 w-5 text-white" />
+                            <a href="#" class="flex h-7 w-7 items-center justify-center rounded-full bg-[#1877F2] sm:h-8 sm:w-8">
+                                <Icon icon="mdi:facebook" class="h-4 w-4 text-white sm:h-5 sm:w-5" />
                             </a>
-                            <a href="#" class="flex h-8 w-8 items-center justify-center rounded-full bg-black">
-                                <Icon icon="mdi:twitter" class="h-5 w-5 text-white" />
+                            <a href="#" class="flex h-7 w-7 items-center justify-center rounded-full bg-black sm:h-8 sm:w-8">
+                                <Icon icon="mdi:twitter" class="h-4 w-4 text-white sm:h-5 sm:w-5" />
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- All Right Reserved -->
-                <div class="mt-8 border-t border-[#1b1b18]/10 pt-4">
-                    <p class="flex items-center justify-center gap-2 text-[12px] text-[#1b1b18]/60">
-                        <Icon icon="mdi:copyright" class="h-4 w-4" />
+                <div class="mt-6 border-t border-[#1b1b18]/10 pt-3 sm:mt-8 sm:pt-4">
+                    <p class="flex items-center justify-center gap-1.5 text-[11px] text-[#1b1b18]/60 sm:gap-2 sm:text-[12px]">
+                        <Icon icon="mdi:copyright" class="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         {{ new Date().getFullYear() }} DocDot. All rights reserved.
                     </p>
                 </div>

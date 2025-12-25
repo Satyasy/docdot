@@ -22,9 +22,13 @@ class PhysicalHealthLogResource extends Resource
 
    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
 
-   protected static string|UnitEnum|null $navigationGroup = 'Health Logs';
+   protected static string|UnitEnum|null $navigationGroup = 'Kesehatan User';
 
-   protected static ?string $navigationLabel = 'Physical Health Logs';
+   protected static ?string $navigationLabel = 'Log Fisik';
+
+   protected static ?string $modelLabel = 'Log Kesehatan Fisik';
+
+   protected static ?string $pluralModelLabel = 'Log Kesehatan Fisik';
 
    public static function form(Schema $schema): Schema
    {

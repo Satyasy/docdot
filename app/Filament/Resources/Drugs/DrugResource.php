@@ -24,7 +24,13 @@ class DrugResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBeaker;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Medical';
+    protected static string|UnitEnum|null $navigationGroup = 'Katalog Obat';
+
+    protected static ?string $navigationLabel = 'Obat';
+
+    protected static ?string $modelLabel = 'Obat';
+
+    protected static ?string $pluralModelLabel = 'Katalog Obat';
 
     public static function form(Schema $schema): Schema
     {

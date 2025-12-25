@@ -23,7 +23,13 @@ class MedicalDocumentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Medical';
+    protected static string|UnitEnum|null $navigationGroup = 'Konten';
+
+    protected static ?string $navigationLabel = 'Dokumen Medis';
+
+    protected static ?string $modelLabel = 'Dokumen Medis';
+
+    protected static ?string $pluralModelLabel = 'Dokumen Medis';
 
     public static function form(Schema $schema): Schema
     {

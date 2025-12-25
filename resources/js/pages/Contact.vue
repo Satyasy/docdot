@@ -80,28 +80,28 @@ const contactInfo = [
 <template>
     <Head title="Hubungi Kami - DocDot" />
 
-    <div class="min-h-screen font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
+    <div class="min-h-screen pt-16 sm:pt-20 lg:pt-22 font-[Poppins]" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
         <Navbar />
 
         <!-- Hero Section -->
-        <section class="px-6 py-16 lg:px-12">
+        <section class="px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
             <div class="mx-auto max-w-5xl text-center">
-                <h1 class="scroll-animate text-[36px] font-bold text-[#1b1b18] lg:text-[48px]">
+                <h1 class="scroll-animate text-[28px] font-bold text-[#1b1b18] sm:text-[36px] lg:text-[48px]">
                     Hubungi <span class="bg-gradient-to-r from-[#BF55FF] to-[#43B3FC] bg-clip-text text-transparent">Kami</span>
                 </h1>
-                <p class="scroll-animate scroll-animate-delay-1 mx-auto mt-4 max-w-2xl text-[16px] text-[#1b1b18]/70 lg:text-[18px]">
+                <p class="scroll-animate scroll-animate-delay-1 mx-auto mt-3 max-w-2xl text-[14px] text-[#1b1b18]/70 sm:mt-4 sm:text-[16px] lg:text-[18px]">
                     Punya pertanyaan atau saran? Kami siap membantu Anda. Hubungi kami melalui form di bawah atau kontak langsung.
                 </p>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section class="px-6 pb-16 lg:px-12">
+        <section class="px-4 pb-8 sm:px-6 sm:pb-12 lg:px-12 lg:pb-16">
             <div class="mx-auto max-w-6xl">
-                <div class="grid gap-8 lg:grid-cols-2">
+                <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                     <!-- Contact Form -->
-                    <div class="scroll-animate rounded-2xl bg-white p-6 lg:p-8">
-                        <h2 class="mb-6 text-[20px] font-semibold text-[#1b1b18]">Kirim Pesan</h2>
+                    <div class="scroll-animate rounded-xl bg-white p-5 sm:rounded-2xl sm:p-6 lg:p-8">
+                        <h2 class="mb-4 text-[18px] font-semibold text-[#1b1b18] sm:mb-6 sm:text-[20px]">Kirim Pesan</h2>
 
                         <!-- Success Message -->
                         <div 
@@ -177,53 +177,53 @@ const contactInfo = [
                     </div>
 
                     <!-- Contact Info & FAQ -->
-                    <div class="space-y-6">
+                    <div class="space-y-4 sm:space-y-6">
                         <!-- Contact Info -->
-                        <div class="scroll-animate scroll-animate-delay-1 rounded-2xl bg-white p-6 lg:p-8">
-                            <h2 class="mb-6 text-[20px] font-semibold text-[#1b1b18]">Informasi Kontak</h2>
-                            <div class="space-y-4">
+                        <div class="scroll-animate scroll-animate-delay-1 rounded-xl bg-white p-5 sm:rounded-2xl sm:p-6 lg:p-8">
+                            <h2 class="mb-4 text-[18px] font-semibold text-[#1b1b18] sm:mb-6 sm:text-[20px]">Informasi Kontak</h2>
+                            <div class="space-y-3 sm:space-y-4">
                                 <a
                                     v-for="info in contactInfo"
                                     :key="info.label"
                                     :href="info.href || undefined"
-                                    class="flex items-center gap-4 rounded-xl bg-[#F8F8F8] p-4 transition-colors"
+                                    class="flex items-center gap-3 rounded-lg bg-[#F8F8F8] p-3 transition-colors sm:gap-4 sm:rounded-xl sm:p-4"
                                     :class="info.href ? 'hover:bg-[#F0F0F0]' : ''"
                                 >
-                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9]/30 to-[#8DD0FC]/30">
-                                        <Icon :icon="info.icon" class="h-6 w-6 text-[#43B3FC]" />
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#F4AFE9]/30 to-[#8DD0FC]/30 sm:h-12 sm:w-12">
+                                        <Icon :icon="info.icon" class="h-5 w-5 text-[#43B3FC] sm:h-6 sm:w-6" />
                                     </div>
                                     <div>
-                                        <p class="text-[13px] text-[#1b1b18]/60">{{ info.label }}</p>
-                                        <p class="text-[14px] font-medium text-[#1b1b18]">{{ info.value }}</p>
+                                        <p class="text-[12px] text-[#1b1b18]/60 sm:text-[13px]">{{ info.label }}</p>
+                                        <p class="text-[13px] font-medium text-[#1b1b18] sm:text-[14px]">{{ info.value }}</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
 
                         <!-- FAQ -->
-                        <div class="scroll-animate scroll-animate-delay-2 rounded-2xl bg-white p-6 lg:p-8">
-                            <h2 class="mb-6 text-[20px] font-semibold text-[#1b1b18]">FAQ</h2>
-                            <div class="space-y-3">
+                        <div class="scroll-animate scroll-animate-delay-2 rounded-xl bg-white p-5 sm:rounded-2xl sm:p-6 lg:p-8">
+                            <h2 class="mb-4 text-[18px] font-semibold text-[#1b1b18] sm:mb-6 sm:text-[20px]">FAQ</h2>
+                            <div class="space-y-2 sm:space-y-3">
                                 <div 
                                     v-for="(faq, index) in faqs" 
                                     :key="index"
-                                    class="rounded-xl bg-[#F8F8F8] overflow-hidden"
+                                    class="overflow-hidden rounded-lg bg-[#F8F8F8] sm:rounded-xl"
                                 >
                                     <button
                                         @click="toggleFaq(index)"
-                                        class="flex w-full items-center justify-between p-4 text-left"
+                                        class="flex w-full items-center justify-between p-3 text-left sm:p-4"
                                     >
-                                        <span class="text-[14px] font-medium text-[#1b1b18]">{{ faq.question }}</span>
+                                        <span class="pr-2 text-[13px] font-medium text-[#1b1b18] sm:text-[14px]">{{ faq.question }}</span>
                                         <Icon 
                                             :icon="openFaq === index ? 'mdi:chevron-up' : 'mdi:chevron-down'" 
-                                            class="h-5 w-5 flex-shrink-0 text-[#1b1b18]/40"
+                                            class="h-4 w-4 flex-shrink-0 text-[#1b1b18]/40 sm:h-5 sm:w-5"
                                         />
                                     </button>
                                     <div 
                                         v-show="openFaq === index"
-                                        class="px-4 pb-4"
+                                        class="px-3 pb-3 sm:px-4 sm:pb-4"
                                     >
-                                        <p class="text-[13px] text-[#1b1b18]/70">{{ faq.answer }}</p>
+                                        <p class="text-[12px] text-[#1b1b18]/70 sm:text-[13px]">{{ faq.answer }}</p>
                                     </div>
                                 </div>
                             </div>

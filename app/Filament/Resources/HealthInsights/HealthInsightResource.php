@@ -22,9 +22,13 @@ class HealthInsightResource extends Resource
 
    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLightBulb;
 
-   protected static string|UnitEnum|null $navigationGroup = 'Health Logs';
+   protected static string|UnitEnum|null $navigationGroup = 'Kesehatan User';
 
    protected static ?string $navigationLabel = 'Health Insights';
+
+   protected static ?string $modelLabel = 'Health Insight';
+
+   protected static ?string $pluralModelLabel = 'Health Insights';
 
    public static function form(Schema $schema): Schema
    {
