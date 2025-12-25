@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick, computed } from 'vue';
+import { ref, onMounted, nextTick, computed, watch } from 'vue';
 import { Head, usePage, router } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
 import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
 import axios from 'axios';
 import { marked } from 'marked';
+import { useScrollAnimation } from '@/composables/useScrollAnimation';
+
+useScrollAnimation();
 
 // Configure marked for safe rendering
 marked.setOptions({
@@ -42,9 +46,17 @@ const messages = ref<Message[]>([]);
 const newMessage = ref('');
 const isLoading = ref(false);
 const chatContainer = ref<HTMLElement | null>(null);
+const showChatMode = ref(false);
 
 const user = computed(() => (page.props.auth as any)?.user);
 const isLoggedIn = computed(() => !!user.value);
+
+// Watch for messages to switch to chat mode
+watch(messages, (newMessages) => {
+    if (newMessages.length > 0) {
+        showChatMode.value = true;
+    }
+}, { deep: true });
 
 // Create new session
 const createSession = async () => {
@@ -65,6 +77,9 @@ const loadMessages = async (session: Session) => {
     try {
         const response = await axios.get(`/consultation/session/${session.id}/messages`);
         messages.value = response.data.messages;
+        if (response.data.messages.length > 0) {
+            showChatMode.value = true;
+        }
         await nextTick();
         scrollToBottom();
     } catch (error) {
@@ -92,6 +107,7 @@ const sendMessage = async () => {
     const messageText = newMessage.value;
     newMessage.value = '';
     isLoading.value = true;
+    showChatMode.value = true;
 
     // Add user message immediately
     messages.value.push({
@@ -143,12 +159,18 @@ const handleKeydown = (e: KeyboardEvent) => {
     }
 };
 
+// Start new consultation
+const startNewChat = () => {
+    showChatMode.value = true;
+};
+
 // Process pending prompt after login
 const processPendingPrompt = async () => {
     const pendingPrompt = localStorage.getItem('pendingPrompt');
     if (pendingPrompt && isLoggedIn.value) {
         localStorage.removeItem('pendingPrompt');
         newMessage.value = pendingPrompt;
+        showChatMode.value = true;
         
         // Auto submit after a short delay
         await nextTick();
@@ -180,7 +202,196 @@ onMounted(async () => {
     <div class="min-h-screen" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%)">
         <Navbar />
 
-        <div class="flex h-[calc(100vh-80px)] flex-col px-6 pb-6 lg:px-12">
+        <!-- Landing Mode: Show when no messages and not in chat mode -->
+        <div v-if="!showChatMode" class="overflow-x-hidden">
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden px-6 pt-8 lg:px-12">
+                <!-- Background gradient blob -->
+                <div class="absolute top-20 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-gradient-to-r from-[#8DD0FC]/30 via-[#DDB4F6]/20 to-[#F4AFE9]/30 blur-3xl"></div>
+
+                <div class="relative z-10 mx-auto max-w-4xl pt-16 text-center">
+                    <!-- Floating card top right -->
+                    <div class="scroll-animate absolute top-4 -right-40 hidden rounded-full bg-white px-6 py-3 text-[16px] font-normal shadow-lg lg:block">
+                        Ayo mulai sekarang!
+                    </div>
+
+                    <h1 class="scroll-animate text-[36px] font-semibold leading-tight text-[#1b1b18] lg:text-[56px]">
+                        Get trusted insights about your<br />symptoms with <span style="background: linear-gradient(to right, #C360FF 0%, #54BBFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">DocDot</span>
+                    </h1>
+
+                    <p class="scroll-animate scroll-animate-delay-1 mt-6 text-[18px] font-light text-[#1b1b18]/80 lg:text-[20px]">
+                        Describe what you're feeling, DocDot will help decode it for you.
+                    </p>
+
+                    <!-- Floating card left -->
+                    <div class="scroll-animate absolute bottom-50 -left-50 hidden rounded-xl bg-white px-5 py-3 shadow-lg lg:block">
+                        <p class="text-[14px] font-semibold text-[#1b1b18]">Konsultasi Sekarang! 🌟 9.10</p>
+                    </div>
+
+                    <!-- Get Started Button -->
+                    <button 
+                        @click="startNewChat"
+                        class="scroll-animate scroll-animate-delay-2 mt-8 inline-flex items-center gap-2 rounded-full border-2 border-[#1b1b18] px-8 py-3 text-[18px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white"
+                    >
+                        Get Started
+                        <Icon icon="mdi:arrow-right" class="h-5 w-5" />
+                    </button>
+
+                    <!-- Chat Input Box with gradient border -->
+                    <div class="scroll-animate scroll-animate-delay-3 mx-auto mt-12 w-full max-w-[600px] overflow-hidden rounded-xl p-[2px]" style="background: linear-gradient(to left, #8DD0FC 0%, #DDB4F6 100%);">
+                        <div class="overflow-hidden rounded-xl bg-white px-6 py-4">
+                            <input 
+                                v-model="newMessage"
+                                @keydown="handleKeydown"
+                                type="text" 
+                                placeholder="Type your symptoms here..."
+                                class="w-full border-none bg-transparent text-[16px] text-[#1b1b18] placeholder-[#1b1b18]/40 outline-none focus:outline-none focus:ring-0"
+                            />
+                            <div class="mt-4 flex items-center justify-between">
+                                <div class="flex flex-wrap items-center gap-4">
+                                    <button class="flex items-center gap-2 text-[13px] text-[#54BBFF]">
+                                        <Icon icon="mdi:auto-fix" class="h-4 w-4" />
+                                        Identify your symptoms
+                                    </button>
+                                    <button class="hidden items-center gap-2 text-[13px] text-[#1b1b18]/60 sm:flex">
+                                        <Icon icon="mdi:image-outline" class="h-4 w-4" />
+                                        Consult by uploading a photo
+                                    </button>
+                                </div>
+                                <button 
+                                    @click="sendMessage"
+                                    :disabled="!newMessage.trim()"
+                                    class="flex h-8 w-8 items-center justify-center text-[#54BBFF] transition-colors hover:text-[#43A8E8] disabled:opacity-50"
+                                >
+                                    <Icon icon="mdi:send" class="h-5 w-5" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How does it work Section -->
+            <section class="relative px-6 py-8 lg:px-12 mt-30">
+                <div class="scroll-animate mx-auto max-w-6xl overflow-visible rounded-[30px] px-8 pb-16 pt-8 lg:px-16" style="background: rgba(255, 255, 255, 0.4);">
+                    <h2 class="mb-8 text-center text-[28px] font-semibold text-[#1b1b18] lg:text-[36px]">How does it work?</h2>
+                    
+                    <div class="flex flex-col items-center justify-center gap-8 lg:flex-row lg:items-start">
+                        <!-- Card 1 -->
+                        <div class="scroll-animate scroll-animate-delay-1 h-auto min-h-[280px] w-full max-w-[260px] overflow-hidden rounded-[20px] bg-white p-6 text-center shadow-sm lg:mt-8 lg:h-[300px]">
+                            <Icon icon="mingcute:search-line" class="mx-auto mb-4 h-10 w-10 text-[#9EC9FB]" />
+                            <h3 class="mb-3 text-[16px] font-semibold text-[#1b1b18]">Input Gejala atau Pertanyaan</h3>
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70">
+                                Pengguna cukup mengetik keluhan atau pertanyaan kesehatan, misalnya "sakit kepala", "demam sejak kemarin", atau "tips pola makan sehat untuk remaja."
+                            </p>
+                        </div>
+
+                        <!-- Card 2 (higher) -->
+                        <div class="scroll-animate scroll-animate-delay-2 h-auto min-h-[280px] w-full max-w-[260px] overflow-hidden rounded-[20px] bg-white p-6 text-center shadow-sm lg:-mt-4 lg:h-[300px]">
+                            <Icon icon="mage:robot-wink" class="mx-auto mb-4 h-10 w-10 text-[#9EC9FB]" />
+                            <h3 class="mb-3 text-[16px] font-semibold text-[#1b1b18]">Analisis dengan AI Medis</h3>
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70">
+                                DocDot memproses input dengan teknologi AI, membandingkan dengan data medis terpercaya, lalu memberikan informasi seputar kemungkinan penyebab, tips perawatan awal, dan rekomendasi gaya hidup.
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="scroll-animate scroll-animate-delay-3 h-auto min-h-[280px] w-full max-w-[260px] overflow-hidden rounded-[20px] bg-white p-6 text-center shadow-sm lg:mt-8 lg:h-[300px]">
+                            <Icon icon="mdi:clipboard-text-outline" class="mx-auto mb-4 h-10 w-10 text-[#CCBAF8]" />
+                            <h3 class="mb-3 text-[16px] font-semibold text-[#1b1b18]">Saran & Rekomendasi Lanjutan</h3>
+                            <p class="text-[13px] leading-relaxed text-[#1b1b18]/70">
+                                DocDot menampilkan hasil analisis dalam bahasa yang mudah dipahami. Jika gejala serius, chatbot akan menyarankan pengguna untuk segera berkonsultasi dengan tenaga medis profesional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonial Section -->
+            <section class="mt-16 w-full py-12 mb-16" style="background: rgba(255, 255, 255, 0.3);">
+                <div class="px-6 lg:px-12">
+                    <h2 class="scroll-animate mb-10 text-left text-[28px] font-semibold text-[#1b1b18] lg:text-[32px]">
+                        Testimonial dari Pengguna <span class="text-[#54BBFF]">DocDot</span>
+                    </h2>
+                    
+                    <div class="scroll-animate scroll-animate-delay-1 flex flex-col justify-between gap-6 lg:flex-row">
+                        <!-- Card 1 -->
+                        <div class="flex-1 rounded-[20px] bg-[#FAF1FF] p-6">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://i.pravatar.cc/48?img=11" class="h-12 w-12 rounded-full object-cover" />
+                                    <div>
+                                        <p class="text-[16px] font-semibold text-[#1b1b18]">Andi Pratama</p>
+                                        <p class="text-[12px] text-[#1b1b18]/60">@andipratama</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-1">
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                </div>
+                            </div>
+                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                DocDot sangat membantu saya memahami gejala yang saya rasakan. Penjelasannya detail dan mudah dipahami, plus selalu mengingatkan untuk konsultasi ke dokter jika perlu.
+                            </p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="flex-1 rounded-[20px] bg-[#FAF1FF] p-6">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://i.pravatar.cc/48?img=12" class="h-12 w-12 rounded-full object-cover" />
+                                    <div>
+                                        <p class="text-[16px] font-semibold text-[#1b1b18]">Siti Rahayu</p>
+                                        <p class="text-[12px] text-[#1b1b18]/60">@sitirahayu</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-1">
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                </div>
+                            </div>
+                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                Sebagai ibu rumah tangga, DocDot sangat berguna untuk mendapat informasi awal tentang kesehatan keluarga. Responnya cepat dan informatif!
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="flex-1 rounded-[20px] bg-[#FAF1FF] p-6">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://i.pravatar.cc/48?img=13" class="h-12 w-12 rounded-full object-cover" />
+                                    <div>
+                                        <p class="text-[16px] font-semibold text-[#1b1b18]">Budi Santoso</p>
+                                        <p class="text-[12px] text-[#1b1b18]/60">@budisantoso</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-1">
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                    <Icon icon="mdi:star-half-full" class="h-4 w-4 text-[#FFD700]" />
+                                </div>
+                            </div>
+                            <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
+                                Fitur konsultasi 24 jam sangat membantu ketika butuh informasi kesehatan di malam hari. Terima kasih DocDot!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <Footer />
+        </div>
+
+        <!-- Chat Mode: Show when in chat mode -->
+        <div v-else class="flex h-[calc(100vh-80px)] flex-col px-6 pb-6 lg:px-12">
             <!-- Chat Messages Area -->
             <div 
                 ref="chatContainer"
@@ -273,14 +484,14 @@ onMounted(async () => {
                     </div>
                     
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4">
+                        <div class="flex flex-wrap items-center gap-4">
                             <button class="flex items-center gap-2 text-[13px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18]">
                                 <Icon icon="mdi:magnify" class="h-5 w-5" />
                                 Identify your symptoms
                             </button>
-                            <button class="flex items-center gap-2 text-[13px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18]">
+                            <button class="hidden items-center gap-2 text-[13px] text-[#1b1b18]/70 transition-colors hover:text-[#1b1b18] sm:flex">
                                 <Icon icon="mdi:image-plus" class="h-5 w-5" />
-                                Consult by uploading a photo of your condition
+                                Upload photo
                             </button>
                         </div>
                         

@@ -36,28 +36,35 @@ class ArticleController extends Controller
          ->paginate(12)
          ->withQueryString();
 
-      // Get featured article (latest)
-      $featuredArticle = HealthArticle::where('verified', true)
-         ->whereNotNull('published_at')
-         ->where('published_at', '<=', now())
-         ->orderBy('published_at', 'desc')
-         ->first();
+      // Get featured article (latest) - cached for 5 minutes
+      $featuredArticle = cache()->remember('featured_article', 300, function () {
+         return HealthArticle::where('verified', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderBy('published_at', 'desc')
+            ->first();
+      });
 
-      // Get popular articles (could be based on views, for now just random)
-      $popularArticles = HealthArticle::where('verified', true)
-         ->whereNotNull('published_at')
-         ->where('published_at', '<=', now())
-         ->inRandomOrder()
-         ->take(3)
-         ->get();
+      // Get popular articles (recent ones, cached)
+      $popularArticles = cache()->remember('popular_articles', 300, function () {
+         return HealthArticle::where('verified', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderBy('published_at', 'desc')
+            ->skip(1)
+            ->take(3)
+            ->get();
+      });
 
-      // Get categories with counts
-      $categories = HealthArticle::where('verified', true)
-         ->whereNotNull('published_at')
-         ->selectRaw('category, count(*) as count')
-         ->groupBy('category')
-         ->pluck('count', 'category')
-         ->toArray();
+      // Get categories with counts - cached for 10 minutes
+      $categories = cache()->remember('article_categories', 600, function () {
+         return HealthArticle::where('verified', true)
+            ->whereNotNull('published_at')
+            ->selectRaw('category, count(*) as count')
+            ->groupBy('category')
+            ->pluck('count', 'category')
+            ->toArray();
+      });
 
       return Inertia::render('Article', [
          'articles' => $articles,

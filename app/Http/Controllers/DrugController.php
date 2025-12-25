@@ -34,11 +34,13 @@ class DrugController extends Controller
          $query->where('pregnancy_safe', (bool) $request->input('pregnancy_safe'));
       }
 
-      // Get all unique categories
-      $categories = Drug::select('category')
-         ->distinct()
-         ->orderBy('category')
-         ->pluck('category');
+      // Get all unique categories - cached for 10 minutes
+      $categories = cache()->remember('drug_categories', 600, function () {
+         return Drug::select('category')
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category');
+      });
 
       // Paginate results
       $drugs = $query->orderBy('name')

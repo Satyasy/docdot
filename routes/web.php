@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DrugController;
+use App\Http\Controllers\HealthDashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,9 +13,40 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
+// Redirect old features route to consultation
 Route::get('/features', function () {
-    return Inertia::render('Features');
-})->name('features');
+    return redirect()->route('consultation');
+});
+
+// Static Pages
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
+
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+})->name('contact');
+
+Route::post('/contact', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'name' => 'required|string|max:100',
+        'email' => 'required|email|max:100',
+        'subject' => 'required|string|max:50',
+        'message' => 'required|string|max:2000',
+    ]);
+
+    // Here you could send an email or save to database
+    // For now, just redirect with success
+    return back()->with('success', 'Pesan berhasil dikirim!');
+});
+
+Route::get('/privacy-policy', function () {
+    return Inertia::render('PrivacyPolicy');
+})->name('privacy-policy');
+
+Route::get('/terms-of-service', function () {
+    return Inertia::render('TermsOfService');
+})->name('terms-of-service');
 
 // Article Routes
 Route::get('/article', [ArticleController::class, 'index'])->name('article');
@@ -60,6 +92,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
     Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/photo', [AuthController::class, 'updateProfilePhoto'])->name('profile.photo');
+
+    // Health Dashboard
+    Route::get('/health-dashboard', [HealthDashboardController::class, 'index'])->name('health-dashboard');
+    Route::post('/health-dashboard/physical', [HealthDashboardController::class, 'storePhysical']);
+    Route::post('/health-dashboard/mental', [HealthDashboardController::class, 'storeMental']);
 
     // Chat History
     Route::get('/chat-history', [ChatController::class, 'history'])->name('chat.history');

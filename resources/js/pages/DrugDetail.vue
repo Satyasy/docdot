@@ -308,7 +308,7 @@ const tabs = [
                             class="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#F4AFE9] to-[#8DD0FC] p-4 text-[14px] font-medium text-white transition-all hover:shadow-lg"
                         >
                             <Icon icon="mdi:robot" class="h-5 w-5" />
-                            Konsultasikan dengan AI
+                            Tanyakan informasi lebih dengan AI
                         </Link>
                     </div>
                 </div>

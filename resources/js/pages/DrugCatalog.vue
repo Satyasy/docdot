@@ -5,6 +5,7 @@ import { ref, watch, computed } from 'vue';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import { useDebounceFn } from '@vueuse/core';
+import { useScrollAnimation } from '@/composables/useScrollAnimation';
 
 interface DrugPrice {
     id: number;
@@ -148,6 +149,8 @@ const goToPage = (url: string | null) => {
 const hasActiveFilters = computed(() => {
     return searchQuery.value || selectedCategory.value || pregnancySafe.value;
 });
+
+useScrollAnimation();
 </script>
 
 <template>
@@ -166,7 +169,7 @@ const hasActiveFilters = computed(() => {
                 </nav>
 
                 <!-- Header -->
-                <div class="mb-8">
+                <div class="scroll-animate mb-8">
                     <h1 class="mb-2 text-[28px] font-bold text-[#1b1b18] lg:text-[36px]">
                         Katalog Obat
                     </h1>
@@ -176,7 +179,7 @@ const hasActiveFilters = computed(() => {
                 </div>
 
                 <!-- Search & Filters -->
-                <div class="mb-8 rounded-2xl bg-white p-4 lg:p-6">
+                <div class="scroll-animate mb-8 rounded-2xl bg-white p-4 lg:p-6">
                     <div class="flex flex-col gap-4 lg:flex-row lg:items-center">
                         <!-- Search Input -->
                         <div class="relative flex-1">
@@ -269,7 +272,7 @@ const hasActiveFilters = computed(() => {
                 </div>
 
                 <!-- Drug Grid -->
-                <div v-if="drugs.data.length > 0" class="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div v-if="drugs.data.length > 0" class="scroll-animate mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     <Link
                         v-for="drug in drugs.data"
                         :key="drug.id"

@@ -18,7 +18,6 @@ interface User {
 
 const navItems: NavItem[] = [
     { label: 'Home', href: '/' },
-    { label: 'Features', href: '/features' },
     { label: 'Article', href: '/article' },
     { label: 'Drug Catalog', href: '/drug-catalog' },
     { label: 'Consultation', href: '/consultation' },
@@ -119,6 +118,14 @@ const toggleMobileMenu = () => {
                                 >
                                     <Icon icon="mdi:account-outline" class="h-4 w-4" />
                                     Profile
+                                </Link>
+                                <Link 
+                                    href="/health-dashboard" 
+                                    class="flex items-center gap-2 px-4 py-2 text-[14px] text-[#1b1b18] transition-colors hover:bg-[#43B3FC]/20"
+                                    @click="showDropdown = false"
+                                >
+                                    <Icon icon="mdi:heart-pulse" class="h-4 w-4" />
+                                    Health Dashboard
                                 </Link>
                                 <Link 
                                     href="/chat-history" 
@@ -226,6 +233,14 @@ const toggleMobileMenu = () => {
                     >
                         <Icon icon="mdi:account-outline" class="h-5 w-5" />
                         Profile
+                    </Link>
+                    <Link 
+                        href="/health-dashboard" 
+                        @click="showMobileMenu = false"
+                        class="flex items-center gap-3 rounded-xl px-4 py-3 text-[16px] text-[#1b1b18]/80 transition-colors hover:bg-[#F8F8F8]"
+                    >
+                        <Icon icon="mdi:heart-pulse" class="h-5 w-5" />
+                        Health Dashboard
                     </Link>
                     <Link 
                         href="/chat-history" 
