@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import type { AppPageProps } from '@/types';
+
+const page = usePage<AppPageProps>();
+const success = computed(() => page.props.flash?.success);
 
 const showPassword = ref(false);
 
@@ -20,16 +24,24 @@ const submit = () => {
     <Head title="Login" />
     <div class="flex min-h-screen overflow-x-hidden" style="background: linear-gradient(to left, rgba(141, 208, 252, 0.6) 0%, rgba(221, 180, 246, 0.6) 100%);">
         <!-- Left Side - Robot Image -->
-        <div class="relative flex flex-1 items-center justify-center">
+        <div class="relative hidden flex-1 items-center justify-center lg:flex">
             <!-- Purple circle background -->
             <img src="/images/login.png" alt="Robot" class="relative z-10 h-[500px] w-auto" />
         </div>
 
         <!-- Right Side - Login Form -->
-        <div class="flex flex-1 items-center pl-12">
-            <div class="-ml-16 w-[600px] rounded-[30px] bg-white/50 p-10">
-                <h1 class="text-[36px] font-bold text-[#1b1b18]" style="font-style: italic;">Login</h1>
-                <p class="mt-2 text-[14px] text-[#1b1b18]/70">Login to access your travelwise account</p>
+        <div class="flex flex-1 items-center justify-center px-6 lg:justify-start lg:pl-12">
+            <div class="w-full max-w-[600px] rounded-[30px] bg-white/50 p-8 lg:-ml-16 lg:p-10">
+                <h1 class="text-[28px] font-bold text-[#1b1b18] lg:text-[36px]" style="font-style: italic;">Login</h1>
+                <p class="mt-2 text-[14px] text-[#1b1b18]/70">Login to access your DocDot account</p>
+
+                <!-- Success Message -->
+                <div v-if="success" class="mt-6 rounded-lg bg-green-50 border border-green-200 p-4">
+                    <div class="flex items-start gap-3">
+                        <Icon icon="mdi:check-circle" class="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <p class="text-[14px] text-green-800">{{ success }}</p>
+                    </div>
+                </div>
 
                 <form @submit.prevent="submit" class="mt-8 space-y-5">
                     <!-- Email -->
@@ -75,7 +87,7 @@ const submit = () => {
                             />
                             Remember me
                         </label>
-                        <a href="#" class="text-[13px] text-[#FF7CEA]">Forgot Password</a>
+                        <Link href="/forgot-password" class="text-[13px] text-[#FF7CEA] hover:underline">Forgot Password</Link>
                     </div>
 
                     <!-- Login Button -->

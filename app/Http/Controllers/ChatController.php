@@ -13,7 +13,8 @@ class ChatController extends Controller
 {
     public function __construct(
         private RagService $ragService
-    ) {}
+    ) {
+    }
 
     /**
      * Show consultation page
@@ -21,7 +22,7 @@ class ChatController extends Controller
     public function index()
     {
         $sessions = [];
-        
+
         if (Auth::check()) {
             $sessions = ChatSession::where('user_id', Auth::id())
                 ->orderBy('updated_at', 'desc')
@@ -144,6 +145,52 @@ class ChatController extends Controller
 
         return response()->json([
             'success' => true,
+        ]);
+    }
+
+    /**
+     * Show chat history page
+     */
+    public function history(Request $request)
+    {
+        $query = ChatSession::where('user_id', Auth::id())
+            ->withCount('messages');
+
+        // Search filter
+        if ($request->search) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        // Date filter
+        if ($request->date) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        $sessions = $query->orderBy('updated_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        // Get statistics
+        $totalSessions = ChatSession::where('user_id', Auth::id())->count();
+        $totalMessages = ChatMessage::whereHas('session', function ($q) {
+            $q->where('user_id', Auth::id());
+        })->count();
+        $thisMonthSessions = ChatSession::where('user_id', Auth::id())
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+
+        return Inertia::render('ChatHistory', [
+            'sessions' => $sessions,
+            'stats' => [
+                'total_sessions' => $totalSessions,
+                'total_messages' => $totalMessages,
+                'this_month_sessions' => $thisMonthSessions,
+            ],
+            'filters' => [
+                'search' => $request->search ?? '',
+                'date' => $request->date ?? '',
+            ],
         ]);
     }
 }

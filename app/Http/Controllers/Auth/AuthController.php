@@ -7,8 +7,10 @@ use App\Mail\OtpMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
@@ -30,13 +32,13 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             $user = Auth::user();
-            
+
             // Check if user is verified
             if (!$user->isVerified()) {
                 // Generate and send OTP
                 $otp = $user->generateOtp();
                 Mail::to($user->email)->send(new OtpMail($otp, $user->name));
-                
+
                 return redirect()->route('verify.otp');
             }
 
@@ -83,7 +85,7 @@ class AuthController extends Controller
     public function showVerifyOtp()
     {
         $user = Auth::user();
-        
+
         if (!$user) {
             return redirect()->route('login');
         }
@@ -137,7 +139,7 @@ class AuthController extends Controller
         }
 
         $resendStatus = $user->canResendOtp();
-        
+
         if (!$resendStatus['can_resend']) {
             return back()->withErrors([
                 'resend' => $resendStatus['reason'],
@@ -167,7 +169,7 @@ class AuthController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
-        
+
         if (!$user) {
             return redirect()->route('login');
         }
@@ -181,5 +183,112 @@ class AuthController extends Controller
                 'created_at' => $user->created_at,
             ],
         ]);
+    }
+
+    public function showForgotPassword()
+    {
+        return Inertia::render('Auth/ForgotPassword');
+    }
+
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'Email tidak terdaftar.',
+            ]);
+        }
+
+        // Delete any existing token for this email
+        DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
+        // Generate token
+        $token = Str::random(64);
+
+        // Store token
+        DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => Hash::make($token),
+            'created_at' => now(),
+        ]);
+
+        // Send email (using a simple approach - you can create a dedicated Mailable later)
+        $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($request->email));
+
+        Mail::raw(
+            "Halo {$user->name},\n\nAnda menerima email ini karena kami menerima permintaan reset password untuk akun Anda.\n\nKlik link berikut untuk reset password:\n{$resetUrl}\n\nLink ini akan kadaluarsa dalam 60 menit.\n\nJika Anda tidak meminta reset password, abaikan email ini.\n\nSalam,\nDocDot Team",
+            function ($message) use ($user) {
+                $message->to($user->email)
+                    ->subject('Reset Password - DocDot');
+            }
+        );
+
+        return back()->with('success', 'Link reset password telah dikirim ke email Anda.');
+    }
+
+    public function showResetPassword(Request $request, $token)
+    {
+        return Inertia::render('Auth/ResetPassword', [
+            'token' => $token,
+            'email' => $request->email,
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ]);
+
+        // Find the reset token
+        $resetRecord = DB::table('password_reset_tokens')
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$resetRecord) {
+            return back()->withErrors([
+                'email' => 'Token reset password tidak valid.',
+            ]);
+        }
+
+        // Check if token matches
+        if (!Hash::check($request->token, $resetRecord->token)) {
+            return back()->withErrors([
+                'email' => 'Token reset password tidak valid.',
+            ]);
+        }
+
+        // Check if token is expired (60 minutes)
+        if (now()->diffInMinutes($resetRecord->created_at) > 60) {
+            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+            return back()->withErrors([
+                'email' => 'Token reset password sudah kadaluarsa.',
+            ]);
+        }
+
+        // Update password
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'User tidak ditemukan.',
+            ]);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        // Delete the token
+        DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
+        return redirect()->route('login')->with('success', 'Password berhasil direset. Silakan login dengan password baru Anda.');
     }
 }

@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
         $user = $request->user();
-        
+
         // Only share user if verified, otherwise treat as guest
         $authUser = null;
         if ($user && $user->isVerified()) {
@@ -52,6 +52,10 @@ class HandleInertiaRequests extends Middleware
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $authUser,
+            ],
+            'flash' => [
+                'success' => fn() => $request->session()->get('success'),
+                'error' => fn() => $request->session()->get('error'),
             ],
         ];
     }

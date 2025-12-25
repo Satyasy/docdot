@@ -101,6 +101,13 @@ const toggleDropdown = () => {
                         >
                             Profile
                         </Link>
+                        <Link 
+                            href="/chat-history" 
+                            class="block px-4 py-2 text-[14px] text-[#1b1b18] transition-colors hover:bg-[#8DD0FC]/20"
+                            @click="showDropdown = false"
+                        >
+                            Riwayat Chat
+                        </Link>
                         <button 
                             @click="logout"
                             class="block w-full px-4 py-2 text-left text-[14px] text-red-500 transition-colors hover:bg-red-50"
