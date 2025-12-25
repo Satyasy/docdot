@@ -15,6 +15,16 @@ class DrugForm
                     ->required()
                     ->maxLength(255),
 
+                Forms\Components\FileUpload::make('image')
+                    ->label('Gambar Obat')
+                    ->image()
+                    ->imageEditor()
+                    ->disk('public')
+                    ->directory('drugs')
+                    ->visibility('public')
+                    ->maxSize(2048)
+                    ->columnSpanFull(),
+
                 Forms\Components\TextInput::make('category')
                     ->maxLength(255),
 

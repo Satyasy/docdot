@@ -15,6 +15,7 @@ interface DrugPrice {
 interface Drug {
     id: number;
     name: string;
+    image: string | null;
     category: string;
     description: string;
     dosage_info: string | null;
@@ -120,12 +121,19 @@ const tabs = [
                     <div class="space-y-4 sm:space-y-6 lg:col-span-2">
                         <!-- Drug Header Card -->
                         <div class="overflow-hidden rounded-xl bg-white sm:rounded-2xl">
-                            <!-- Header Banner -->
+                            <!-- Header Banner with Image -->
                             <div 
-                                class="flex h-32 items-center justify-center sm:h-48"
-                                :style="{ background: `linear-gradient(135deg, ${getCategoryColor(drug.category)}60, ${getCategoryColor(drug.category)}30)` }"
+                                class="relative flex h-40 items-center justify-center overflow-hidden bg-[#f8f8f8] sm:h-56 lg:h-64"
+                                :style="{ background: drug.image ? '#f8f8f8' : `linear-gradient(135deg, ${getCategoryColor(drug.category)}60, ${getCategoryColor(drug.category)}30)` }"
                             >
+                                <img 
+                                    v-if="drug.image"
+                                    :src="`/storage/${drug.image}`"
+                                    :alt="drug.name"
+                                    class="h-full w-full object-contain p-4"
+                                />
                                 <Icon 
+                                    v-else
                                     :icon="getCategoryIcon(drug.category)" 
                                     class="h-16 w-16 sm:h-24 sm:w-24"
                                     :style="{ color: getCategoryColor(drug.category) }"

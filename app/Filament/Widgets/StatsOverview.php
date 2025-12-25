@@ -28,7 +28,7 @@ class StatsOverview extends BaseWidget
       $totalSessions = ChatSession::count();
       $totalMessages = ChatMessage::count();
 
-      $totalArticles = HealthArticle::where('status', 'published')->count();
+      $totalArticles = HealthArticle::whereNotNull('published_at')->count();
       $totalDrugs = Drug::count();
 
       $aiQueries = AiAuditLog::count();

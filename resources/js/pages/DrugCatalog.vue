@@ -17,6 +17,7 @@ interface DrugPrice {
 interface Drug {
     id: number;
     name: string;
+    image: string | null;
     category: string;
     description: string;
     dosage_info: string | null;
@@ -279,12 +280,19 @@ useScrollAnimation();
                         :href="`/drug-catalog/${drug.id}`"
                         class="group overflow-hidden rounded-xl bg-white transition-all hover:-translate-y-1 hover:shadow-lg sm:rounded-2xl"
                     >
-                        <!-- Card Header -->
+                        <!-- Card Header with Image -->
                         <div 
-                            class="flex h-24 items-center justify-center sm:h-32"
-                            :style="{ background: `linear-gradient(135deg, ${getCategoryColor(drug.category)}40, ${getCategoryColor(drug.category)}20)` }"
+                            class="relative flex h-28 items-center justify-center overflow-hidden sm:h-36"
+                            :style="{ background: drug.image ? '#f8f8f8' : `linear-gradient(135deg, ${getCategoryColor(drug.category)}40, ${getCategoryColor(drug.category)}20)` }"
                         >
+                            <img 
+                                v-if="drug.image"
+                                :src="`/storage/${drug.image}`"
+                                :alt="drug.name"
+                                class="h-full w-full object-contain p-2 transition-transform group-hover:scale-105"
+                            />
                             <Icon 
+                                v-else
                                 :icon="getCategoryIcon(drug.category)" 
                                 class="h-12 w-12 transition-transform group-hover:scale-110 sm:h-16 sm:w-16"
                                 :style="{ color: getCategoryColor(drug.category) }"

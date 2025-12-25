@@ -14,6 +14,11 @@ class DrugsTable
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
+                    ->disk('public')
+                    ->square()
+                    ->size(50),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('category')->badge()->sortable(),
                 Tables\Columns\IconColumn::make('pregnancy_safe')->boolean()->label('Pregnancy Safe'),
