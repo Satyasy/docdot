@@ -120,25 +120,48 @@ useScrollAnimation();
 
         <!-- Features Bar Section -->
         <section class="px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-16">
-            <div class="scroll-animate rounded-2xl bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-4 py-4 sm:rounded-[30px] sm:px-8 sm:py-6 lg:px-16">
-                <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between sm:gap-6">
-                    <div class="flex items-center gap-3 sm:gap-4">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent sm:h-12 sm:w-12 sm:rounded-xl">
-                            <Icon icon="mdi:clock-fast" class="h-5 w-5 text-[#43B3FC] sm:h-8 sm:w-8" />
-                        </div>
-                        <span class="text-[14px] font-medium text-[#1b1b18] sm:text-[16px] lg:text-[18px]">Layanan yang cepat</span>
+            <!-- Mobile: 3 separate cards -->
+            <div class="grid grid-cols-1 gap-3 sm:hidden">
+                <div class="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-4 py-4">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent">
+                        <Icon icon="mdi:clock-fast" class="h-5 w-5 text-[#43B3FC]" />
                     </div>
-                    <div class="flex items-center gap-3 sm:gap-4">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent sm:h-12 sm:w-12 sm:rounded-xl">
-                            <Icon icon="mingcute:hours-fill" class="h-5 w-5 text-[#43B3FC] sm:h-8 sm:w-8" />
-                        </div>
-                        <span class="text-[14px] font-medium text-[#1b1b18] sm:text-[16px] lg:text-[18px]">24 Jam</span>
+                    <span class="text-[14px] font-medium text-[#1b1b18]">Layanan yang cepat</span>
+                </div>
+                <div class="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-4 py-4">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent">
+                        <Icon icon="mingcute:hours-fill" class="h-5 w-5 text-[#43B3FC]" />
                     </div>
-                    <div class="flex items-center gap-3 sm:gap-4">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent sm:h-12 sm:w-12 sm:rounded-xl">
-                            <Icon icon="wpf:doctors-bag" class="h-5 w-5 text-[#43B3FC] sm:h-8 sm:w-8" />
+                    <span class="text-[14px] font-medium text-[#1b1b18]">24 Jam</span>
+                </div>
+                <div class="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-4 py-4">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-[#7D80DF] bg-transparent">
+                        <Icon icon="wpf:doctors-bag" class="h-5 w-5 text-[#43B3FC]" />
+                    </div>
+                    <span class="text-[14px] font-medium text-[#1b1b18]">Konsultasi Gratis</span>
+                </div>
+            </div>
+
+            <!-- Desktop: Single bar -->
+            <div class="scroll-animate hidden rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-8 py-6 sm:block lg:px-16">
+                <div class="flex items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
+                            <Icon icon="mdi:clock-fast" class="h-8 w-8 text-[#43B3FC]" />
                         </div>
-                        <span class="text-[14px] font-medium text-[#1b1b18] sm:text-[16px] lg:text-[18px]">Konsultasi Gratis</span>
+                        <span class="text-[16px] font-medium text-[#1b1b18] lg:text-[18px]">Layanan yang cepat</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
+                            <Icon icon="mingcute:hours-fill" class="h-8 w-8 text-[#43B3FC]" />
+                        </div>
+                        <span class="text-[16px] font-medium text-[#1b1b18] lg:text-[18px]">24 Jam</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#7D80DF] bg-transparent">
+                            <Icon icon="wpf:doctors-bag" class="h-8 w-8 text-[#43B3FC]" />
+                        </div>
+                        <span class="text-[16px] font-medium text-[#1b1b18] lg:text-[18px]">Konsultasi Gratis</span>
                     </div>
                 </div>
             </div>
@@ -150,16 +173,14 @@ useScrollAnimation();
                 <div class="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-between">
                     <!-- Left side visual - Hidden on mobile, visible on tablet+ -->
                     <div class="scroll-animate relative hidden items-center sm:flex">
-                        <div class="relative h-[280px] w-[160px] rounded-[20px] bg-[#43B3FC]/10 sm:h-[380px] sm:w-[220px] sm:rounded-[30px]">
-                            <div class="absolute top-1/2 left-1/2 h-[150px] w-[2px] -translate-x-1/2 -translate-y-1/2 bg-[#43B3FC]/40 sm:h-[200px]"></div>
-                            <div class="absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#43B3FC]/60"></div>
-                            <div class="absolute top-1/2 -left-6 flex h-12 w-12 -translate-y-1/2 rotate-[-15deg] items-center justify-center rounded-[10px] bg-[#7DD3FC] sm:-left-8 sm:h-16 sm:w-16 sm:rounded-[14px]">
-                                <Icon icon="mdi:magnify" class="h-6 w-6 text-white sm:h-8 sm:w-8" />
+                        <div class="relative h-[280px] w-[340px] rounded-[20px] bg-[#43B3FC]/10 sm:h-[380px] sm:w-[480px] sm:rounded-[30px]">
+                            <img src="/images/docbot.png" alt="DocBot" class="absolute top-1/2 left-1/2 z-50 max-w-none w-[200px] -translate-x-1/2 -translate-y-1/2 sm:w-[260px] lg:w-[320px]" />
+                            <div class="absolute top-1/2 -left-10 flex h-14 w-14 -translate-y-1/2 rotate-[-15deg] items-center justify-center rounded-[12px] bg-[#7DD3FC] sm:-left-14 sm:h-20 sm:w-20 sm:rounded-[16px]">
+                                <Icon icon="mdi:magnify" class="h-7 w-7 text-white sm:h-10 sm:w-10" />
                             </div>
-                            <Icon icon="mdi:magnify" class="absolute bottom-4 left-4 h-5 w-5 text-[#1b1b18]/30 sm:h-6 sm:w-6" />
                         </div>
 
-                        <div class="relative -ml-10 max-w-[280px] rounded-[20px] bg-white p-6 sm:-ml-16 sm:max-w-md sm:rounded-[30px] sm:p-10" style="box-shadow: 0 10px 40px rgba(141, 208, 252, 0.4)">
+                        <div class="relative -ml-4 max-w-[280px] rounded-[20px] bg-white p-6 sm:-ml-8 sm:max-w-md sm:rounded-[30px] sm:p-10" style="box-shadow: 0 10px 40px rgba(141, 208, 252, 0.4)">
                             <h2 class="mb-4 text-[18px] font-bold text-[#1b1b18] sm:mb-6 sm:text-[24px]">Mengapa harus DocDot?</h2>
                             <div class="space-y-3 sm:space-y-4">
                                 <div class="border-l-2 border-[#43B3FC] pl-3 sm:pl-4">
@@ -356,23 +377,42 @@ useScrollAnimation();
         </section>
 
         <!-- Informasi Tepat Section -->
-        <section class="mt-16 bg-white px-6 pt-40 pb-16 lg:px-12">
+        <section class="bg-white px-4 py-8 sm:px-6 lg:mt-16 lg:px-12 lg:pt-40 lg:pb-16">
             <div class="mx-auto max-w-6xl">
-                <div class="scroll-animate relative flex h-[400px] items-center rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-10">
+                <!-- Mobile Version -->
+                <div class="scroll-animate block rounded-2xl bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] p-6 sm:hidden">
+                    <h2 class="flex items-center gap-2 text-[24px] font-bold text-[#1b1b18]">
+                        Informasi Tepat
+                        <Icon icon="carbon:circle-dash" class="h-6 w-6 text-[#1b1b18]" />
+                    </h2>
+                    <h3 class="text-[24px] font-bold text-[#1b1b18]">
+                        Untuk <span class="text-[#7C3AED]">Hidup</span> Sehat
+                    </h3>
+                    <p class="mt-3 text-[14px] font-light text-[#1b1b18]/80">
+                        Konten tepercaya untuk mendukung kesehatan keluarga Anda.
+                    </p>
+                    <Link href="/article" class="mt-4 inline-flex w-fit items-center justify-between gap-4 rounded-full border-2 border-[#1b1b18] bg-white px-5 py-2 text-[14px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
+                        Article
+                        <Icon icon="mdi:arrow-top-right" class="h-4 w-4" />
+                    </Link>
+                </div>
+
+                <!-- Desktop Version -->
+                <div class="scroll-animate relative hidden h-[400px] items-center rounded-[30px] bg-gradient-to-r from-[#8DD0FC] to-[#DDB4F6] px-10 sm:flex">
                     <!-- Stripes di pojok kanan bawah (inside card with clip) -->
                     <div class="absolute inset-0 overflow-hidden rounded-[30px]">
                         <div class="absolute bottom-16 -right-17 h-[50px] w-[500px] rounded-l-full bg-white/20" style="transform: rotate(-35deg); transform-origin: bottom right;"></div>
                     </div>
 
-                    <div class="absolute right-48 z-10 max-w-sm py-4">
-                        <h2 class="flex items-center gap-3 text-[32px] font-bold text-[#1b1b18]">
+                    <div class="absolute right-10 z-10 max-w-sm py-4 lg:right-48">
+                        <h2 class="flex items-center gap-3 text-[24px] font-bold text-[#1b1b18] lg:text-[32px]">
                             Informasi Tepat
-                            <Icon icon="carbon:circle-dash" class="h-8 w-8 text-[#1b1b18]" />
+                            <Icon icon="carbon:circle-dash" class="h-6 w-6 text-[#1b1b18] lg:h-8 lg:w-8" />
                         </h2>
-                        <h3 class="text-[32px] font-bold text-[#1b1b18]">
+                        <h3 class="text-[24px] font-bold text-[#1b1b18] lg:text-[32px]">
                             Untuk <span class="text-[#7C3AED]">Hidup</span> Sehat
                         </h3>
-                        <p class="mt-3 text-[18px] font-light text-[#1b1b18]/80">
+                        <p class="mt-3 text-[14px] font-light text-[#1b1b18]/80 lg:text-[18px]">
                             Konten tepercaya untuk<br />mendukung kesehatan keluarga<br />Anda.
                         </p>
                         <Link href="/article" class="mt-5 inline-flex w-fit items-center justify-between gap-6 rounded-full border-2 border-[#1b1b18] bg-white px-6 py-2 text-[16px] font-medium text-[#1b1b18] transition-colors hover:bg-[#1b1b18] hover:text-white">
@@ -380,87 +420,87 @@ useScrollAnimation();
                             <Icon icon="mdi:arrow-top-right" class="h-5 w-5" />
                         </Link>
                     </div>
-                    <div class="absolute left-10 -top-32 z-20">
-                        <img src="/images/informasi.png" alt="Informasi" class="w-[600px] max-w-none" />
+                    <div class="absolute left-4 -top-24 z-20 lg:left-10 lg:-top-32">
+                        <img src="/images/informasi.png" alt="Informasi" class="w-[350px] max-w-none lg:w-[600px]" />
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Ulasan Section -->
-        <section class="bg-white px-6 py-16 lg:px-12">
+        <section class="bg-white px-4 py-8 sm:px-6 sm:py-16 lg:px-12">
             <div class="mx-auto max-w-6xl">
-                <h2 class="scroll-animate mb-12 text-left text-[32px] font-bold text-[#1b1b18]">
+                <h2 class="scroll-animate mb-6 text-left text-[24px] font-bold text-[#1b1b18] sm:mb-12 sm:text-[32px]">
                     Ulasan Nyata dari Pengguna DocDot
                 </h2>
 
-                <div class="scroll-animate scroll-animate-delay-1 flex justify-between gap-4">
+                <div class="scroll-animate scroll-animate-delay-1 flex flex-col gap-4 sm:flex-row sm:justify-between">
                     <!-- Card 1 -->
-                    <div class="w-[350px] rounded-[20px] bg-[#FAF1FF] p-6">
+                    <div class="w-full rounded-[20px] bg-[#FAF1FF] p-5 sm:w-[350px] sm:p-6">
                         <div class="mb-4 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <img src="https://i.pravatar.cc/48?img=11" class="h-12 w-12 rounded-full object-cover" />
+                                <img src="https://i.pravatar.cc/48?img=11" class="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12" />
                                 <div>
-                                    <p class="text-[16px] font-semibold text-[#1b1b18]">User2345</p>
-                                    <p class="text-[12px] text-[#1b1b18]/60">@msamjdjshf</p>
+                                    <p class="text-[14px] font-semibold text-[#1b1b18] sm:text-[16px]">Rina Sari</p>
+                                    <p class="text-[11px] text-[#1b1b18]/60 sm:text-[12px]">@rinasari</p>
                                 </div>
                             </div>
                             <div class="flex gap-1">
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
                             </div>
                         </div>
-                        <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco .
+                        <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
+                            DocDot sangat membantu saya memahami gejala yang saya alami. Responnya cepat dan informasinya mudah dipahami. Recommended!
                         </p>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="w-[350px] rounded-[20px] bg-[#FAF1FF] p-6">
+                    <div class="w-full rounded-[20px] bg-[#FAF1FF] p-5 sm:w-[350px] sm:p-6">
                         <div class="mb-4 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <img src="https://i.pravatar.cc/48?img=12" class="h-12 w-12 rounded-full object-cover" />
+                                <img src="https://i.pravatar.cc/48?img=12" class="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12" />
                                 <div>
-                                    <p class="text-[16px] font-semibold text-[#1b1b18]">User2345</p>
-                                    <p class="text-[12px] text-[#1b1b18]/60">@msamjdjshf</p>
+                                    <p class="text-[14px] font-semibold text-[#1b1b18] sm:text-[16px]">Budi Santoso</p>
+                                    <p class="text-[11px] text-[#1b1b18]/60 sm:text-[12px]">@budisantoso</p>
                                 </div>
                             </div>
                             <div class="flex gap-1">
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
                             </div>
                         </div>
-                        <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco .
+                        <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
+                            Fitur konsultasi 24 jam sangat berguna. Saya bisa bertanya kapan saja tanpa harus menunggu jam kerja. Terima kasih DocDot!
                         </p>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="w-[350px] rounded-[20px] bg-[#FAF1FF] p-6">
+                    <div class="w-full rounded-[20px] bg-[#FAF1FF] p-5 sm:w-[350px] sm:p-6">
                         <div class="mb-4 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <img src="https://i.pravatar.cc/48?img=13" class="h-12 w-12 rounded-full object-cover" />
+                                <img src="https://i.pravatar.cc/48?img=13" class="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12" />
                                 <div>
-                                    <p class="text-[16px] font-semibold text-[#1b1b18]">User2345</p>
-                                    <p class="text-[12px] text-[#1b1b18]/60">@msamjdjshf</p>
+                                    <p class="text-[14px] font-semibold text-[#1b1b18] sm:text-[16px]">Dewi Lestari</p>
+                                    <p class="text-[11px] text-[#1b1b18]/60 sm:text-[12px]">@dewilestari</p>
                                 </div>
                             </div>
                             <div class="flex gap-1">
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
-                                <Icon icon="mdi:star" class="h-4 w-4 text-[#FFD700]" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
+                                <Icon icon="mdi:star" class="h-3 w-3 text-[#FFD700] sm:h-4 sm:w-4" />
                             </div>
                         </div>
-                        <p class="text-[14px] leading-relaxed text-[#1b1b18]/80">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco .
+                        <p class="text-[13px] leading-relaxed text-[#1b1b18]/80 sm:text-[14px]">
+                            Artikel kesehatannya lengkap dan terpercaya. Sekarang saya lebih paham cara menjaga kesehatan keluarga. Sangat bermanfaat!
                         </p>
                     </div>
                 </div>
